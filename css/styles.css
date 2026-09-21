@@ -517,6 +517,9 @@ input[type="checkbox"].pk-check { width: 18px; height: 18px; accent-color: var(-
   body { font-size: 14px; }
   .closet-grid { grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)); }
   .card__actions { opacity: 1; }
+  /* Two columns on a phone, with an odd final stat spanning both. */
+  .stat-row { grid-template-columns: repeat(2, 1fr); }
+  .stat:last-child:nth-child(odd) { grid-column: 1 / -1; }
   .packing-table thead { display: none; }
   .packing-table tr { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line); }
   .packing-table td { border: 0; padding: 2px 0; }
