@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Paris Trip · Outfit Planner</title>
+<meta name="description" content="Capsule wardrobe and outfit planner for a 12-day Paris trip.">
+<meta name="theme-color" content="#fbfaf8">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👗</text></svg>">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead__inner">
+    <div class="masthead__title">
+      <h1 id="trip-title">Paris</h1>
+      <p class="masthead__dates">
+        <span id="trip-dates">26 September – 8 October 2026</span>
+        <span class="dot">·</span>
+        <span id="trip-countdown"></span>
+      </p>
+    </div>
+    <div class="masthead__meta">
+      <div id="weather-strip" class="weather-strip" aria-live="polite"></div>
+      <button class="btn btn--ghost" id="btn-settings" type="button" aria-label="Trip settings">Settings</button>
+    </div>
+  </div>
+
+  <nav class="tabs" role="tablist" aria-label="Sections">
+    <button class="tab" role="tab" data-view="closet"   aria-selected="true">Closet</button>
+    <button class="tab" role="tab" data-view="builder"  aria-selected="false">Outfit Builder</button>
+    <button class="tab" role="tab" data-view="matrix"   aria-selected="false">Combinations</button>
+    <button class="tab" role="tab" data-view="calendar" aria-selected="false">12 Days</button>
+    <button class="tab" role="tab" data-view="packing"  aria-selected="false">Packing</button>
+  </nav>
+</header>
+
+<main id="main">
+  <section class="view" id="view-closet" role="tabpanel" aria-label="Closet"></section>
+  <section class="view" id="view-builder" role="tabpanel" aria-label="Outfit builder" hidden></section>
+  <section class="view" id="view-matrix" role="tabpanel" aria-label="Combination matrix" hidden></section>
+  <section class="view" id="view-calendar" role="tabpanel" aria-label="Day by day" hidden></section>
+  <section class="view" id="view-packing" role="tabpanel" aria-label="Packing list" hidden></section>
+</main>
+
+<footer class="colophon">
+  <span>Everything is stored in this browser only.</span>
+  <span id="storage-meter" class="storage-meter"></span>
+</footer>
+
+<!-- overlays -->
+<div class="modal-root" id="modal-root" hidden>
+  <div class="modal-backdrop" data-close-modal></div>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal__head">
+      <h2 class="modal__title" id="modal-title"></h2>
+      <button class="icon-btn" type="button" data-close-modal aria-label="Close">&times;</button>
+    </div>
+    <div class="modal__body" id="modal-body"></div>
+  </div>
+</div>
+<div class="toast-root" id="toast-root" aria-live="polite"></div>
+
+<script src="js/util.js"></script>
+<script src="js/colors.js"></script>
+<script src="js/store.js"></script>
+<script src="js/closet.js"></script>
+<script src="js/builder.js"></script>
+<script src="js/matrix.js"></script>
+<script src="js/calendar.js"></script>
+<script src="js/packing.js"></script>
+<script src="js/weather.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

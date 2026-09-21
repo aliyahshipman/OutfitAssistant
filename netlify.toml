@@ -1,0 +1,17 @@
+# Static site — no build step, no dependencies. Netlify serves the repo as-is.
+[build]
+  publish = "."
+  command = ""
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer"
+
+# Photos and plans live in localStorage, which is per-browser and per-origin,
+# so the app must not be served from a stale cache after an update.
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-cache"
