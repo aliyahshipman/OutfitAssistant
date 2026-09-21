@@ -92,7 +92,13 @@ Trip settings holds the name and dates; the calendar follows them. Note that
 `js/seed.js` holds a closet that is loaded **once**, on first open, when the
 closet is empty and that browser has never been seeded. It is what makes the
 hosted site arrive populated on any device instead of asking you to import
-something first.
+something first. It was generated from shop order-confirmation emails across
+REVOLVE, FWRD, The RealReal and SKIMS.
+
+Because it comes from *orders*, it lists what was bought, not what was kept.
+The closet has a **Select** mode for exactly this: tap everything you returned
+or no longer own and remove it in one go. Removals are permanent — the starter
+wardrobe never reappears.
 
 It is applied once and only once: delete a seeded piece, or erase everything,
 and it stays gone. Regenerate it from an order file, edit it by hand, or delete

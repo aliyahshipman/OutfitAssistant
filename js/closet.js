@@ -4,6 +4,12 @@
   const util = PT.util;
 
   const filters = { category: 'all', color: 'all', agency: false, time: 'all', search: '' };
+  let selectMode = false;
+  const selected = {};
+
+  function selectedIds() {
+    return Object.keys(selected).filter(function (id) { return selected[id]; });
+  }
 
   function matches(item) {
     if (filters.category !== 'all' && item.category !== filters.category) return false;
@@ -24,20 +30,24 @@
     const usesText = uses === 0 ? 'In no look yet' : util.pluralize(uses, 'look');
     const onTrip = store.inTrip(item.id);
 
+    const isSelected = Boolean(selected[item.id]);
     return '' +
-      '<article class="card" data-item="' + util.esc(item.id) + '">' +
-        '<div class="card__frame">' +
+      '<article class="card' + (selectMode ? ' card--selectable' : '') +
+        (isSelected ? ' is-selected' : '') + '" data-item="' + util.esc(item.id) + '">' +
+        '<div class="card__frame"' + (selectMode ? ' data-select-item role="button" tabindex="0"' : '') + '>' +
           util.thumb(item) +
+          (selectMode ? '<span class="pick-mark">' + (isSelected ? '&#10003;' : '') + '</span>' : '') +
           '<div class="card__badges">' +
             (item.agency ? '<span class="badge badge--agency">Agency</span>' : '') +
             (item.time === 'night' ? '<span class="badge badge--night">Night</span>' : '') +
             (item.time === 'day' ? '<span class="badge">Day</span>' : '') +
             (onTrip ? '<span class="badge badge--trip">Packing</span>' : '') +
           '</div>' +
-          '<div class="card__actions">' +
-            '<button class="btn btn--ghost btn--sm" data-edit type="button">Edit</button>' +
-            '<button class="btn btn--ghost btn--sm" data-delete type="button">Remove</button>' +
-          '</div>' +
+          (selectMode ? '' :
+            '<div class="card__actions">' +
+              '<button class="btn btn--ghost btn--sm" data-edit type="button">Edit</button>' +
+              '<button class="btn btn--ghost btn--sm" data-delete type="button">Remove</button>' +
+            '</div>') +
         '</div>' +
         '<div class="card__body">' +
           '<div class="card__name">' + util.esc(item.name) + '</div>' +
@@ -143,10 +153,20 @@
         '<h2>The Closet</h2>' +
         '<div class="section-head__aside">' +
           '<span class="category-block__count">' + util.pluralize(all.length, 'piece') + '</span>' +
+          '<button class="chip" data-select-mode aria-pressed="' + selectMode + '" type="button">Select</button>' +
           '<button class="btn btn--ghost" data-import-orders type="button">Import from orders</button>' +
           '<button class="btn" data-add-item type="button">Add piece</button>' +
         '</div>' +
       '</div>' +
+      (selectMode
+        ? '<div class="note note--calm select-bar">' +
+            '<strong data-sel-count>' + selectedIds().length + '</strong> selected. ' +
+            'Tap anything you returned or no longer own, then remove it. ' +
+            '<span class="spacer"></span>' +
+            '<button class="btn btn--ghost btn--sm" data-select-none type="button">Clear</button>' +
+            '<button class="btn btn--danger btn--sm" data-remove-selected type="button">Remove selected</button>' +
+          '</div>'
+        : '') +
       filterBarHTML() +
       body;
   }
@@ -336,6 +356,30 @@
   }
 
   function bind(root) {
+    util.on(root, 'click', '[data-select-mode]', function () {
+      selectMode = !selectMode;
+      Object.keys(selected).forEach(function (k) { delete selected[k]; });
+      PT.app.rerender();
+    });
+    util.on(root, 'click', '[data-select-item]', function (e, node) {
+      const id = node.closest('[data-item]').dataset.item;
+      selected[id] = !selected[id];
+      PT.app.rerender();
+    });
+    util.on(root, 'click', '[data-select-none]', function () {
+      Object.keys(selected).forEach(function (k) { delete selected[k]; });
+      PT.app.rerender();
+    });
+    util.on(root, 'click', '[data-remove-selected]', function () {
+      const ids = selectedIds();
+      if (!ids.length) { util.toast('Tap the pieces you want to remove first.'); return; }
+      util.confirm('Remove ' + util.pluralize(ids.length, 'piece') + ' from the closet? ' +
+        'They leave any looks they were in.', function () {
+        PT.store.deleteItems(ids);
+        Object.keys(selected).forEach(function (k) { delete selected[k]; });
+        util.toast('Removed.');
+      }, 'Remove');
+    });
     util.on(root, 'click', '[data-add-item]', function () { openForm(null); });
     util.on(root, 'click', '[data-import-orders]', function () { PT.importer.open(); });
     util.on(root, 'click', '[data-edit]', function (e, btn) {

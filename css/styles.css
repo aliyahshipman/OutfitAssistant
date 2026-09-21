@@ -281,6 +281,13 @@ img { display: block; max-width: 100%; }
 }
 .card--pick.is-picked .pick-mark { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 
+/* Bulk select in the closet */
+.card--selectable .card__frame { cursor: pointer; }
+.card--selectable.is-selected .card__frame { box-shadow: inset 0 0 0 2px var(--ink); border-color: var(--ink); }
+.card--selectable:not(.is-selected) .card__frame img,
+.card--selectable:not(.is-selected) .card__frame .ph { opacity: .6; }
+.select-bar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
 /* Import review */
 .imp-thumb { display: block; width: 44px; height: 58px; flex: none; overflow: hidden; border: 1px solid var(--line); }
 .imp-thumb img, .imp-thumb .ph { width: 100%; height: 100%; object-fit: cover; }

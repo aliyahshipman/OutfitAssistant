@@ -243,6 +243,28 @@
       });
     },
 
+    /* Remove several pieces at once - pruning a seeded or imported closet. */
+    deleteItems(ids) {
+      const set = {};
+      ids.forEach(function (id) { set[id] = true; });
+      update(function (s) {
+        s.items = s.items.filter(function (i) { return !set[i.id]; });
+        s.trips.forEach(function (trip) {
+          trip.itemIds = trip.itemIds.filter(function (i) { return !set[i]; });
+          ids.forEach(function (id) { delete trip.packing[id]; });
+          trip.outfits.forEach(function (outfit) {
+            Object.keys(outfit.slots).forEach(function (slot) {
+              if (slot === 'accessories') {
+                outfit.slots.accessories = (outfit.slots.accessories || []).filter(function (a) { return !set[a]; });
+              } else if (set[outfit.slots[slot]]) {
+                outfit.slots[slot] = null;
+              }
+            });
+          });
+        });
+      });
+    },
+
     /* Add several items at once (the order importer). */
     addItems(drafts) {
       const ids = [];
