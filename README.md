@@ -107,14 +107,36 @@ Inside a trip, the masthead shows that city's weather from
 climate normals for Paris, labelled *Seasonal average*. The last forecast is
 cached per trip, so it still shows something sensible offline.
 
+## Seeing it without hosting anything
+
+```
+node build-single-file.js
+```
+
+bundles the stylesheet and every script into `dist/outfit-planner.html` — one
+self-contained file you can double-click, email to yourself, or drop onto any
+host. It behaves exactly like the multi-file version; `localStorage` is keyed
+per origin, so the single file keeps its own closet separate from a hosted copy
+(move between them with Export/Import backup).
+
 ## Hosting on Netlify
+
+Pushing this repo to GitHub does **not** create a website. `netlify.toml` only
+tells Netlify how to serve the repo once a site exists — you still have to
+create that site once:
 
 `netlify.toml` sets the publish directory to the repo root and leaves the build
 command empty.
 
-- **From Git:** *Add new site → Import an existing project*, pick this repo,
-  deploy. No build command, publish directory `.`.
-- **Without Git:** drag the folder onto the Netlify drop zone.
+1. Sign in at [app.netlify.com](https://app.netlify.com).
+2. *Add new site → Import an existing project → GitHub*, and pick this repo.
+3. Netlify reads `netlify.toml`: no build command, publish directory `.`.
+   Leave the branch as the repo's default.
+4. Deploy. You get a `something.netlify.app` URL in under a minute, and every
+   later push redeploys it automatically.
+
+Faster, without Git at all: run the bundle step above and drag
+`dist/outfit-planner.html` onto the Netlify drop zone.
 
 `localStorage` is scoped to an origin, so a closet built by opening
 `index.html` locally will **not** appear on the Netlify URL. Move it with
