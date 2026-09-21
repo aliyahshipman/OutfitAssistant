@@ -7,11 +7,11 @@
   const PT = (window.PT = window.PT || {});
   const util = PT.util;
 
-  let scope = 'packed';   // 'packed' = items used in a saved look, 'all' = whole closet
+  let scope = 'packed';   // 'packed' = already in a look, 'all' = everything coming on the trip
 
   function pool(categoryId) {
     const store = PT.store;
-    const items = store.itemsIn(categoryId);
+    const items = store.tripItemsIn(categoryId);
     if (scope === 'all') return items;
     return items.filter(function (item) { return store.usageCount(item.id) > 0; });
   }
@@ -19,7 +19,7 @@
   /* Pairs already worn together in a saved look. */
   function savedPairs() {
     const set = {};
-    PT.store.get().outfits.forEach(function (outfit) {
+    PT.store.outfits().forEach(function (outfit) {
       const slots = outfit.slots || {};
       if (slots.top && slots.bottom) set[slots.top + '::' + slots.bottom] = true;
     });
@@ -36,7 +36,7 @@
     });
     const total = tops.length * bottoms.length + dresses.length;
     const pieces = tops.length + bottoms.length + dresses.length;
-    const looks = store.get().outfits.length;
+    const looks = store.outfits().length;
 
     return '' +
       '<div class="stat-row">' +
@@ -88,8 +88,8 @@
 
   function underusedHTML() {
     const store = PT.store;
-    const zero = store.get().items.filter(function (i) { return store.usageCount(i.id) === 0; });
-    const once = store.get().items.filter(function (i) { return store.usageCount(i.id) === 1; });
+    const zero = store.tripItems().filter(function (i) { return store.usageCount(i.id) === 0; });
+    const once = store.tripItems().filter(function (i) { return store.usageCount(i.id) === 1; });
     if (!zero.length && !once.length) {
       return '<div class="note note--calm">Every piece in the closet is pulling its weight. Pack with confidence.</div>';
     }
@@ -139,7 +139,7 @@
         '<div class="section-head__aside">' +
           '<div class="seg">' +
             '<button data-scope="packed" aria-pressed="' + (scope === 'packed') + '" type="button">Packed pieces</button>' +
-            '<button data-scope="all" aria-pressed="' + (scope === 'all') + '" type="button">Whole closet</button>' +
+            '<button data-scope="all" aria-pressed="' + (scope === 'all') + '" type="button">Everything packed</button>' +
           '</div>' +
         '</div>' +
       '</div>';
@@ -147,7 +147,7 @@
     if (!tops.length || !bottoms.length) {
       const why = scope === 'packed'
         ? 'Save a look or two first — this grid is built from the pieces you have actually used.'
-        : 'Add tops and bottoms to the closet to see the grid.';
+        : 'Pick tops and bottoms for this trip to see the grid.';
       root.innerHTML = head +
         '<div class="empty-state"><h3>Not enough to combine yet</h3><p>' + util.esc(why) + '</p></div>' +
         underusedHTML();

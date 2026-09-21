@@ -19,7 +19,7 @@
   };
 
   function cached() {
-    const weather = PT.store.get().weather;
+    const weather = PT.store.weather();
     if (!weather || !Array.isArray(weather.days)) return null;
     return weather;
   }
@@ -64,9 +64,7 @@
             code: daily.weather_code ? daily.weather_code[index] : null
           };
         });
-        PT.store.update(function (s) {
-          s.weather = { fetchedAt: Date.now(), days: days };
-        });
+        PT.store.setWeather({ fetchedAt: Date.now(), days: days });
         return days;
       });
   }

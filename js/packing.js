@@ -66,7 +66,7 @@
   function render(root) {
     const store = PT.store;
     const packedItems = store.packedItems();
-    const unused = store.get().items.filter(function (i) { return store.usageCount(i.id) === 0; });
+    const unused = store.tripItems().filter(function (i) { return store.usageCount(i.id) === 0; });
 
     const head = '' +
       '<div class="section-head">' +
@@ -108,7 +108,7 @@
       ? '<section class="leave-behind">' +
           '<p class="eyebrow">Staying home</p>' +
           '<p class="harmony__note">' + util.pluralize(unused.length, 'piece') +
-            ' never made it into a look. That is the overpacking, caught early.</p>' +
+            ' you picked for this trip never made it into a look. That is the overpacking, caught early.</p>' +
           '<ul>' + unused.map(function (i) { return '<li>' + util.esc(i.name) + '</li>'; }).join('') + '</ul>' +
         '</section>'
       : '';
@@ -119,7 +119,7 @@
   /* A standalone, self-contained HTML page for printing or sharing. */
   function exportPage() {
     const store = PT.store;
-    const trip = store.get().trip;
+    const trip = store.trip();
     const items = store.packedItems();
 
     const sections = store.CATEGORIES.map(function (cat) {

@@ -1,119 +1,147 @@
-# Paris Trip · Outfit Planner
+# Outfit Planner
 
-A single-page planner for a capsule wardrobe: photograph what you own, build
-looks from it, see every combination those pieces actually produce, assign
-looks to days, and pack only what earned its place.
+Your wardrobe, and a tight capsule plan for every trip.
 
-Built for **26 September – 8 October 2026**, including five agency days during
-Paris Fashion Week. No backend, no accounts, no build step — open
-`index.html` and it works, including offline.
+The **Closet** is the home screen: everything you own, once. A **trip** is its
+own little section that borrows from it — you pick what is coming, build looks
+from those pieces only, and pack what earned its place.
 
-## Running it
+No backend, no accounts, no build step. Open `index.html` and it works,
+including offline.
 
-**On your laptop:** double-click `index.html`. That is the whole setup.
+## The shape of it
 
-**Hosted (optional):** see [Hosting on Netlify](#hosting-on-netlify) below.
+```
+Closet                     ← home. Everything you own.
+└── Paris · Fashion Week   ← a trip. Draws on the closet.
+    ├── What's coming      pick the capsule from your closet
+    ├── Looks              build outfits from the picked pieces
+    ├── Combinations       every top × bottom those pieces make
+    ├── 13 days            assign looks to days
+    └── Packing            the list, from looks you actually saved
+```
 
-## The five sections
+Add a trip with **+** in the top nav. Trips are independent — their own looks,
+calendar and packing — but they all draw on the one closet, so a piece is
+described once and reused forever.
 
-**Closet** — Add each piece with a name, colour, photo, an *agency-appropriate*
-tag, and a *day / night / both* tag. Filter the grid by category, colour,
-agency, or time of day. Photos come straight from your camera roll.
+## The Closet
 
-**Outfit Builder** — Tap a slot in the flat lay to fill it. Pieces are ordered
-by how well they sit with what you have already chosen, and badged **Match**,
-**Works** or **Clash**, so you never have to decide what goes together. A dress
-locks out the top and bottom slots automatically. *Suggest a look* builds a
-complete, colour-coherent outfit from whatever is in the closet. Saved looks
-feed the calendar and the packing list.
+Each piece carries a name, brand, size, colour, photo, an *agency-appropriate*
+tag and a *day / night / both* tag. Filter by category, colour, agency or time.
 
-**Combinations** — Every top × bottom pairing in one grid, showing which
-pairings work and which you have already saved as a look. The counters tell you
-how many distinct looks a small wardrobe is really producing. Below the grid,
-any piece appearing in fewer than two saved looks is flagged — that is the
-piece not earning its space in the suitcase. Tap any cell to build that pairing.
+Pictures come from three places, in order: a photo you added from your camera
+roll, the product image from the order it was imported from, or — failing both
+— a block of the piece's own colour, so a photo-less closet still reads
+visually rather than as a spreadsheet.
 
-**Day by Day** — One tile per date of the trip, each split into a day look and
-a night look. Mark the agency days. Drag a look from the rail onto a tile, or
-tap a slot to choose one. You get warned when the same look is worn twice, when
-an agency day contains a piece you have not tagged agency-appropriate, and when
-days are still unplanned.
+### Importing from your order emails
 
-**Packing** — Builds itself from your saved looks: a piece only appears once it
-is in at least one outfit. Assign each to carry-on, checked bag or personal
-item, and tick it off as you physically pack. Everything that never made it
-into a look is listed separately as *Staying home*. **Print** gives a clean
-printable list; **Save as page** downloads a self-contained HTML file you can
-open anywhere or send to someone.
+Claude can read your shop order confirmations and write them to a JSON file in
+the `outfit-planner/orders@1` format. **Closet → Import from orders** takes
+that file and shows every line item — picture, brand, colour, size — for
+review before anything is added.
+
+The review step is the point. An order email records what you *bought*, not
+what you *kept*: returns, wrong sizes and gifts all look identical to a
+receipt. Untick those. Pieces already in the closet are detected and unticked
+for you.
+
+Product images are hot-linked from the shop by default, so they need a
+connection. Tick **Save pictures for offline** on import to copy them into the
+file itself — this only works if the shop allows cross-origin reads, and the
+app says so plainly if it doesn't.
+
+The order file is *your* data — it holds what you bought and when. It is
+deliberately not part of this repository; keep it wherever you keep personal
+files.
+
+## A trip
+
+**What's coming** — tap pieces from the closet to bring them. The counters show
+how many distinct looks your picks can produce against how many days you are
+away, which is the whole anti-overpacking argument in one line.
+
+**Looks** — tap a slot in the flat lay to fill it. Candidates are ordered by how
+well they sit with what you have already chosen and badged **Match**, **Works**
+or **Clash**, so you never decide what goes together. A dress locks out the top
+and bottom slots. *Suggest a look* builds a complete, colour-coherent outfit.
+
+**Combinations** — every top × bottom pairing from the picked pieces, showing
+which work and which you have already saved. Any piece in fewer than two looks
+is flagged: that is the one not earning its space.
+
+**Day by day** — one tile per date, split into a day look and a night look.
+Mark the agency days. Drag a look from the rail onto a tile, or tap to choose.
+You are warned about repeated looks, agency days holding untagged pieces, and
+days still unplanned.
+
+**Packing** — builds itself from saved looks. Assign each piece to carry-on,
+checked bag or personal item and tick it off as you pack. Anything picked for
+the trip but never worn in a look is listed as *Staying home*. **Print** gives a
+clean list; **Save as page** downloads a self-contained HTML file to send on.
 
 ## Trip dates
 
-Settings holds the trip name and dates, and the calendar follows them. Note
-that 26 September – 8 October inclusive is **13 dates**, not 12 — if you want
-exactly twelve tiles, set the last day to 7 October. The tab label always shows
-the real count.
+Trip settings holds the name and dates; the calendar follows them. Note that
+26 September – 8 October inclusive is **13 dates**, not 12 — set the last day to
+7 October if you want exactly twelve tiles. The tab always shows the real count.
 
 ## Your data
 
-Everything is stored in your browser's `localStorage` under a single key, on
-the one device and browser you used. It is never sent anywhere, and the app
-works with no network connection.
+Everything lives in this browser's `localStorage` under one key, on the one
+device you used. It is never sent anywhere, and the app works with no network.
 
-Two consequences worth knowing:
-
-- **Clearing your browsing data erases the plan.** Use *Settings → Export
-  backup* to save a JSON file first; *Import backup* restores it, photos
-  included. This is also how you move the plan to another laptop or from the
-  local file to a hosted copy.
-- **Storage is finite** (roughly 5 MB). Photos are automatically downscaled to
-  620px JPEGs on import — a typical photo lands around 30–60 KB — so a capsule
-  wardrobe fits comfortably. The footer shows how much you have used and turns
-  red as you approach the limit.
+- **Clearing your browsing data erases it.** Use *Closet → Settings → Export
+  backup* first; *Import backup* restores it, photos included. This is also how
+  you move between machines, or from the local file to a hosted copy.
+- **Storage is finite** (roughly 5 MB). Camera-roll photos are downscaled to
+  620px JPEGs on import — about 30–60 KB each. The footer shows usage and turns
+  red near the limit.
 
 ## Weather
 
-The masthead shows Paris weather for the trip from
-[Open-Meteo](https://open-meteo.com) (no API key). The forecast only reaches
-about 16 days out, so any date beyond that falls back to late-September /
-early-October climate normals, labelled *Seasonal average*. The last forecast
-is cached, so the strip still shows something sensible offline.
+Inside a trip, the masthead shows that city's weather from
+[Open-Meteo](https://open-meteo.com) (no API key). The forecast reaches about
+16 days out; beyond that it falls back to late-September / early-October
+climate normals for Paris, labelled *Seasonal average*. The last forecast is
+cached per trip, so it still shows something sensible offline.
 
 ## Hosting on Netlify
 
-The repo is a static site, so Netlify needs no build configuration —
 `netlify.toml` sets the publish directory to the repo root and leaves the build
 command empty.
 
-- **From Git:** in Netlify, *Add new site → Import an existing project*, pick
-  this repository, and deploy. No build command, publish directory `.`.
-- **Without Git:** drag the project folder onto the Netlify drop zone.
+- **From Git:** *Add new site → Import an existing project*, pick this repo,
+  deploy. No build command, publish directory `.`.
+- **Without Git:** drag the folder onto the Netlify drop zone.
 
-One thing to expect: `localStorage` is scoped to an origin, so a plan built by
-opening `index.html` locally will **not** appear on the Netlify URL, and vice
-versa. Move it across with *Settings → Export backup* and then *Import backup*
-on the hosted site. Pick one home for the plan and stay there.
+`localStorage` is scoped to an origin, so a closet built by opening
+`index.html` locally will **not** appear on the Netlify URL. Move it with
+*Export backup* → *Import backup*, and keep the closet in one place.
 
-The hosted page is public to anyone who has the URL, but your closet is not —
-the data lives in your browser, not on the server. Netlify's *Site
-configuration → Access control → Password protection* adds a password if you
-would rather the page itself not be public.
+The hosted page is public to anyone with the URL, but your closet is not — the
+data stays in your browser, never on the server. Netlify's *Site configuration
+→ Access control → Password protection* covers the page itself.
 
 ## Project layout
 
 ```
 index.html        markup shell and script order
 css/styles.css    all styling, including print and mobile
-js/util.js        DOM helpers, photo downscaling, modal and toast
+js/util.js        DOM helpers, photo handling, modal and toast
 js/colors.js      colour model and the pairing-score rules
-js/store.js       state, localStorage persistence, derived stats
-js/closet.js      closet grid, filters, add/edit form
+js/store.js       closet + trips, localStorage, derived stats
+js/closet.js      the closet grid, filters, add/edit form
+js/import.js      order-file import with a review step
+js/trip.js        picking a trip's capsule from the closet
 js/builder.js     flat lay, suggestions, saved looks
 js/matrix.js      combination grid and underused-piece flags
 js/calendar.js    day tiles, agency days, drag-and-drop assignment
 js/packing.js     derived packing list, luggage, printable export
 js/weather.js     Open-Meteo fetch, caching, seasonal fallback
-js/app.js         tab routing, masthead, settings, backup
+js/app.js         two-level navigation, masthead, settings, backup
 ```
 
-Plain ES5-compatible scripts with no modules or bundler, deliberately: it means
-the app runs from `file://` with nothing installed.
+Plain ES5-compatible scripts, no modules or bundler, so the app runs from
+`file://` with nothing installed.

@@ -59,7 +59,7 @@
       ? draft.slots.accessories[Number(slotKey.split(':')[1])]
       : draft.slots[slotKey];
 
-    return PT.store.itemsIn(categoryId)
+    return PT.store.tripItemsIn(categoryId)
       .filter(function (item) {
         if (pickerFilters.agency && !item.agency) return false;
         if (pickerFilters.time !== 'all' && item.time !== pickerFilters.time && item.time !== 'both') return false;
@@ -198,16 +198,16 @@
   }
 
   function render(root) {
-    const outfits = PT.store.get().outfits;
-    const hasItems = PT.store.get().items.length > 0;
+    const outfits = PT.store.outfits();
+    const hasItems = PT.store.tripItems().length > 0;
 
     if (!hasItems) {
       root.innerHTML = '' +
         '<div class="section-head"><h2>Outfit Builder</h2></div>' +
         '<div class="empty-state">' +
-          '<h3>Fill the closet first</h3>' +
-          '<p>Add a few tops, bottoms and shoes, then come back and the builder will do the matching for you.</p>' +
-          '<button class="btn" data-goto="closet" type="button">Go to the closet</button>' +
+          '<h3>Nothing picked for this trip yet</h3>' +
+          '<p>Choose which pieces are coming, and the builder will do the matching from those alone.</p>' +
+          '<button class="btn" data-goto="trip" type="button">Pick what is coming</button>' +
         '</div>';
       return;
     }
@@ -267,11 +267,11 @@
   /* Build a complete, colour-coherent look from whatever is in the closet. */
   function suggest() {
     const store = PT.store;
-    const anchorPool = store.get().items.filter(function (item) {
+    const anchorPool = store.tripItems().filter(function (item) {
       if (pickerFilters.agency && !item.agency) return false;
       return item.category === 'tops' || item.category === 'dresses';
     });
-    if (!anchorPool.length) { util.toast('Add a top or a dress first.'); return; }
+    if (!anchorPool.length) { util.toast('Pick a top or a dress for this trip first.'); return; }
 
     const anchor = anchorPool[Math.floor(Math.random() * anchorPool.length)];
     draft = emptyDraft();

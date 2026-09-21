@@ -56,7 +56,7 @@
   }
 
   function railHTML() {
-    const outfits = PT.store.get().outfits;
+    const outfits = PT.store.outfits();
     if (!outfits.length) {
       return '<div class="rail"><h3>Saved looks</h3><p class="rail__hint">Save a look in the builder and it will ' +
         'appear here, ready to drop onto a day.</p></div>';
@@ -118,7 +118,7 @@
       const entry = store.day(date);
       if (!entry.day) unfilled++;
     });
-    if (unfilled && store.get().outfits.length) {
+    if (unfilled && store.outfits().length) {
       notices.push('<div class="note note--calm">' + util.pluralize(unfilled, 'day') +
         ' still without a day look.</div>');
     }
@@ -148,7 +148,7 @@
     const repeats = store.repeatedOutfits();
 
     if (!dates.length) {
-      root.innerHTML = '<div class="section-head"><h2>12 Days</h2></div>' +
+      root.innerHTML = '<div class="section-head"><h2>Day by Day</h2></div>' +
         '<div class="empty-state"><h3>Trip dates look wrong</h3>' +
         '<p>Set a start and end date in Settings to lay out the calendar.</p></div>';
       return;
@@ -173,7 +173,7 @@
 
   function openAssignDialog(date, slot) {
     const store = PT.store;
-    const outfits = store.get().outfits;
+    const outfits = store.outfits();
     const entry = store.day(date);
     const label = util.formatDate(date, { weekday: 'long', day: 'numeric', month: 'long' });
 

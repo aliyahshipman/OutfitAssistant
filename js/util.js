@@ -116,16 +116,96 @@
       });
     },
 
-    /* A photo, or a lettered placeholder when there is none. */
+    /*
+     * The picture for an item, in priority order:
+     *   1. a photo the user added (a data URL — always available offline)
+     *   2. the product image from the order it was imported from (needs network)
+     *   3. a colour block, so a photo-less closet still reads visually
+     *
+     * A remote image that fails to load swaps itself for the colour block, so a
+     * dead product URL or an offline session never leaves an empty frame.
+     */
     thumb(item, className) {
       const cls = className ? ' class="' + className + '"' : '';
-      if (item && item.photo) {
-        return '<img' + cls + ' src="' + util.esc(item.photo) + '" alt="' + util.esc(item.name) + '" loading="lazy">';
+      const src = item && (item.photo || item.photoUrl);
+      if (src) {
+        return '<img' + cls + ' src="' + util.esc(src) + '" alt="' + util.esc(item.name) +
+          '" loading="lazy" data-fallback-for="' + util.esc(item.id || '') +
+          '" onerror="window.PT.util.imageFailed(this)">';
       }
+      return util.colorBlock(item, className);
+    },
+
+    /* A flat block of the item's own colour, captioned with its initial. */
+    colorBlock(item, className) {
+      const color = (item && item.color) || '#d8d3ca';
       const letter = item && item.name ? item.name.trim().charAt(0).toUpperCase() : '·';
-      return '<div' + (className ? ' class="ph ' + className + '"' : ' class="ph"') +
-        ' aria-hidden="true" style="display:flex;align-items:center;justify-content:center;' +
-        'font-family:var(--serif);color:rgba(0,0,0,.2)">' + util.esc(letter) + '</div>';
+      const ink = util.isLight(color) ? 'rgba(0,0,0,.45)' : 'rgba(255,255,255,.72)';
+      return '<div class="ph' + (className ? ' ' + className : '') + '" aria-hidden="true" ' +
+        'style="background:' + util.esc(color) + ';color:' + ink + ';display:flex;' +
+        'align-items:center;justify-content:center;font-family:var(--serif);font-size:1.6em;' +
+        'width:100%;height:100%">' + util.esc(letter) + '</div>';
+    },
+
+    /* Swap a broken remote image for the colour block. */
+    imageFailed(img) {
+      const id = img.getAttribute('data-fallback-for');
+      const item = id && window.PT.store ? window.PT.store.itemById(id) : null;
+      const wrapper = document.createElement('div');
+      wrapper.innerHTML = util.colorBlock(item || { name: img.alt }, img.className);
+      const replacement = wrapper.firstChild;
+      if (img.parentNode) img.parentNode.replaceChild(replacement, img);
+    },
+
+    isLight(hex) {
+      let value = String(hex || '').replace('#', '');
+      if (value.length === 3) value = value.split('').map(function (c) { return c + c; }).join('');
+      if (!/^[0-9a-f]{6}$/i.test(value)) return true;
+      const r = parseInt(value.slice(0, 2), 16);
+      const g = parseInt(value.slice(2, 4), 16);
+      const b = parseInt(value.slice(4, 6), 16);
+      // Perceived luminance.
+      return (0.299 * r + 0.587 * g + 0.114 * b) > 150;
+    },
+
+    /*
+     * Download a remote image and turn it into a data URL, so an imported piece
+     * keeps its picture offline. Fails quietly when the host forbids CORS.
+     */
+    cacheImage(url) {
+      return fetch(url, { mode: 'cors' })
+        .then(function (response) {
+          if (!response.ok) throw new Error('HTTP ' + response.status);
+          return response.blob();
+        })
+        .then(function (blob) {
+          return new Promise(function (resolve, reject) {
+            const reader = new FileReader();
+            reader.onload = function () { resolve(reader.result); };
+            reader.onerror = function () { reject(new Error('Could not read the image.')); };
+            reader.readAsDataURL(blob);
+          });
+        })
+        .then(function (dataUrl) {
+          // Re-encode through the resizer so cached photos stay small.
+          return new Promise(function (resolve, reject) {
+            const img = new Image();
+            img.onload = function () {
+              const scale = Math.min(1, 620 / Math.max(img.width, img.height));
+              const canvas = document.createElement('canvas');
+              canvas.width = Math.max(1, Math.round(img.width * scale));
+              canvas.height = Math.max(1, Math.round(img.height * scale));
+              const ctx = canvas.getContext('2d');
+              ctx.fillStyle = '#ffffff';
+              ctx.fillRect(0, 0, canvas.width, canvas.height);
+              ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+              try { resolve(canvas.toDataURL('image/jpeg', 0.72)); }
+              catch (err) { reject(err); }
+            };
+            img.onerror = function () { reject(new Error('Could not decode the image.')); };
+            img.src = dataUrl;
+          });
+        });
     },
 
     /* ---- misc ------------------------------------------------------ */

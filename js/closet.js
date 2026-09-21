@@ -11,7 +11,7 @@
     if (filters.agency && !item.agency) return false;
     if (filters.time !== 'all' && item.time !== filters.time && item.time !== 'both') return false;
     if (filters.search) {
-      const haystack = (item.name + ' ' + (item.subtype || '')).toLowerCase();
+      const haystack = (item.name + ' ' + (item.brand || '') + ' ' + (item.subtype || '')).toLowerCase();
       if (haystack.indexOf(filters.search.toLowerCase()) === -1) return false;
     }
     return true;
@@ -19,9 +19,10 @@
 
   function cardHTML(item) {
     const store = PT.store;
-    const uses = store.usageCount(item.id);
-    const usesClass = uses < 2 ? 'card__uses card__uses--low' : 'card__uses';
-    const usesText = uses === 0 ? 'In no outfit yet' : util.pluralize(uses, 'outfit');
+    const uses = store.closetUsage(item.id);
+    const usesClass = uses < 1 ? 'card__uses card__uses--low' : 'card__uses';
+    const usesText = uses === 0 ? 'In no look yet' : util.pluralize(uses, 'look');
+    const onTrip = store.inTrip(item.id);
 
     return '' +
       '<article class="card" data-item="' + util.esc(item.id) + '">' +
@@ -31,6 +32,7 @@
             (item.agency ? '<span class="badge badge--agency">Agency</span>' : '') +
             (item.time === 'night' ? '<span class="badge badge--night">Night</span>' : '') +
             (item.time === 'day' ? '<span class="badge">Day</span>' : '') +
+            (onTrip ? '<span class="badge badge--trip">Packing</span>' : '') +
           '</div>' +
           '<div class="card__actions">' +
             '<button class="btn btn--ghost btn--sm" data-edit type="button">Edit</button>' +
@@ -41,8 +43,8 @@
           '<div class="card__name">' + util.esc(item.name) + '</div>' +
           '<div class="card__meta">' +
             '<span class="swatch" style="background:' + util.esc(item.color) + '"></span>' +
-            '<span>' + util.esc(PT.colors.nameFor(item.color)) + '</span>' +
-            (item.subtype ? '<span class="dot">·</span><span>' + util.esc(item.subtype) + '</span>' : '') +
+            '<span>' + util.esc(item.colorName || PT.colors.nameFor(item.color)) + '</span>' +
+            (item.brand ? '<span class="dot">·</span><span>' + util.esc(item.brand) + '</span>' : '') +
           '</div>' +
           '<div class="' + usesClass + '">' + usesText + '</div>' +
         '</div>' +
@@ -102,9 +104,12 @@
         '<div class="section-head"><h2>The Closet</h2></div>' +
         '<div class="empty-state">' +
           '<h3>Nothing hanging up yet</h3>' +
-          '<p>Add the pieces you are actually considering for Paris. Photograph them flat on a plain surface — ' +
-          'the photos become the whole interface from here on.</p>' +
-          '<button class="btn" data-add-item type="button">Add the first piece</button>' +
+          '<p>This is your whole wardrobe, not one trip\'s packing list. Add pieces by hand, or import them ' +
+          'straight from your shop order emails — pictures included.</p>' +
+          '<div class="row" style="justify-content:center">' +
+            '<button class="btn" data-add-item type="button">Add a piece</button>' +
+            '<button class="btn btn--ghost" data-import-orders type="button">Import from orders</button>' +
+          '</div>' +
         '</div>';
       return;
     }
@@ -135,8 +140,8 @@
       '<div class="section-head">' +
         '<h2>The Closet</h2>' +
         '<div class="section-head__aside">' +
-          '<span class="category-block__count">' + util.pluralize(all.length, 'piece') +
-            ' · ' + store.packedItems().length + ' in use</span>' +
+          '<span class="category-block__count">' + util.pluralize(all.length, 'piece') + '</span>' +
+          '<button class="btn btn--ghost" data-import-orders type="button">Import from orders</button>' +
           '<button class="btn" data-add-item type="button">Add piece</button>' +
         '</div>' +
       '</div>' +
@@ -150,7 +155,8 @@
     const store = PT.store;
     const existing = itemId ? store.itemById(itemId) : null;
     const draft = Object.assign({
-      name: '', category: 'tops', subtype: '', color: '#141414', photo: '', agency: false, time: 'both'
+      name: '', brand: '', size: '', category: 'tops', subtype: '', color: '#141414',
+      colorName: '', photo: '', photoUrl: '', agency: false, time: 'both'
     }, existing || {});
 
     const categoryOptions = store.CATEGORIES.map(function (c) {
@@ -168,7 +174,9 @@
         '<div class="field" style="flex:none">' +
           '<span class="field-label">Photo</span>' +
           '<label class="photo-drop" data-photo-drop>' +
-            (draft.photo ? '<img src="' + util.esc(draft.photo) + '" alt="">' : '<span>Tap to add a photo from your camera roll</span>') +
+            (draft.photo || draft.photoUrl
+              ? '<img src="' + util.esc(draft.photo || draft.photoUrl) + '" alt="">'
+              : '<span>Tap to add a photo from your camera roll</span>') +
             '<input type="file" accept="image/*" data-photo-input hidden>' +
           '</label>' +
           (draft.photo ? '<button class="btn btn--quiet btn--sm" data-photo-clear type="button">Remove photo</button>' : '') +
@@ -177,6 +185,16 @@
           '<div class="field">' +
             '<label for="f-name">Name</label>' +
             '<input id="f-name" type="text" data-field="name" value="' + util.esc(draft.name) + '" placeholder="Black silk blouse">' +
+          '</div>' +
+          '<div class="field-row">' +
+            '<div class="field">' +
+              '<label for="f-brand">Brand</label>' +
+              '<input id="f-brand" type="text" data-field="brand" value="' + util.esc(draft.brand) + '" placeholder="Optional">' +
+            '</div>' +
+            '<div class="field">' +
+              '<label for="f-size">Size</label>' +
+              '<input id="f-size" type="text" data-field="size" value="' + util.esc(draft.size) + '" placeholder="Optional">' +
+            '</div>' +
           '</div>' +
           '<div class="field-row">' +
             '<div class="field">' +
@@ -238,6 +256,8 @@
       paintSubtypes();
 
       body.querySelector('[data-field="name"]').addEventListener('input', function (e) { draft.name = e.target.value; });
+      body.querySelector('[data-field="brand"]').addEventListener('input', function (e) { draft.brand = e.target.value; });
+      body.querySelector('[data-field="size"]').addEventListener('input', function (e) { draft.size = e.target.value; });
       body.querySelector('[data-field="category"]').addEventListener('change', function (e) {
         draft.category = e.target.value;
         draft.subtype = '';
@@ -249,6 +269,7 @@
       const colorName = body.querySelector('[data-color-name]');
       function setColor(hex) {
         draft.color = hex;
+        draft.colorName = '';
         colorInput.value = hex;
         colorName.textContent = PT.colors.nameFor(hex);
         util.qsa('[data-swatch]', body).forEach(function (btn) {
@@ -314,6 +335,7 @@
 
   function bind(root) {
     util.on(root, 'click', '[data-add-item]', function () { openForm(null); });
+    util.on(root, 'click', '[data-import-orders]', function () { PT.importer.open(); });
     util.on(root, 'click', '[data-edit]', function (e, btn) {
       openForm(btn.closest('[data-item]').dataset.item);
     });
