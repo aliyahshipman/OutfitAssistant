@@ -187,19 +187,42 @@
     next(0);
   }
 
-  /* Entry point: pick a file, parse it, review it. */
+  /* Take parsed JSON text through to the review screen. */
+  function accept(text) {
+    const payload = JSON.parse(text);
+    const drafts = normalise(payload);
+    if (!drafts.length) throw new Error('No items found in that data.');
+    meta = { retailer: payload.retailer || '', window: payload.window || '' };
+    rows = drafts.map(function (draft) {
+      const duplicate = Boolean(PT.store.findDuplicate(draft));
+      return { draft: draft, chosen: !duplicate, duplicate: duplicate };
+    });
+    openReview();
+  }
+
+  /*
+   * Entry point. Two ways in, because moving a file onto a phone is a nuisance:
+   * choose the file, or paste its contents.
+   */
   function open() {
     const html = '' +
       '<p class="lede">Import the pieces from your shop order emails.</p>' +
-      '<div class="note note--calm">Claude reads your order confirmations and writes them to a file in the ' +
-        '<code>outfit-planner/orders@1</code> format. Choose that file here and every line item comes up for ' +
-        'review, with its picture, before anything is added.</div>' +
+      '<div class="note note--calm">Claude reads your order confirmations and writes them out in the ' +
+        '<code>outfit-planner/orders@1</code> format. Bring that in here and every line item comes up for ' +
+        'review, with its picture, before anything is added to the closet.</div>' +
       '<div class="row">' +
         '<label class="btn" style="cursor:pointer">Choose order file' +
-          '<input type="file" accept="application/json,.json" data-imp-file hidden></label>' +
+          '<input type="file" accept="application/json,.json,text/plain" data-imp-file hidden></label>' +
+        '<span class="harmony__note">or paste it below</span>' +
+      '</div>' +
+      '<div class="field">' +
+        '<label for="imp-paste">Paste order data</label>' +
+        '<textarea id="imp-paste" data-imp-paste rows="5" placeholder=\'{ "format": "outfit-planner/orders@1", ... }\' ' +
+          'style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;border:1px solid var(--line-firm);padding:8px"></textarea>' +
       '</div>' +
       '<div class="modal__actions">' +
         '<button class="btn btn--ghost" data-close-modal type="button">Cancel</button>' +
+        '<button class="btn" data-imp-paste-go type="button">Read pasted data</button>' +
       '</div>';
 
     util.modal('Import from orders', html, function (body) {
@@ -208,21 +231,17 @@
         if (!file) return;
         const reader = new FileReader();
         reader.onload = function () {
-          try {
-            const payload = JSON.parse(reader.result);
-            const drafts = normalise(payload);
-            if (!drafts.length) { util.toast('No items found in that file.'); return; }
-            meta = { retailer: payload.retailer || '', window: payload.window || '' };
-            rows = drafts.map(function (draft) {
-              const duplicate = Boolean(PT.store.findDuplicate(draft));
-              return { draft: draft, chosen: !duplicate, duplicate: duplicate };
-            });
-            openReview();
-          } catch (err) {
-            util.toast(err.message || 'That file could not be read.');
-          }
+          try { accept(reader.result); }
+          catch (err) { util.toast(err.message || 'That file could not be read.'); }
         };
         reader.readAsText(file);
+      });
+
+      body.querySelector('[data-imp-paste-go]').addEventListener('click', function () {
+        const text = body.querySelector('[data-imp-paste]').value.trim();
+        if (!text) { util.toast('Paste the order data first, or choose a file.'); return; }
+        try { accept(text); }
+        catch (err) { util.toast(err.message || 'That data could not be read.'); }
       });
     });
   }

@@ -106,6 +106,8 @@
           '<h3>Nothing hanging up yet</h3>' +
           '<p>This is your whole wardrobe, not one trip\'s packing list. Add pieces by hand, or import them ' +
           'straight from your shop order emails — pictures included.</p>' +
+          '<p style="font-size:12px">Your closet is kept in this browser, at this address. Opening the app ' +
+          'somewhere else starts a fresh one — bring it across with a backup or an order file.</p>' +
           '<div class="row" style="justify-content:center">' +
             '<button class="btn" data-add-item type="button">Add a piece</button>' +
             '<button class="btn btn--ghost" data-import-orders type="button">Import from orders</button>' +

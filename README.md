@@ -87,6 +87,21 @@ Trip settings holds the name and dates; the calendar follows them. Note that
 26 September – 8 October inclusive is **13 dates**, not 12 — set the last day to
 7 October if you want exactly twelve tiles. The tab always shows the real count.
 
+## The starter wardrobe
+
+`js/seed.js` holds a closet that is loaded **once**, on first open, when the
+closet is empty and that browser has never been seeded. It is what makes the
+hosted site arrive populated on any device instead of asking you to import
+something first.
+
+It is applied once and only once: delete a seeded piece, or erase everything,
+and it stays gone. Regenerate it from an order file, edit it by hand, or delete
+the file (and its `<script>` tag in `index.html`) to go back to starting empty.
+
+Note what this means — the pieces in `seed.js` are part of the deployed site.
+Anyone who can open the URL, or read this repository, can read them. Keep the
+repo private, or put a password on the Netlify site, if that matters to you.
+
 ## Your data
 
 Everything lives in this browser's `localStorage` under one key, on the one
@@ -162,6 +177,7 @@ js/matrix.js      combination grid and underused-piece flags
 js/calendar.js    day tiles, agency days, drag-and-drop assignment
 js/packing.js     derived packing list, luggage, printable export
 js/weather.js     Open-Meteo fetch, caching, seasonal fallback
+js/seed.js        the starter wardrobe this deployment ships with
 js/app.js         two-level navigation, masthead, settings, backup
 ```
 

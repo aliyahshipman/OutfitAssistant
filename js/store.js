@@ -436,6 +436,22 @@
       });
     },
 
+    /*
+     * Apply the bundled starter wardrobe, once.
+     *
+     * Only when the closet is empty AND this browser has never been seeded, so
+     * that deleting a seeded piece - or erasing everything - sticks instead of
+     * silently coming back on the next load.
+     */
+    seedIfEmpty() {
+      const seed = PT.SEED;
+      if (!seed || !Array.isArray(seed.items) || !seed.items.length) return 0;
+      if (state.items.length || state.ui.seeded) return 0;
+      const ids = store.addItems(seed.items);
+      update(function (s) { s.ui.seeded = true; });
+      return ids.length;
+    },
+
     /* ---- backup ------------------------------------------------------------ */
 
     exportJSON() { return JSON.stringify(state, null, 2); },
@@ -457,6 +473,8 @@
       update(function (s) {
         const fresh = defaultState();
         Object.keys(fresh).forEach(function (key) { s[key] = fresh[key]; });
+        // Erasing is deliberate: do not let the starter wardrobe reappear.
+        s.ui.seeded = true;
       });
     },
 

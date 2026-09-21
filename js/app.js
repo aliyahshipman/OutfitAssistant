@@ -311,6 +311,10 @@
 
     PT.store.subscribe(function () { rerender(); });
 
+    // A deployment may ship a starter wardrobe; applied once, before first paint.
+    const seeded = PT.store.seedIfEmpty();
+    if (seeded) console.info('Loaded ' + seeded + ' starter pieces.');
+
     const hash = (location.hash || '').replace('#', '');
     show(VIEWS[hash] ? hash : 'closet');
 
