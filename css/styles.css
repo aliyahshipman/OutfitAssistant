@@ -265,6 +265,7 @@ img { display: block; max-width: 100%; }
 .badge--night { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 .badge--alert { border-color: var(--accent); color: var(--accent); }
 .badge--trip { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.badge--archived { background: var(--paper-warm); color: var(--muted); border-color: var(--line-firm); }
 
 /* Cards in the trip picker are one big toggle. */
 .card--pick .card__frame {
@@ -308,6 +309,11 @@ img { display: block; max-width: 100%; }
   display: flex; align-items: center; gap: 6px; margin-top: 4px;
   font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
 }
+.card__source {
+  margin-top: 4px; font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--accent);
+}
+.chip__count { opacity: .55; margin-left: 2px; }
 .card__uses { margin-top: 5px; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
 .card__uses--low { color: var(--accent); }
 

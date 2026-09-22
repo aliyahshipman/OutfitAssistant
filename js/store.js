@@ -207,6 +207,8 @@
             name: 'Untitled',
             brand: '',
             size: '',
+            retailer: '',
+            archived: false,
             category: 'tops',
             subtype: '',
             color: '#141414',
@@ -243,6 +245,42 @@
       });
     },
 
+    /*
+     * Archive, rather than delete.
+     *
+     * An archived piece stays in the closet's records - with its photo, brand
+     * and history - but drops out of every trip, the builder and the packing
+     * list. It is the honest answer for something returned, lent out, or simply
+     * not in rotation, and it is reversible.
+     */
+    setArchived(ids, archived) {
+      const set = {};
+      ids.forEach(function (id) { set[id] = true; });
+      update(function (s) {
+        s.items.forEach(function (item) {
+          if (set[item.id]) item.archived = Boolean(archived);
+        });
+        if (!archived) return;
+        // An archived piece cannot stay on a trip or inside its looks.
+        s.trips.forEach(function (trip) {
+          trip.itemIds = trip.itemIds.filter(function (i) { return !set[i]; });
+          trip.outfits.forEach(function (outfit) {
+            Object.keys(outfit.slots).forEach(function (slot) {
+              if (slot === 'accessories') {
+                outfit.slots.accessories = (outfit.slots.accessories || []).filter(function (a) { return !set[a]; });
+              } else if (set[outfit.slots[slot]]) {
+                outfit.slots[slot] = null;
+              }
+            });
+          });
+        });
+      });
+    },
+
+    archivedCount() {
+      return state.items.filter(function (i) { return i.archived; }).length;
+    },
+
     /* Remove several pieces at once - pruning a seeded or imported closet. */
     deleteItems(ids) {
       const set = {};
@@ -273,7 +311,7 @@
           const id = util.uid('item');
           ids.push(id);
           s.items.push(Object.assign({
-            id: id, name: 'Untitled', brand: '', size: '', category: 'tops', subtype: '',
+            id: id, name: 'Untitled', brand: '', size: '', retailer: '', archived: false, category: 'tops', subtype: '',
             color: '#141414', colorName: '', photo: '', photoUrl: '', link: '',
             source: 'import', agency: false, time: 'both', createdAt: Date.now()
           }, draft, { id: id }));
@@ -319,7 +357,7 @@
     /* Items shortlisted for the trip — what the builder and matrix work from. */
     tripItems() {
       const trip = store.trip();
-      return trip.itemIds.map(store.itemById).filter(Boolean);
+      return trip.itemIds.map(store.itemById).filter(function (i) { return i && !i.archived; });
     },
 
     tripItemsIn(categoryId) {

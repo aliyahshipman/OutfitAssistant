@@ -3,7 +3,8 @@
   const PT = (window.PT = window.PT || {});
   const util = PT.util;
 
-  const filters = { category: 'all', color: 'all', agency: false, time: 'all', search: '' };
+  const filters = { category: 'all', color: 'all', retailer: 'all', agency: false,
+                    time: 'all', search: '', shelf: 'active' };
   let selectMode = false;
   const selected = {};
 
@@ -12,12 +13,16 @@
   }
 
   function matches(item) {
+    if (filters.shelf === 'active' && item.archived) return false;
+    if (filters.shelf === 'archived' && !item.archived) return false;
     if (filters.category !== 'all' && item.category !== filters.category) return false;
     if (filters.color !== 'all' && PT.colors.bucket(item.color) !== filters.color) return false;
+    if (filters.retailer !== 'all' && (item.retailer || 'Added by hand') !== filters.retailer) return false;
     if (filters.agency && !item.agency) return false;
     if (filters.time !== 'all' && item.time !== filters.time && item.time !== 'both') return false;
     if (filters.search) {
-      const haystack = (item.name + ' ' + (item.brand || '') + ' ' + (item.subtype || '')).toLowerCase();
+      const haystack = (item.name + ' ' + (item.brand || '') + ' ' +
+        (item.retailer || '') + ' ' + (item.subtype || '')).toLowerCase();
       if (haystack.indexOf(filters.search.toLowerCase()) === -1) return false;
     }
     return true;
@@ -42,11 +47,15 @@
             (item.time === 'night' ? '<span class="badge badge--night">Night</span>' : '') +
             (item.time === 'day' ? '<span class="badge">Day</span>' : '') +
             (onTrip ? '<span class="badge badge--trip">Packing</span>' : '') +
+            (item.archived ? '<span class="badge badge--archived">Archived</span>' : '') +
           '</div>' +
           (selectMode ? '' :
             '<div class="card__actions">' +
               '<button class="btn btn--ghost btn--sm" data-edit type="button">Edit</button>' +
-              '<button class="btn btn--ghost btn--sm" data-delete type="button">Remove</button>' +
+              (item.archived
+                ? '<button class="btn btn--ghost btn--sm" data-restore type="button">Restore</button>'
+                : '<button class="btn btn--ghost btn--sm" data-archive type="button">Archive</button>') +
+              '<button class="btn btn--quiet btn--sm" data-delete type="button">Delete</button>' +
             '</div>') +
         '</div>' +
         '<div class="card__body">' +
@@ -56,6 +65,9 @@
             '<span>' + util.esc(item.colorName || PT.colors.nameFor(item.color)) + '</span>' +
             (item.brand ? '<span class="dot">·</span><span>' + util.esc(item.brand) + '</span>' : '') +
           '</div>' +
+          (item.retailer
+            ? '<div class="card__source">' + util.esc(item.retailer) + '</div>'
+            : '') +
           '<div class="' + usesClass + '">' + usesText + '</div>' +
         '</div>' +
       '</article>';
@@ -85,10 +97,31 @@
       }).join('')
     ) : '';
 
+    const shops = [];
+    store.get().items.forEach(function (item) {
+      const label = item.retailer || 'Added by hand';
+      if (shops.indexOf(label) === -1) shops.push(label);
+    });
+    shops.sort();
+
+    const shopChips = shops.length > 1 ? (
+      '<button class="chip" data-filter-retailer="all" aria-pressed="' + (filters.retailer === 'all') +
+        '" type="button">All shops</button>' +
+      shops.map(function (shop) {
+        const count = store.get().items.filter(function (i) {
+          return (i.retailer || 'Added by hand') === shop;
+        }).length;
+        return '<button class="chip" data-filter-retailer="' + util.esc(shop) + '" aria-pressed="' +
+          (filters.retailer === shop) + '" type="button">' + util.esc(shop) +
+          ' <span class="chip__count">' + count + '</span></button>';
+      }).join('')
+    ) : '';
+
     return '' +
       '<div class="filters">' +
         '<div class="filters__group">' + catChips + '</div>' +
       '</div>' +
+      (shopChips ? '<div class="filters"><div class="filters__group">' + shopChips + '</div></div>' : '') +
       '<div class="filters">' +
         '<div class="filters__group">' + colorChips + '</div>' +
         '<span class="spacer"></span>' +
@@ -152,7 +185,13 @@
       '<div class="section-head">' +
         '<h2>The Closet</h2>' +
         '<div class="section-head__aside">' +
-          '<span class="category-block__count">' + util.pluralize(all.length, 'piece') + '</span>' +
+          '<span class="category-block__count">' +
+            util.pluralize(all.filter(function (i) { return !i.archived; }).length, 'piece') + '</span>' +
+          '<div class="seg">' +
+            '<button data-shelf="active" aria-pressed="' + (filters.shelf === 'active') + '" type="button">In the closet</button>' +
+            '<button data-shelf="archived" aria-pressed="' + (filters.shelf === 'archived') + '" type="button">Archived' +
+              (store.archivedCount() ? ' (' + store.archivedCount() + ')' : '') + '</button>' +
+          '</div>' +
           '<button class="chip" data-select-mode aria-pressed="' + selectMode + '" type="button">Select</button>' +
           '<button class="btn btn--ghost" data-import-orders type="button">Import from orders</button>' +
           '<button class="btn" data-add-item type="button">Add piece</button>' +
@@ -161,10 +200,13 @@
       (selectMode
         ? '<div class="note note--calm select-bar">' +
             '<strong data-sel-count>' + selectedIds().length + '</strong> selected. ' +
-            'Tap anything you returned or no longer own, then remove it. ' +
+            'Tap anything you no longer own, then archive it — archiving is reversible, deleting is not. ' +
             '<span class="spacer"></span>' +
             '<button class="btn btn--ghost btn--sm" data-select-none type="button">Clear</button>' +
-            '<button class="btn btn--danger btn--sm" data-remove-selected type="button">Remove selected</button>' +
+            (filters.shelf === 'archived'
+              ? '<button class="btn btn--ghost btn--sm" data-restore-selected type="button">Restore selected</button>'
+              : '<button class="btn btn--sm" data-archive-selected type="button">Archive selected</button>') +
+            '<button class="btn btn--danger btn--sm" data-remove-selected type="button">Delete</button>' +
           '</div>'
         : '') +
       filterBarHTML() +
@@ -177,7 +219,7 @@
     const store = PT.store;
     const existing = itemId ? store.itemById(itemId) : null;
     const draft = Object.assign({
-      name: '', brand: '', size: '', category: 'tops', subtype: '', color: '#141414',
+      name: '', brand: '', size: '', retailer: '', category: 'tops', subtype: '', color: '#141414',
       colorName: '', photo: '', photoUrl: '', agency: false, time: 'both'
     }, existing || {});
 
@@ -216,6 +258,10 @@
             '<div class="field">' +
               '<label for="f-size">Size</label>' +
               '<input id="f-size" type="text" data-field="size" value="' + util.esc(draft.size) + '" placeholder="Optional">' +
+            '</div>' +
+            '<div class="field">' +
+              '<label for="f-retailer">Shop</label>' +
+              '<input id="f-retailer" type="text" data-field="retailer" value="' + util.esc(draft.retailer) + '" placeholder="Optional">' +
             '</div>' +
           '</div>' +
           '<div class="field-row">' +
@@ -280,6 +326,7 @@
       body.querySelector('[data-field="name"]').addEventListener('input', function (e) { draft.name = e.target.value; });
       body.querySelector('[data-field="brand"]').addEventListener('input', function (e) { draft.brand = e.target.value; });
       body.querySelector('[data-field="size"]').addEventListener('input', function (e) { draft.size = e.target.value; });
+      body.querySelector('[data-field="retailer"]').addEventListener('input', function (e) { draft.retailer = e.target.value; });
       body.querySelector('[data-field="category"]').addEventListener('change', function (e) {
         draft.category = e.target.value;
         draft.subtype = '';
@@ -356,6 +403,33 @@
   }
 
   function bind(root) {
+    util.on(root, 'click', '[data-shelf]', function (e, btn) {
+      filters.shelf = btn.dataset.shelf;
+      Object.keys(selected).forEach(function (k) { delete selected[k]; });
+      PT.app.rerender();
+    });
+    util.on(root, 'click', '[data-archive]', function (e, btn) {
+      PT.store.setArchived([btn.closest('[data-item]').dataset.item], true);
+      util.toast('Archived. Find it under Archived.');
+    });
+    util.on(root, 'click', '[data-restore]', function (e, btn) {
+      PT.store.setArchived([btn.closest('[data-item]').dataset.item], false);
+      util.toast('Back in the closet.');
+    });
+    util.on(root, 'click', '[data-archive-selected]', function () {
+      const ids = selectedIds();
+      if (!ids.length) { util.toast('Tap the pieces you want to archive first.'); return; }
+      PT.store.setArchived(ids, true);
+      Object.keys(selected).forEach(function (k) { delete selected[k]; });
+      util.toast('Archived ' + util.pluralize(ids.length, 'piece') + '.');
+    });
+    util.on(root, 'click', '[data-restore-selected]', function () {
+      const ids = selectedIds();
+      if (!ids.length) { util.toast('Tap the pieces you want to restore first.'); return; }
+      PT.store.setArchived(ids, false);
+      Object.keys(selected).forEach(function (k) { delete selected[k]; });
+      util.toast('Restored ' + util.pluralize(ids.length, 'piece') + '.');
+    });
     util.on(root, 'click', '[data-select-mode]', function () {
       selectMode = !selectMode;
       Object.keys(selected).forEach(function (k) { delete selected[k]; });
@@ -373,8 +447,8 @@
     util.on(root, 'click', '[data-remove-selected]', function () {
       const ids = selectedIds();
       if (!ids.length) { util.toast('Tap the pieces you want to remove first.'); return; }
-      util.confirm('Remove ' + util.pluralize(ids.length, 'piece') + ' from the closet? ' +
-        'They leave any looks they were in.', function () {
+      util.confirm('Delete ' + util.pluralize(ids.length, 'piece') + ' for good? ' +
+        'Archiving keeps them out of the way without losing them.', function () {
         PT.store.deleteItems(ids);
         Object.keys(selected).forEach(function (k) { delete selected[k]; });
         util.toast('Removed.');
@@ -397,6 +471,10 @@
 
     util.on(root, 'click', '[data-filter-category]', function (e, btn) {
       filters.category = btn.dataset.filterCategory;
+      PT.app.rerender();
+    });
+    util.on(root, 'click', '[data-filter-retailer]', function (e, btn) {
+      filters.retailer = btn.dataset.filterRetailer;
       PT.app.rerender();
     });
     util.on(root, 'click', '[data-filter-color]', function (e, btn) {

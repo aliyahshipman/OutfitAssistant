@@ -16,7 +16,8 @@
     if (filters.shortlisted === 'in' && !store.inTrip(item.id)) return false;
     if (filters.shortlisted === 'out' && store.inTrip(item.id)) return false;
     if (filters.search) {
-      const hay = (item.name + ' ' + (item.brand || '') + ' ' + (item.subtype || '')).toLowerCase();
+      const hay = (item.name + ' ' + (item.brand || '') + ' ' +
+        (item.retailer || '') + ' ' + (item.subtype || '')).toLowerCase();
       if (hay.indexOf(filters.search.toLowerCase()) === -1) return false;
     }
     return true;
@@ -38,9 +39,10 @@
         '<div class="card__body">' +
           '<div class="card__name">' + util.esc(item.name) + '</div>' +
           '<div class="card__meta">' +
-            (item.brand ? '<span>' + util.esc(item.brand) + '</span>' : '') +
             '<span class="swatch" style="background:' + util.esc(item.color) + '"></span>' +
+            (item.brand ? '<span>' + util.esc(item.brand) + '</span>' : '') +
           '</div>' +
+          (item.retailer ? '<div class="card__source">' + util.esc(item.retailer) + '</div>' : '') +
         '</div>' +
       '</article>';
   }
