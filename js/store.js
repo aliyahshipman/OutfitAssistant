@@ -13,21 +13,40 @@
   const util = PT.util;
   const KEY = 'paris-outfit-planner/v1';
 
+  /* The closet's shelves. Bottoms are split by kind rather than lumped
+     together, because "what trousers do I have" and "what skirts do I have"
+     are two different questions when you are packing. */
   const CATEGORIES = [
     { id: 'tops', label: 'Tops', subtypes: ['Sleeveless', 'Short-sleeve', 'Long-sleeve', 'Shirt', 'Sweater'] },
-    { id: 'bottoms', label: 'Bottoms', subtypes: ['Jeans', 'Trousers', 'Skirt', 'Shorts'] },
+    { id: 'jeans', label: 'Jeans', subtypes: ['Straight leg', 'Wide leg', 'Baggy', 'Skinny', 'Bootcut', 'Flare'] },
+    { id: 'pants', label: 'Pants & Trousers', subtypes: ['Tailored', 'Wide leg', 'Cargo', 'Leather', 'Linen'] },
+    { id: 'shorts', label: 'Shorts', subtypes: ['Denim', 'Tailored', 'Micro', 'Bermuda'] },
+    { id: 'skirts', label: 'Skirts', subtypes: ['Mini', 'Midi', 'Maxi', 'Denim'] },
     { id: 'dresses', label: 'Dresses', subtypes: ['Day dress', 'Evening dress', 'Jumpsuit'] },
     { id: 'outerwear', label: 'Outerwear', subtypes: ['Blazer', 'Coat', 'Jacket', 'Trench'] },
     { id: 'shoes', label: 'Shoes', subtypes: ['Flats', 'Heels', 'Boots', 'Trainers'] },
     { id: 'bags', label: 'Bags', subtypes: ['Day bag', 'Evening bag', 'Tote'] },
     { id: 'accessories', label: 'Accessories', subtypes: ['Scarf', 'Jewellery', 'Belt', 'Hat', 'Sunglasses', 'Hosiery'] },
     { id: 'activewear', label: 'Activewear', subtypes: ['Sports bra', 'Leggings', 'Shorts', 'Top', 'Jacket'] },
-    { id: 'sleepswim', label: 'Pyjamas & Swim', subtypes: ['Pyjamas', 'Robe', 'Swimsuit', 'Bikini', 'Cover-up'] },
+    { id: 'swim', label: 'Swim', subtypes: ['Bikini top', 'Bikini bottom', 'One-piece', 'Cover-up'] },
+    { id: 'sleep', label: 'Pyjamas & Loungewear', subtypes: ['Pyjamas', 'Robe', 'Nightdress', 'Lounge set'] },
     { id: 'underwear', label: 'Underwear & Bras', subtypes: ['Bra', 'Bralette', 'Briefs', 'Thong', 'Shapewear'] },
     // A catch-all so an imported piece whose kind we could not work out still
     // shows up in the closet instead of quietly going missing.
     { id: 'other', label: 'Other', subtypes: [] }
   ];
+
+  /* Places that still think in terms of "a bottom" — the outfit builder's
+     lower-half slot, the combination grid, the capsule maths — ask for the
+     group and get all four shelves back. */
+  const GROUPS = {
+    bottoms: ['jeans', 'pants', 'shorts', 'skirts']
+  };
+
+  /* A category id, or a group id, to the list of shelves it covers. */
+  function expand(id) {
+    return GROUPS[id] || [id];
+  }
 
   const BAGS = [
     { id: 'carry', label: 'Carry-on' },
@@ -69,7 +88,7 @@
   function defaultState() {
     const paris = parisTrip();
     return {
-      version: 2,
+      version: 3,
       items: [],
       trips: [paris],
       activeTripId: paris.id,
@@ -80,9 +99,51 @@
   let state = defaultState();
   const listeners = [];
 
+  /* v2 kept every lower-half piece on one "bottoms" shelf and put swimwear in
+     with the pyjamas. Work out which of the new shelves each one belongs on
+     from its own name, so a closet saved before the split comes back sorted. */
+  const RESHELVE = [
+    ['skirts', /\b(skirts?|skorts?)\b/],
+    ['shorts', /\b(shorts?|jorts?)\b(?!\s*sleeve)/],
+    ['jeans', /\b(jeans?|denim)\b/],
+    ['pants', /.*/]
+  ];
+  const SWIMWEAR = /\b(swim\w*|bikinis?|tankinis?|one[- ]piece|cover[- ]ups?|bathing ?suits?|rash ?guards?|board shorts?)\b/;
+
+  function reshelve(item) {
+    const text = ((item && item.name) || '') + ' ' + ((item && item.subtype) || '');
+    if (item.category === 'sleepswim') {
+      return SWIMWEAR.test(text.toLowerCase()) ? 'swim' : 'sleep';
+    }
+    if (item.category !== 'bottoms') return item.category;
+    // A bathing suit is not a pair of trousers, whatever shelf it was on.
+    if (SWIMWEAR.test(text.toLowerCase())) return 'swim';
+    const hit = RESHELVE.filter(function (rule) { return rule[1].test(text.toLowerCase()); })[0];
+    return hit ? hit[0] : 'pants';
+  }
+
+  /* A piece that arrives naming a shelf we no longer have — an old backup, an
+     order file written against the previous scheme — is re-filed rather than
+     left invisible in the closet. */
+  function normalizeCategory(item) {
+    const id = item && item.category;
+    if (CATEGORIES.some(function (c) { return c.id === id; })) return id;
+    if (id === 'bottoms' || id === 'sleepswim') return reshelve(item);
+    return 'other';
+  }
+
+  function migrateShelves(parsed) {
+    if (!parsed) return parsed;
+    (Array.isArray(parsed.items) ? parsed.items : []).forEach(function (item) {
+      item.category = normalizeCategory(item);
+    });
+    parsed.version = 3;
+    return parsed;
+  }
+
   /* v1 kept a single trip's outfits/days/packing at the top level. */
   function migrate(parsed) {
-    if (!parsed || parsed.version >= 2) return parsed;
+    if (!parsed || parsed.version >= 2) return migrateShelves(parsed);
     const trip = newTrip({
       id: 'trip-paris-2026',
       name: (parsed.trip && parsed.trip.name) || 'Paris · Fashion Week',
@@ -95,13 +156,13 @@
     });
     // Everything already in the closet was, by definition, for this trip.
     trip.itemIds = (Array.isArray(parsed.items) ? parsed.items : []).map(function (i) { return i.id; });
-    return {
+    return migrateShelves({
       version: 2,
       items: Array.isArray(parsed.items) ? parsed.items : [],
       trips: [trip],
       activeTripId: trip.id,
       ui: parsed.ui || {}
-    };
+    });
   }
 
   function load() {
@@ -148,11 +209,22 @@
 
   const store = {
     CATEGORIES: CATEGORIES,
+    GROUPS: GROUPS,
     BAGS: BAGS,
+    expand: expand,
 
     get() { return state; },
     subscribe(fn) { listeners.push(fn); },
+
+    /* Small scraps of interface state that should survive a refresh. */
+    ui() { return state.ui; },
+    setUI(patch) {
+      update(function (s) { s.ui = Object.assign({}, s.ui, patch); });
+    },
     update: update,
+
+    /* Which shelf a piece belongs on, given whatever its file says. */
+    shelfFor(item) { return normalizeCategory(item); },
 
     category(id) {
       return CATEGORIES.filter(function (c) { return c.id === id; })[0] || null;
@@ -203,8 +275,10 @@
       return state.items.filter(function (i) { return i.id === id; })[0] || null;
     },
 
+    /* Accepts a category id or a group id ("bottoms"). */
     closetIn(categoryId) {
-      return state.items.filter(function (i) { return i.category === categoryId; });
+      const ids = expand(categoryId);
+      return state.items.filter(function (i) { return ids.indexOf(i.category) > -1; });
     },
 
     saveItem(draft) {
@@ -212,7 +286,11 @@
       update(function (s) {
         if (draft.id) {
           const index = s.items.findIndex(function (i) { return i.id === draft.id; });
-          if (index > -1) s.items[index] = Object.assign({}, s.items[index], draft);
+          if (index > -1) {
+            const merged = Object.assign({}, s.items[index], draft);
+            merged.category = normalizeCategory(merged);
+            s.items[index] = merged;
+          }
         } else {
           savedId = util.uid('item');
           s.items.push(Object.assign({
@@ -237,6 +315,8 @@
             time: 'both',
             createdAt: Date.now()
           }, draft, { id: savedId }));
+          const added = s.items[s.items.length - 1];
+          added.category = normalizeCategory(added);
         }
       });
       return savedId;
@@ -367,6 +447,8 @@
             color: '#141414', colorName: '', photo: '', photoUrl: '', link: '',
             source: 'import', agency: false, time: 'both', createdAt: Date.now()
           }, draft, { id: id }));
+          const added = s.items[s.items.length - 1];
+          added.category = normalizeCategory(added);
         });
       });
       return ids;
@@ -413,7 +495,8 @@
     },
 
     tripItemsIn(categoryId) {
-      return store.tripItems().filter(function (i) { return i.category === categoryId; });
+      const ids = expand(categoryId);
+      return store.tripItems().filter(function (i) { return ids.indexOf(i.category) > -1; });
     },
 
     /* ---- looks (per trip) ----------------------------------------------- */

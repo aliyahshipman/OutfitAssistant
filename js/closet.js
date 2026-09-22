@@ -94,6 +94,19 @@
       '</article>';
   }
 
+  /* One shelf: its name, how much is on it, and the grid itself. */
+  function shelfHTML(label, items) {
+    return '' +
+      '<section class="category-block">' +
+        '<div class="category-block__head category-block__head--shelf">' +
+          '<h3>' + util.esc(label) + '</h3>' +
+          '<span class="category-block__rule"></span>' +
+          '<span class="category-block__count">' + util.pluralize(items.length, 'piece') + '</span>' +
+        '</div>' +
+        '<div class="closet-grid">' + items.map(cardHTML).join('') + '</div>' +
+      '</section>';
+  }
+
   function filterBarHTML() {
     const store = PT.store;
     const usedBuckets = [];
@@ -198,17 +211,12 @@
       body = store.CATEGORIES.map(function (cat) {
         const inCat = visible.filter(function (i) { return i.category === cat.id; });
         if (!inCat.length) return '';
-        return '' +
-          '<section class="category-block">' +
-            '<div class="category-block__head">' +
-              '<h3>' + util.esc(cat.label) + '</h3>' +
-              '<span class="category-block__count">' + util.pluralize(inCat.length, 'piece') + '</span>' +
-            '</div>' +
-            '<div class="closet-grid">' + inCat.map(cardHTML).join('') + '</div>' +
-          '</section>';
+        return shelfHTML(cat.label, inCat);
       }).join('');
     } else {
-      body = '<div class="closet-grid">' + visible.map(cardHTML).join('') + '</div>';
+      // One shelf on its own still gets its name above it, so the page never
+      // opens on a wall of clothes with nothing saying what they are.
+      body = shelfHTML(store.category(filters.category).label, visible);
     }
 
     root.innerHTML = '' +

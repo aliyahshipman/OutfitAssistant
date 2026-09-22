@@ -174,9 +174,32 @@
     return best ? best.name : bucket(hex);
   }
 
+  /* 0 (identical) to 1 (opposite ends of the space). Weighted so lightness and
+     saturation count as much as hue — "black vs charcoal" should read as close
+     even though their hues are meaningless. */
+  function distance(hexA, hexB) {
+    const a = hexToHsl(hexA);
+    const b = hexToHsl(hexB);
+    const chroma = Math.min(a.s, b.s);
+    const hue = (hueGap(a.h, b.h) / 180) * chroma;      // hue only matters if both have colour
+    const sat = Math.abs(a.s - b.s);
+    const light = Math.abs(a.l - b.l);
+    return Math.min(1, (hue * 0.45) + (sat * 0.2) + (light * 0.6));
+  }
+
+  function rgbToHex(r, g, b) {
+    return '#' + [r, g, b].map(function (v) {
+      const n = Math.max(0, Math.min(255, Math.round(v))).toString(16);
+      return n.length === 1 ? '0' + n : n;
+    }).join('');
+  }
+
   PT.colors = {
     PALETTE: PALETTE,
     hexToHsl: hexToHsl,
+    hexToRgb: hexToRgb,
+    rgbToHex: rgbToHex,
+    distance: distance,
     isNeutral: isNeutral,
     pairScore: pairScore,
     pairLabel: pairLabel,

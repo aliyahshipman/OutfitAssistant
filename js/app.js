@@ -11,6 +11,7 @@
 
   const VIEWS = {
     closet:   { module: 'closet',   root: null, scope: 'home' },
+    inspo:    { module: 'inspo',    root: null, scope: 'home' },
     trip:     { module: 'trip',     root: null, scope: 'trip', label: 'What’s coming' },
     builder:  { module: 'builder',  root: null, scope: 'trip', label: 'Looks' },
     matrix:   { module: 'matrix',   root: null, scope: 'trip', label: 'Combinations' },
@@ -31,6 +32,7 @@
     const active = store.trip();
 
     const primary = '<button class="tab" data-view="closet" aria-selected="' + (current === 'closet') + '">Closet</button>' +
+      '<button class="tab" data-view="inspo" aria-selected="' + (current === 'inspo') + '">Looks like this</button>' +
       trips.map(function (trip) {
         const isOn = inTrip() && trip.id === active.id;
         return '<button class="tab" data-trip-tab="' + util.esc(trip.id) + '" aria-selected="' + isOn + '">' +
@@ -62,6 +64,16 @@
     const dates = util.qs('#trip-dates');
     const countdown = util.qs('#trip-countdown');
     const settings = util.qs('#btn-settings');
+
+    if (current === 'inspo') {
+      title.textContent = 'Looks like this';
+      dates.textContent = 'A photo in, an outfit out of your own closet';
+      countdown.textContent = '';
+      util.qs('#trip-dot').hidden = true;
+      settings.textContent = 'Settings';
+      util.qs('#weather-strip').hidden = true;
+      return;
+    }
 
     if (!inTrip()) {
       const items = store.get().items.length;

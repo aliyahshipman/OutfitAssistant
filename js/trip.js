@@ -61,7 +61,10 @@
     picked.forEach(function (i) { counts[i.category] = (counts[i.category] || 0) + 1; });
 
     const tops = counts.tops || 0;
-    const bottoms = counts.bottoms || 0;
+    // Jeans, trousers, shorts and skirts all count as a lower half.
+    const bottoms = store.expand('bottoms').reduce(function (sum, id) {
+      return sum + (counts[id] || 0);
+    }, 0);
     const dresses = counts.dresses || 0;
     const looks = tops * bottoms + dresses;
     const days = store.tripDates().length;

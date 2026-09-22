@@ -13,6 +13,7 @@ including offline.
 
 ```
 Closet                     ← home. Everything you own.
+Looks like this            ← a photo in, an outfit out of the closet.
 └── Paris · Fashion Week   ← a trip. Draws on the closet.
     ├── What's coming      pick the capsule from your closet
     ├── Looks              build outfits from the picked pieces
@@ -29,6 +30,19 @@ described once and reused forever.
 
 Each piece carries a name, brand, size, colour, photo, an *agency-appropriate*
 tag and a *day / night / both* tag. Filter by category, colour, agency or time.
+
+The shelves are: **Tops · Jeans · Pants & Trousers · Shorts · Skirts · Dresses
+· Outerwear · Shoes · Bags · Accessories · Activewear · Swim · Pyjamas &
+Loungewear · Underwear & Bras · Other**, and each one gets its own header,
+which stays put at the top of the screen while you scroll that shelf. The lower
+half is four shelves rather than one because *what jeans do I have* and *what
+skirts do I have* are different questions when you are packing — but the outfit
+builder, the combination grid and the capsule maths still treat all four as
+"a bottom", so nothing downstream had to learn the difference.
+
+A piece whose shelf the app does not recognise — an old backup, an order file
+written against an earlier version — is re-filed on the way in rather than
+left invisible.
 
 Pictures come from three places, in order: a photo you added from your camera
 roll, the product image from the order it was imported from, or — failing both
@@ -55,6 +69,39 @@ app says so plainly if it doesn't.
 The order file is *your* data — it holds what you bought and when. It is
 deliberately not part of this repository; keep it wherever you keep personal
 files.
+
+## Looks like this
+
+Drop in a photo you saved because you wanted to dress like it, and the app
+builds the nearest version of it out of what you actually own.
+
+Be clear about what is happening, because it is not magic and there is no
+server involved. What the app reads off the picture is **colour, and which part
+of the frame that colour sits in** — what is up by the shoulders, what is
+around the legs, what is down at the floor. It throws away the backdrop (taken
+from the corners) and skin tones, which are otherwise the largest thing in a
+full-length shot and not something you can wear.
+
+What it cannot read is the *cut*. That comes from a small library of ten
+silhouettes this kind of photo keeps repeating — the off-duty uniform you see
+on Bella Hadid between shows and outside every Paris Fashion Week venue: big
+denim with a small top, all black with the cut doing the talking, blazer and
+jeans, trench over everything, a slip dress with a blunt shoe, micro skirt and
+a tall boot, show-day tailoring, leather with a fine knit, gym clothes worn
+like real clothes, and one loud piece against neutrals. The app picks the
+shape it thinks fits your photo and says so; one tap changes it if it guessed
+wrong.
+
+Each slot is then filled from your own closet by colour distance to that part
+of your photo, whether the piece's name matches the shape, and how it sits
+against everything already chosen. Every pick says why it was picked.
+**Try another** walks down the rankings. **Save as a look** writes it into the
+trip and brings those pieces along.
+
+The photo stays in this browser. It is downscaled, kept in `localStorage` with
+everything else so the board survives a refresh, and nothing about it is sent
+anywhere or looked up online. You can also build any of the ten shapes with no
+photo at all, from the closet's own colours.
 
 ## A trip
 
@@ -189,6 +236,7 @@ js/builder.js     flat lay, suggestions, saved looks
 js/matrix.js      combination grid and underused-piece flags
 js/calendar.js    day tiles, agency days, drag-and-drop assignment
 js/packing.js     derived packing list, luggage, printable export
+js/inspo.js       photo palette reading and the reference looks
 js/weather.js     Open-Meteo fetch, caching, seasonal fallback
 js/seed.js        the starter wardrobe this deployment ships with
 js/app.js         two-level navigation, masthead, settings, backup

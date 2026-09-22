@@ -28,7 +28,9 @@
           size: String(item.size || ''),
           color: /^#[0-9a-f]{3,6}$/i.test(item.color || '') ? item.color : '#141414',
           colorName: String(item.colorName || ''),
-          category: PT.store.category(item.category) ? item.category : 'tops',
+          // An order file written against an older shelf scheme ("bottoms")
+          // is re-filed rather than dumped into Tops.
+          category: PT.store.shelfFor(item),
           subtype: String(item.subtype || ''),
           photoUrl: /^https?:\/\//i.test(item.photoUrl || '') ? item.photoUrl : '',
           link: /^https?:\/\//i.test(item.link || '') ? item.link : '',
