@@ -5087,6 +5087,25 @@
     "eta": ""
   },
   {
+    "name": "Maria Mid Rise Bootcut Jeans in Drift",
+    "brand": "EB Denim",
+    "size": "24",
+    "category": "jeans",
+    "subtype": "Jeans",
+    "color": "#9c8f7d",
+    "colorName": "Drift",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/EBDR-WJ135_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-22",
+    "agency": false,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "ontheway",
+    "eta": "2026-09-23"
+  },
+  {
     "name": "Maria Mid Rise Bootcut Jeans in Havana Night",
     "brand": "EB Denim",
     "size": "24",
@@ -7156,6 +7175,25 @@
     "archived": false,
     "status": "have",
     "eta": ""
+  },
+  {
+    "name": "Derrel Sandal in Camel",
+    "brand": "Dolce Vita",
+    "size": "9",
+    "category": "shoes",
+    "subtype": "Sandals",
+    "color": "#b4855c",
+    "colorName": "Camel",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/DOLC-WZ1537_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-22",
+    "agency": true,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "ontheway",
+    "eta": "2026-09-23"
   },
   {
     "name": "Drift Trail Sneaker in Mutli",
@@ -11528,6 +11566,25 @@
     "eta": ""
   },
   {
+    "name": "Lea Top in Storm Blue",
+    "brand": "ANINE BING",
+    "size": "XS",
+    "category": "tops",
+    "subtype": "",
+    "color": "#4a6c94",
+    "colorName": "Storm Blue",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/ANIN-WS483_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-22",
+    "agency": true,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "ontheway",
+    "eta": "2026-09-23"
+  },
+  {
     "name": "Lewis Blouse in White",
     "brand": "Geel",
     "size": "S",
@@ -14205,6 +14262,25 @@
     "archived": false,
     "status": "have",
     "eta": ""
+  },
+  {
+    "name": "Rounded-Buckle Leather Skinny Belt",
+    "brand": "Ralph Lauren",
+    "size": "XS",
+    "category": "accessories",
+    "subtype": "Belt",
+    "color": "#9c8f7d",
+    "colorName": "Dark Garnet",
+    "photoUrl": "https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI412P15694005_lifestyle?%24rl_470_pdp%24",
+    "link": "",
+    "retailer": "Ralph Lauren",
+    "orderedAt": "2026-09-22",
+    "agency": false,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "ontheway",
+    "eta": "2026-09-23"
   },
   {
     "name": "Cable-Knit Polo Shirt",
