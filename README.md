@@ -141,14 +141,19 @@ is what makes the hosted site arrive populated on any device instead of asking
 you to import something first. Each piece is remembered by name, size and
 photo after it is applied, so it never arrives twice and a piece you removed
 stays removed — while pieces added to the seed later still turn up on your next
-visit, alongside everything you have already changed. It was generated from shop order-confirmation emails across
-REVOLVE, The RealReal, Zara, SKIMS, FWRD, Alo Yoga, MOTHER and Cult Naked.
+visit, alongside everything you have already changed. It was generated from every shop order-confirmation email from January 2025
+onwards, across REVOLVE, The RealReal, Zara, SKIMS, FWRD, Alo Yoga, MOTHER and
+Cult Naked.
 
 Because it comes from *orders*, it lists what was bought, not what was kept.
 The closet has a **Select** mode for exactly this: tap everything you returned
 or no longer own. **Archive** keeps a piece on file but out of the way, which is
 the safe choice; **Remove** is permanent and the starter wardrobe never
 reappears.
+
+Four pieces arrive already archived: the mailbox holds a return request for
+their orders, so they are on file rather than in the closet. If a return never
+went through, **Archived → Restore** puts the piece back.
 
 A handful of Zara confirmations split an order across several deliveries and
 list only a size and a price — no product name. Those arrive as *Zara Piece
