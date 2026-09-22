@@ -56,6 +56,13 @@
     });
   }
 
+  /* Identifies a starter-wardrobe piece across seed updates. The same product
+     photo can cover two sizes of one piece, so the size counts too. */
+  function seedKey(item) {
+    return [(item && item.photoUrl) || '', item && item.name, item && item.brand, item && item.size]
+      .map(function (part) { return String(part || '').toLowerCase().trim(); }).join('|');
+  }
+
   function defaultState() {
     const paris = parisTrip();
     return {
@@ -539,18 +546,35 @@
     },
 
     /*
-     * Apply the bundled starter wardrobe, once.
+     * Apply the bundled starter wardrobe.
      *
-     * Only when the closet is empty AND this browser has never been seeded, so
-     * that deleting a seeded piece - or erasing everything - sticks instead of
-     * silently coming back on the next load.
+     * Every piece is applied at most once per browser, remembered by key, so
+     * deleting a seeded piece - or erasing everything - sticks instead of
+     * silently coming back on the next load. Pieces added to the seed later
+     * still arrive, because their key has not been applied yet.
      */
     seedIfEmpty() {
       const seed = PT.SEED;
       if (!seed || !Array.isArray(seed.items) || !seed.items.length) return 0;
-      if (state.items.length || state.ui.seeded) return 0;
-      const ids = store.addItems(seed.items);
-      update(function (s) { s.ui.seeded = true; });
+
+      // A browser seeded before keys were recorded: treat whatever it already
+      // holds as applied, so nothing it kept or deleted comes back doubled.
+      if (state.ui.seeded && !state.ui.seededKeys) {
+        const known = state.items.map(seedKey);
+        update(function (s) { s.ui.seededKeys = known; });
+      }
+
+      const applied = state.ui.seededKeys || [];
+      const fresh = seed.items.filter(function (item) {
+        return applied.indexOf(seedKey(item)) === -1;
+      });
+      if (!fresh.length) return 0;
+
+      const ids = store.addItems(fresh);
+      update(function (s) {
+        s.ui.seeded = true;
+        s.ui.seededKeys = applied.concat(fresh.map(seedKey));
+      });
       return ids.length;
     },
 
@@ -577,6 +601,7 @@
         Object.keys(fresh).forEach(function (key) { s[key] = fresh[key]; });
         // Erasing is deliberate: do not let the starter wardrobe reappear.
         s.ui.seeded = true;
+        s.ui.seededKeys = (PT.SEED && PT.SEED.items || []).map(seedKey);
       });
     },
 

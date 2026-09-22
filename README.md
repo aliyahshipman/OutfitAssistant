@@ -89,10 +89,12 @@ Trip settings holds the name and dates; the calendar follows them. Note that
 
 ## The starter wardrobe
 
-`js/seed.js` holds a closet that is loaded **once**, on first open, when the
-closet is empty and that browser has never been seeded. It is what makes the
-hosted site arrive populated on any device instead of asking you to import
-something first. It was generated from shop order-confirmation emails across
+`js/seed.js` holds a closet that is loaded **once per piece**, per browser. It
+is what makes the hosted site arrive populated on any device instead of asking
+you to import something first. Each piece is remembered by name, size and
+photo after it is applied, so it never arrives twice and a piece you removed
+stays removed — while pieces added to the seed later still turn up on your next
+visit, alongside everything you have already changed. It was generated from shop order-confirmation emails across
 REVOLVE, The RealReal, Zara, SKIMS, FWRD, Alo Yoga, MOTHER and Cult Naked.
 
 Because it comes from *orders*, it lists what was bought, not what was kept.
