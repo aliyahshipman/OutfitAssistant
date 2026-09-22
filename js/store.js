@@ -275,6 +275,28 @@
       return state.items.filter(function (i) { return i.id === id; })[0] || null;
     },
 
+    /*
+     * When a piece entered the wardrobe: the date of the order it came from,
+     * or failing that when it was added by hand. Used to show the newest
+     * things first on every shelf.
+     */
+    orderedTime(item) {
+      if (item && item.orderedAt) {
+        const t = Date.parse(item.orderedAt);
+        if (!isNaN(t)) return t;
+      }
+      return (item && item.createdAt) || 0;
+    },
+
+    /* Newest first, then by name so the order never jitters between renders. */
+    byRecency(items) {
+      return items.slice().sort(function (a, b) {
+        const diff = store.orderedTime(b) - store.orderedTime(a);
+        if (diff) return diff;
+        return String(a.name || '').localeCompare(String(b.name || ''));
+      });
+    },
+
     /* Accepts a category id or a group id ("bottoms"). */
     closetIn(categoryId) {
       const ids = expand(categoryId);

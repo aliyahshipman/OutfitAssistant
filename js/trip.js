@@ -113,7 +113,7 @@
       return;
     }
 
-    const visible = closet.filter(matches);
+    const visible = store.byRecency(closet.filter(matches));
     const catChips = ['all'].concat(store.CATEGORIES.map(function (c) { return c.id; }))
       .map(function (id) {
         const label = id === 'all' ? 'Everything' : store.category(id).label;

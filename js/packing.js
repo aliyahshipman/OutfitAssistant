@@ -90,7 +90,7 @@
     }
 
     const byCategory = store.CATEGORIES.map(function (cat) {
-      let inCat = packedItems.filter(function (i) { return i.category === cat.id; });
+      let inCat = store.byRecency(packedItems.filter(function (i) { return i.category === cat.id; }));
       if (hidePacked) inCat = inCat.filter(function (i) { return !store.packingFor(i.id).packed; });
       if (!inCat.length) return '';
       return '' +
@@ -123,7 +123,7 @@
     const items = store.packedItems();
 
     const sections = store.CATEGORIES.map(function (cat) {
-      const inCat = items.filter(function (i) { return i.category === cat.id; });
+      const inCat = store.byRecency(items.filter(function (i) { return i.category === cat.id; }));
       if (!inCat.length) return '';
       const rows = inCat.map(function (item) {
         const packing = store.packingFor(item.id);

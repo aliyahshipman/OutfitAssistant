@@ -34,6 +34,16 @@
     return true;
   }
 
+  /* "22 Sept", or "22 Sept 2025" once it is not this year. */
+  function orderedLabel(item) {
+    if (!item.orderedAt) return '';
+    const when = new Date(item.orderedAt + 'T00:00:00');
+    if (isNaN(when)) return '';
+    const opts = { day: 'numeric', month: 'short' };
+    if (when.getFullYear() !== new Date().getFullYear()) opts.year = 'numeric';
+    return util.formatDate(item.orderedAt, opts);
+  }
+
   function cardHTML(item) {
     const store = PT.store;
     const uses = store.closetUsage(item.id);
@@ -85,8 +95,10 @@
             '<span>' + util.esc(item.colorName || PT.colors.nameFor(item.color)) + '</span>' +
             (item.brand ? '<span class="dot">·</span><span>' + util.esc(item.brand) + '</span>' : '') +
           '</div>' +
-          (item.retailer
-            ? '<div class="card__source">' + util.esc(item.retailer) + '</div>'
+          (item.retailer || item.orderedAt
+            ? '<div class="card__source">' +
+                util.esc([item.retailer, orderedLabel(item)].filter(Boolean).join(' · ')) +
+              '</div>'
             : '') +
           etaLine +
           '<div class="' + usesClass + '">' + usesText + '</div>' +
@@ -183,7 +195,8 @@
   function render(root) {
     const store = PT.store;
     const all = store.get().items;
-    const visible = all.filter(matches);
+    // Grouped by kind, and newest first inside each kind.
+    const visible = store.byRecency(all.filter(matches));
 
     if (!all.length) {
       root.innerHTML = '' +

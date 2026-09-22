@@ -31,6 +31,11 @@ described once and reused forever.
 Each piece carries a name, brand, size, colour, photo, an *agency-appropriate*
 tag and a *day / night / both* tag. Filter by category, colour, agency or time.
 
+Shelves run **newest first**: the most recently ordered piece leads, so what
+just arrived is at the top of the rail rather than buried alphabetically. Each
+card names its shop and the date it was ordered. A piece added by hand counts
+as ordered today. The trip picker and the packing list follow the same order.
+
 The shelves are: **Tops · Jeans · Pants & Trousers · Shorts · Skirts · Dresses
 · Outerwear · Shoes · Bags · Accessories · Activewear · Swim · Pyjamas &
 Loungewear · Underwear & Bras · Other**, and each one gets its own header,
