@@ -692,3 +692,31 @@ input[type="checkbox"].pk-check { width: 18px; height: 18px; accent-color: var(-
   .inspo-source img { max-height: 46vh; width: auto; margin: 0 auto; }
   .inspo-read__row > span:first-child { width: 70px; }
 }
+
+.inspo-pick__acts { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.inspo-verdict {
+  margin-top: 22px; padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.inspo-verdict p { font-size: 13px; margin-bottom: 8px; }
+.inspo-verdict .row { margin-bottom: 4px; }
+
+.inspo-tuned {
+  display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
+  margin-top: 14px; padding-top: 10px; border-top: 1px dashed var(--line);
+  font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted);
+}
+.inspo-tuned em {
+  font-style: normal; letter-spacing: .04em; text-transform: none; font-size: 12px;
+}
+.inspo-tuned .spacer { flex: 1; min-width: 8px; }
+
+.inspo-muted { list-style: none; margin-top: 8px; display: grid; gap: 4px; }
+.inspo-muted li {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  font-size: 12px; color: var(--muted);
+}
+.inspo-muted strong {
+  font-size: 10px; letter-spacing: .2em; text-transform: uppercase; font-weight: 400;
+}

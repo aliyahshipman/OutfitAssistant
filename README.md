@@ -95,8 +95,29 @@ wrong.
 Each slot is then filled from your own closet by colour distance to that part
 of your photo, whether the piece's name matches the shape, and how it sits
 against everything already chosen. Every pick says why it was picked.
-**Try another** walks down the rankings. **Save as a look** writes it into the
-trip and brings those pieces along.
+**Swap this** replaces one piece and leaves the rest alone; **Try another**
+re-deals the whole look. **Save as a look** writes it into the trip and brings
+those pieces along.
+
+### Telling it when it is wrong
+
+The matcher is argued with rather than configured.
+
+**Not this** under a piece mutes it for that slot — a jumper you own but never
+wear stops being offered as a Top, for good, across every silhouette. Muted
+pieces are listed under *Tuned by you* with an **Unmute** next to each, so
+nothing vanishes without a way back.
+
+**Yes, this works** / **No, not it** rates the whole outfit. A yes brings those
+pieces and that silhouette up next time; a no pushes them down and deals again.
+Saving a look counts as a yes, because keeping something is a stronger vote
+than tapping one.
+
+It is deliberately blunt arithmetic — a running tally per piece, worth about as
+much as getting the shape right. It will reorder pieces that were close to
+begin with; it will not drag a colour that clashes outright to the top, because
+the photo is still the brief. *Tuned by you* shows the tally, and **Forget it**
+clears the lot without touching your closet or your saved looks.
 
 The photo stays in this browser. It is downscaled, kept in `localStorage` with
 everything else so the board survives a refresh, and nothing about it is sent

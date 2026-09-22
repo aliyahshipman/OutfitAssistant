@@ -349,6 +349,73 @@
     });
   }
 
+  /* ---- what she has told us -------------------------------------------- */
+
+  /*
+   * Three kinds of verdict, all kept in localStorage beside the closet:
+   *
+   *   pieces  a running total per piece. Saving or liking a look nudges every
+   *           piece in it up; rejecting one nudges them down.
+   *   muted   pieces banned from one slot — "never offer this as a Top". Kept
+   *           per role, not per look, so it holds across every silhouette.
+   *   looks   whether a silhouette itself tends to land.
+   *
+   * It is deliberately blunt arithmetic rather than anything clever: she can
+   * read the tally, and she can clear it.
+   */
+  function feedback() {
+    const fb = PT.store.ui().inspoFeedback || {};
+    return { pieces: fb.pieces || {}, muted: fb.muted || {}, looks: fb.looks || {} };
+  }
+
+  function writeFeedback(fb) { PT.store.setUI({ inspoFeedback: fb }); }
+
+  function ratePieces(items, delta) {
+    const fb = feedback();
+    items.forEach(function (item) {
+      fb.pieces[item.id] = (fb.pieces[item.id] || 0) + delta;
+    });
+    writeFeedback(fb);
+  }
+
+  function rateLook(lookId, delta) {
+    const fb = feedback();
+    fb.looks[lookId] = (fb.looks[lookId] || 0) + delta;
+    writeFeedback(fb);
+  }
+
+  function mute(role, itemId) {
+    const fb = feedback();
+    const list = fb.muted[role] || (fb.muted[role] = []);
+    if (list.indexOf(itemId) === -1) list.push(itemId);
+    fb.pieces[itemId] = (fb.pieces[itemId] || 0) - 1;
+    writeFeedback(fb);
+  }
+
+  function unmute(role, itemId) {
+    const fb = feedback();
+    fb.muted[role] = (fb.muted[role] || []).filter(function (id) { return id !== itemId; });
+    writeFeedback(fb);
+  }
+
+  function isMuted(fb, role, itemId) {
+    return (fb.muted[role] || []).indexOf(itemId) > -1;
+  }
+
+  /* How much she has taught it, in plain numbers. */
+  function tally() {
+    const fb = feedback();
+    let muted = 0;
+    Object.keys(fb.muted).forEach(function (role) { muted += fb.muted[role].length; });
+    return {
+      rated: Object.keys(fb.pieces).filter(function (id) { return fb.pieces[id]; }).length,
+      muted: muted,
+      shapes: Object.keys(fb.looks).filter(function (id) { return fb.looks[id]; }).length
+    };
+  }
+
+  function clamp(n, lo, hi) { return Math.max(lo, Math.min(hi, n)); }
+
   /* ---- matching the closet -------------------------------------------- */
 
   function moodLabel(a) {
@@ -359,10 +426,12 @@
   }
 
   function rankLooks(analysis) {
+    const fb = feedback();
     return LOOKS.map(function (look) {
       let score = look.moods.indexOf(analysis.mood) === 0 ? 1
         : look.moods.indexOf(analysis.mood) > 0 ? 0.82 : 0.45;
-      // A look whose key colours are already in the photo edges ahead.
+      // A shape she keeps saying yes to comes up first next time.
+      score += clamp((fb.looks[look.id] || 0) * 0.06, -0.3, 0.3);
       return { look: look, score: score };
     }).sort(function (a, b) { return b.score - a.score; });
   }
@@ -375,8 +444,13 @@
 
   function candidates(slot, analysis, chosen, pool) {
     const target = targetFor(slot, analysis);
+    const fb = feedback();
     return pool
-      .filter(function (item) { return slot.cats.indexOf(item.category) > -1; })
+      .filter(function (item) {
+        if (slot.cats.indexOf(item.category) === -1) return false;
+        // Muted for this slot means never offered for it again.
+        return !isMuted(fb, slot.role, item.id);
+      })
       .map(function (item) {
         const text = item.name + ' ' + (item.subtype || '') + ' ' + (item.brand || '');
         const shape = slot.want && slot.want.test(text) ? 1 : 0.42;
@@ -387,10 +461,12 @@
           chosen.forEach(function (other) { sum += PT.colors.pairScore(item.color, other.color); });
           fit = sum / chosen.length;
         }
-        let score = (colour * 0.45) + (shape * 0.28) + (fit * 0.17) + 0.10;
+        // Her own verdict, worth about as much as getting the shape right.
+        const bias = clamp((fb.pieces[item.id] || 0) * 0.05, -0.35, 0.25);
+        let score = (colour * 0.45) + (shape * 0.28) + (fit * 0.17) + 0.10 + bias;
         if (item.status === 'ontheway') score *= 0.94;
         if (!(item.photo || item.photoUrl)) score *= 0.93;
-        return { item: item, score: score, colour: colour, shape: shape > 0.5 };
+        return { item: item, score: score, colour: colour, shape: shape > 0.5, liked: bias > 0 };
       })
       .sort(function (a, b) { return b.score - a.score; });
   }
@@ -401,14 +477,15 @@
     else if (pick.colour > 0.7) parts.push('close to ' + ZONE_LABELS[slot.zone || 'upper']);
     else parts.push('a different colour, but it works with the rest');
     if (pick.shape) parts.push('and the right shape for this look');
+    if (pick.liked) parts.push('and you have said yes to it before');
     return parts.join(', ');
   }
 
   /*
-   * Build the look. `offset` walks down the ranked list for every slot at
-   * once, which is what the "Try another" button does.
+   * Build the look. `offsets` is how far down the ranked list each slot has
+   * been walked: "Swap" moves one slot, "Try another" moves all of them.
    */
-  function build(analysis, lookId, offset, onlyTrip) {
+  function build(analysis, lookId, offsets, onlyTrip) {
     const store = PT.store;
     const look = LOOKS.filter(function (l) { return l.id === lookId; })[0] || LOOKS[0];
     const pool = (onlyTrip ? store.tripItems() : store.get().items)
@@ -426,7 +503,9 @@
         if (slot.key) missing.push(slot);
         return;
       }
-      const pick = ranked[Math.min(ranked.length - 1, offset || 0)];
+      const step = (offsets && offsets[slot.role]) || 0;
+      // Wrap rather than stopping at the end, so Swap always does something.
+      const pick = ranked[step % ranked.length];
       used[pick.item.id] = true;
       chosen.push(pick.item);
       picks.push({ slot: slot, item: pick.item, score: pick.score, why: whyLine(pick, slot) });
@@ -503,14 +582,65 @@
             (item.brand ? '<span class="dot">·</span><span>' + util.esc(item.brand) + '</span>' : '') +
           '</div>' +
           '<div class="inspo-pick__why">' + util.esc(pick.why) + '</div>' +
-          '<button class="btn btn--quiet btn--sm" data-swap="' + util.esc(pick.slot.role) + '" type="button">Swap</button>' +
+          '<div class="inspo-pick__acts">' +
+            '<button class="btn btn--ghost btn--sm" data-swap="' + util.esc(pick.slot.role) +
+              '" type="button">Swap this</button>' +
+            '<button class="btn btn--quiet btn--sm" data-mute="' + util.esc(pick.slot.role) +
+              '" type="button" title="Never offer this piece for this slot again">Not this</button>' +
+          '</div>' +
         '</div>' +
       '</article>';
   }
 
+  /* Her verdict on the whole outfit, and what it has learned so far. */
+  function verdictHTML() {
+    const counts = tally();
+    const taught = counts.rated || counts.muted || counts.shapes;
+
+    const learned = !taught ? '' :
+      '<div class="inspo-tuned">' +
+        '<span>Tuned by you</span>' +
+        '<em>' + util.pluralize(counts.rated, 'piece') + ' rated' +
+          (counts.muted ? ' · ' + counts.muted + ' muted' : '') +
+          (counts.shapes ? ' · ' + util.pluralize(counts.shapes, 'shape') : '') + '</em>' +
+        '<span class="spacer"></span>' +
+        '<button class="btn btn--quiet btn--sm" data-reset-feedback type="button">Forget it</button>' +
+      '</div>' + mutedHTML();
+
+    return '' +
+      '<div class="inspo-verdict">' +
+        '<p>Did this one land?</p>' +
+        '<div class="row">' +
+          '<button class="btn btn--ghost" data-verdict="up" type="button">Yes, this works</button>' +
+          '<button class="btn btn--ghost" data-verdict="down" type="button">No, not it</button>' +
+        '</div>' +
+        '<p class="inspo__fineprint">Either way it remembers: a yes brings these pieces up next ' +
+        'time, a no pushes them down and deals again. Saving a look counts as a yes.</p>' +
+      '</div>' +
+      learned;
+  }
+
+  /* The muted list, so nothing disappears without a way back. */
+  function mutedHTML() {
+    const fb = feedback();
+    const rows = [];
+    Object.keys(fb.muted).forEach(function (role) {
+      (fb.muted[role] || []).forEach(function (id) {
+        const item = PT.store.itemById(id);
+        if (!item) return;
+        rows.push('<li><strong>' + util.esc(ROLE_LABELS[role] || role) + '</strong> ' +
+          util.esc(item.name) +
+          ' <button class="btn btn--quiet btn--sm" data-unmute="' + util.esc(id) +
+          '" data-role="' + util.esc(role) + '" type="button">Unmute</button></li>');
+      });
+    });
+    if (!rows.length) return '';
+    return '<ul class="inspo-muted">' + rows.join('') + '</ul>';
+  }
+
   function boardHTML(state) {
     const analysis = state.analysis;
-    const result = build(analysis, state.lookId, state.offset, state.onlyTrip);
+    const result = build(analysis, state.lookId, state.offsets, state.onlyTrip);
     const store = PT.store;
     const trip = store.trip();
 
@@ -563,6 +693,7 @@
             '<p class="harmony__note">' + util.esc(PT.colors.harmonyNote(result.harmony, result.picks.length)) + '</p>' +
           '</div>' +
           '<p class="inspo__fineprint">' + util.esc(result.look.note) + '</p>' +
+          verdictHTML() +
           '<div class="row">' +
             '<button class="btn" data-save-look type="button">Save as a look in ' + util.esc(trip.name) + '</button>' +
             '<button class="btn btn--ghost" data-add-trip type="button">Add these to the trip</button>' +
@@ -573,7 +704,7 @@
       '</div>';
   }
 
-  let view = { lookId: null, offset: 0, onlyTrip: false, analysis: null, busy: false };
+  let view = { lookId: null, offsets: {}, onlyTrip: false, analysis: null, busy: false };
 
   function render(root) {
     const store = PT.store;
@@ -620,7 +751,7 @@
         }
         view.analysis = analysis;
         view.lookId = rankLooks(analysis)[0].look.id;
-        view.offset = 0;
+        view.offsets = {};
         view.busy = false;
         remember({ analysis: analysis, lookId: view.lookId });
         PT.app.rerender();
@@ -651,8 +782,18 @@
     };
   }
 
+  /* Walk one slot, or every slot, one place down its ranked list. */
+  function shift(role, by) {
+    view.offsets[role] = (view.offsets[role] || 0) + by;
+  }
+
+  function shiftAll(by) {
+    const look = LOOKS.filter(function (l) { return l.id === view.lookId; })[0] || LOOKS[0];
+    look.slots.forEach(function (slot) { shift(slot.role, by); });
+  }
+
   function currentResult() {
-    return build(view.analysis, view.lookId, view.offset, view.onlyTrip);
+    return build(view.analysis, view.lookId, view.offsets, view.onlyTrip);
   }
 
   function toOutfitSlots(result) {
@@ -676,6 +817,9 @@
 
   function saveLook(result) {
     addToTrip(result);
+    // Keeping a look is a stronger vote than tapping "yes", so count it.
+    ratePieces(result.picks.map(function (p) { return p.item; }), 1);
+    rateLook(result.look.id, 1);
     const name = result.look.name;
     PT.store.saveOutfit({ name: name, tag: result.look.agency ? 'agency' : '', slots: toOutfitSlots(result) });
     util.toast('Saved "' + name + '" to ' + PT.store.trip().name + '.');
@@ -689,22 +833,22 @@
 
     root.addEventListener('click', function (event) {
       const look = event.target.closest('[data-look]');
-      if (look) { view.lookId = look.dataset.look; view.offset = 0; remember({ lookId: view.lookId }); PT.app.rerender(); return; }
+      if (look) { view.lookId = look.dataset.look; view.offsets = {}; remember({ lookId: view.lookId }); PT.app.rerender(); return; }
 
       const blind = event.target.closest('[data-look-blind]');
       if (blind) {
         view.analysis = blindAnalysis();
         view.lookId = blind.dataset.lookBlind;
-        view.offset = 0;
+        view.offsets = {};
         util.toast('Built from your closet’s own colours. Add a photo to aim it.');
         PT.app.rerender();
         return;
       }
 
-      if (event.target.closest('[data-shuffle]')) { view.offset += 1; PT.app.rerender(); return; }
+      if (event.target.closest('[data-shuffle]')) { shiftAll(1); PT.app.rerender(); return; }
       if (event.target.closest('[data-only-trip]')) { view.onlyTrip = !view.onlyTrip; PT.app.rerender(); return; }
       if (event.target.closest('[data-clear-inspo]')) {
-        view.analysis = null; view.lookId = null; view.offset = 0;
+        view.analysis = null; view.lookId = null; view.offsets = {};
         forget();
         PT.app.rerender();
         return;
@@ -716,7 +860,50 @@
         return;
       }
       const swap = event.target.closest('[data-swap]');
-      if (swap) { view.offset += 1; util.toast('Swapped the whole look — tap again to keep going.'); PT.app.rerender(); }
+      if (swap) { shift(swap.dataset.swap, 1); PT.app.rerender(); return; }
+
+      const muteBtn = event.target.closest('[data-mute]');
+      if (muteBtn) {
+        const card = muteBtn.closest('[data-item]');
+        const role = muteBtn.dataset.mute;
+        if (!card) return;
+        mute(role, card.dataset.item);
+        shift(role, 1);
+        util.toast('Muted for the ' + (ROLE_LABELS[role] || role).toLowerCase() +
+          ' slot. Undo it under "Tuned by you".');
+        PT.app.rerender();
+        return;
+      }
+
+      const verdict = event.target.closest('[data-verdict]');
+      if (verdict) {
+        const result = currentResult();
+        const up = verdict.dataset.verdict === 'up';
+        ratePieces(result.picks.map(function (p) { return p.item; }), up ? 1 : -1);
+        rateLook(result.look.id, up ? 1 : -1);
+        if (!up) shiftAll(1);
+        util.toast(up
+          ? 'Noted — these pieces will come up sooner.'
+          : 'Noted. Here is a different go at it.');
+        PT.app.rerender();
+        return;
+      }
+
+      const unmuteBtn = event.target.closest('[data-unmute]');
+      if (unmuteBtn) {
+        unmute(unmuteBtn.dataset.role, unmuteBtn.dataset.unmute);
+        PT.app.rerender();
+        return;
+      }
+
+      if (event.target.closest('[data-reset-feedback]')) {
+        util.confirm('Forget everything you have told the matcher — every yes, every no, ' +
+          'every muted piece? Your closet and your saved looks are untouched.', function () {
+          PT.store.setUI({ inspoFeedback: null });
+          util.toast('Back to a blank slate.');
+          PT.app.rerender();
+        }, 'Forget it all');
+      }
     });
 
     /* Drag a picture straight onto the page, or paste one. */
