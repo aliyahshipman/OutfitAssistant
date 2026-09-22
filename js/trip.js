@@ -35,6 +35,13 @@
             (item.agency ? '<span class="badge badge--agency">Agency</span>' : '') +
           '</span>' +
           '<span class="pick-mark">' + (picked ? '&#10003;' : '&#43;') + '</span>' +
+          (item.status === 'ontheway'
+            ? '<span class="card__badges" style="top:auto;bottom:8px;left:8px">' +
+                (store.arrivalRisk(item) === 'late'
+                  ? '<span class="badge badge--alert">Arrives late</span>'
+                  : '<span class="badge badge--way">On the way</span>') +
+              '</span>'
+            : '') +
         '</button>' +
         '<div class="card__body">' +
           '<div class="card__name">' + util.esc(item.name) + '</div>' +
@@ -65,7 +72,19 @@
     else if (picked.length > days * 2) verdict = 'That is a lot of pieces for ' + days + ' days. The matrix will show which ones are not earning their space.';
     else verdict = looks + ' possible looks from ' + picked.length + ' pieces, across ' + days + ' days. That is a capsule.';
 
+    const atRisk = store.atRiskForTrip();
+    const riskNote = atRisk.length
+      ? '<div class="note note--alert">' +
+          '<strong>' + util.pluralize(atRisk.length, 'piece') + '</strong> you have picked ' +
+          (atRisk.length === 1 ? 'has' : 'have') + ' not arrived yet: ' +
+          util.esc(atRisk.slice(0, 4).map(function (i) { return i.name; }).join(', ')) +
+          (atRisk.length > 4 ? ' and ' + (atRisk.length - 4) + ' more' : '') +
+          '. Build a look that does not depend on ' + (atRisk.length === 1 ? 'it' : 'them') + ' as a backup.' +
+        '</div>'
+      : '';
+
     return '' +
+      riskNote +
       '<div class="stat-row">' +
         '<div class="stat"><div class="stat__n">' + picked.length + '</div><div class="stat__label">Pieces chosen</div></div>' +
         '<div class="stat"><div class="stat__n">' + looks + '</div><div class="stat__label">Possible looks</div></div>' +

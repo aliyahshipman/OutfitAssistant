@@ -209,6 +209,9 @@
             size: '',
             retailer: '',
             archived: false,
+            status: 'have',   // 'have' = in your hands, 'ontheway' = ordered
+            eta: '',          // expected arrival, ISO date
+
             category: 'tops',
             subtype: '',
             color: '#141414',
@@ -277,6 +280,41 @@
       });
     },
 
+    /*
+     * Will an ordered piece actually arrive before the trip?
+     *
+     *   ok      - lands with a day or more to spare
+     *   tight   - lands the day before you leave, or the day you leave
+     *   late    - lands after you have gone
+     *   unknown - on the way, but no arrival date recorded
+     *
+     * Returns null for anything already in your hands.
+     */
+    arrivalRisk(item, tripStart) {
+      if (!item || item.status !== 'ontheway') return null;
+      const start = tripStart || store.trip().start;
+      if (!item.eta || !start) return 'unknown';
+      const days = Math.round(
+        (util.parseISO(start) - util.parseISO(item.eta)) / 86400000
+      );
+      if (isNaN(days)) return 'unknown';
+      if (days < 0) return 'late';
+      if (days <= 1) return 'tight';
+      return 'ok';
+    },
+
+    /* Pieces on the trip that may not arrive in time. */
+    atRiskForTrip() {
+      return store.tripItems().filter(function (item) {
+        const risk = store.arrivalRisk(item);
+        return risk === 'late' || risk === 'tight' || risk === 'unknown';
+      });
+    },
+
+    onTheWayCount() {
+      return state.items.filter(function (i) { return !i.archived && i.status === 'ontheway'; }).length;
+    },
+
     archivedCount() {
       return state.items.filter(function (i) { return i.archived; }).length;
     },
@@ -311,7 +349,8 @@
           const id = util.uid('item');
           ids.push(id);
           s.items.push(Object.assign({
-            id: id, name: 'Untitled', brand: '', size: '', retailer: '', archived: false, category: 'tops', subtype: '',
+            id: id, name: 'Untitled', brand: '', size: '', retailer: '', archived: false,
+            status: 'have', eta: '', category: 'tops', subtype: '',
             color: '#141414', colorName: '', photo: '', photoUrl: '', link: '',
             source: 'import', agency: false, time: 'both', createdAt: Date.now()
           }, draft, { id: id }));

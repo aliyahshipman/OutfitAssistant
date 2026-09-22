@@ -265,6 +265,11 @@ img { display: block; max-width: 100%; }
 .badge--night { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 .badge--alert { border-color: var(--accent); color: var(--accent); }
 .badge--trip { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.badge--way { border-color: var(--good); color: var(--good); }
+.badge--warn { border-color: var(--warn); color: var(--warn); }
+.badge--packed { background: var(--good); color: var(--paper); border-color: var(--good); }
+.card__eta { margin-top: 3px; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--good); }
+.card__eta--late { color: var(--accent); }
 .badge--archived { background: var(--paper-warm); color: var(--muted); border-color: var(--line-firm); }
 
 /* Cards in the trip picker are one big toggle. */

@@ -27,7 +27,9 @@
     "orderedAt": "2026-09-21",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "x Revolve Thelma Top",
@@ -43,7 +45,9 @@
     "orderedAt": "2026-09-21",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Harlow Tank Top",
@@ -59,7 +63,9 @@
     "orderedAt": "2026-09-21",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Sleeveless Bodysuit",
@@ -75,7 +81,9 @@
     "orderedAt": "2026-09-21",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Scoop Neck Tank Top",
@@ -91,7 +99,9 @@
     "orderedAt": "2026-09-21",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Slim Racer Tank",
@@ -107,7 +117,9 @@
     "orderedAt": "2026-09-21",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Era top",
@@ -123,7 +135,9 @@
     "orderedAt": "2026-09-21",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Killa pants in Burnt",
@@ -139,7 +153,9 @@
     "orderedAt": "2026-09-21",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Stella Vest",
@@ -155,7 +171,9 @@
     "orderedAt": "2026-09-20",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "ontheway",
+    "eta": "2026-09-23"
   },
   {
     "name": "Fernanda Mini Dress",
@@ -171,7 +189,9 @@
     "orderedAt": "2026-09-20",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "ontheway",
+    "eta": "2026-09-23"
   },
   {
     "name": "The Tomcat Roller Sneak",
@@ -187,7 +207,9 @@
     "orderedAt": "2026-09-20",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "ontheway",
+    "eta": "2026-09-23"
   },
   {
     "name": "Satin Touch 20 Tights",
@@ -203,7 +225,9 @@
     "orderedAt": "2026-09-20",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "ontheway",
+    "eta": "2026-09-23"
   },
   {
     "name": "Maxwell Jacket",
@@ -219,7 +243,9 @@
     "orderedAt": "2026-09-20",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "ontheway",
+    "eta": "2026-09-23"
   },
   {
     "name": "Penny Top",
@@ -235,7 +261,9 @@
     "orderedAt": "2026-09-20",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "ontheway",
+    "eta": "2026-09-23"
   },
   {
     "name": "Penny Micro Skirt",
@@ -251,7 +279,9 @@
     "orderedAt": "2026-09-20",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "ontheway",
+    "eta": "2026-09-23"
   },
   {
     "name": "Fennel Skort",
@@ -267,7 +297,9 @@
     "orderedAt": "2026-09-20",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "ontheway",
+    "eta": "2026-09-23"
   },
   {
     "name": "Morgan Skirt",
@@ -283,7 +315,9 @@
     "orderedAt": "2026-09-20",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "ontheway",
+    "eta": "2026-09-23"
   },
   {
     "name": "Divinity Mini Skirt",
@@ -299,7 +333,9 @@
     "orderedAt": "2026-09-20",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "ontheway",
+    "eta": "2026-09-23"
   },
   {
     "name": "Poise Mini Skirt",
@@ -315,7 +351,9 @@
     "orderedAt": "2026-09-20",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "ontheway",
+    "eta": "2026-09-23"
   },
   {
     "name": "Recycled Twill Trouser Mini Skirt",
@@ -331,7 +369,9 @@
     "orderedAt": "2026-09-20",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "ontheway",
+    "eta": "2026-09-23"
   },
   {
     "name": "Snakeskin Top Handle Bag Medium",
@@ -347,7 +387,9 @@
     "orderedAt": "2026-09-20",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Leather Tweed Pattern Jacket",
@@ -363,7 +405,9 @@
     "orderedAt": "2026-09-20",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Python Shoulder Bag",
@@ -379,7 +423,9 @@
     "orderedAt": "2026-09-20",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "COTTON RIB TANK DRESS",
@@ -395,7 +441,9 @@
     "orderedAt": "2026-09-19",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "SEAMLESS SCULPT THONG BODYSUIT",
@@ -411,7 +459,9 @@
     "orderedAt": "2026-09-19",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "NikeSKIMS RIBBED SEAMLESS MICRO SCOOP BRA",
@@ -427,7 +477,9 @@
     "orderedAt": "2026-09-19",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "NikeSKIMS PERFORMANCE COTTON BLEND SHORT SLEEVE V-NECK CROP TOP",
@@ -443,7 +495,9 @@
     "orderedAt": "2026-09-19",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "NikeSKIMS STUDIO STRETCH MOCK NECK BRA TOP",
@@ -459,7 +513,9 @@
     "orderedAt": "2026-09-19",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "COTTON JERSEY LONG SLEEVE BOATNECK TOP",
@@ -475,7 +531,9 @@
     "orderedAt": "2026-09-19",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "SKIMS SLEEP LONG SLEEVE BUTTON UP SET",
@@ -491,7 +549,9 @@
     "orderedAt": "2026-09-19",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "EVERYDAY COTTON UNLINED DEMI BRA",
@@ -507,7 +567,9 @@
     "orderedAt": "2026-09-19",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "ESSENTIAL KNIT ROUNDED CROPPED CARDIGAN",
@@ -523,7 +585,9 @@
     "orderedAt": "2026-09-19",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "SOFT LOUNGE SLEEP SET",
@@ -539,7 +603,9 @@
     "orderedAt": "2026-09-19",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "NikeSKIMS RIBBED SEAMLESS MUSCLE TANK",
@@ -555,7 +621,9 @@
     "orderedAt": "2026-09-19",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Ira Low Rise Easy Pant",
@@ -571,7 +639,9 @@
     "orderedAt": "2026-09-18",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Tyla Stirrup Pant",
@@ -587,7 +657,9 @@
     "orderedAt": "2026-09-18",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "The Lean Straight Leg Jeans",
@@ -603,7 +675,9 @@
     "orderedAt": "2026-09-18",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Low Rise Boot Jeans",
@@ -619,7 +693,9 @@
     "orderedAt": "2026-09-18",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "V-neck Racerback Tank",
@@ -635,7 +711,9 @@
     "orderedAt": "2026-09-18",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Cropped 60s Slim Tee",
@@ -651,7 +729,9 @@
     "orderedAt": "2026-09-18",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "The Cropped Not So Basic Tank",
@@ -667,7 +747,9 @@
     "orderedAt": "2026-09-18",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Sisi Silk Hooded Blouse",
@@ -683,7 +765,9 @@
     "orderedAt": "2026-09-18",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Maria Mid Rise Bootcut",
@@ -699,7 +783,9 @@
     "orderedAt": "2026-09-17",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Teodora Western Shirt",
@@ -715,7 +801,9 @@
     "orderedAt": "2026-09-17",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Reflect Full Length Legging",
@@ -731,7 +819,9 @@
     "orderedAt": "2026-09-09",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Lumify Sports Bra",
@@ -747,7 +837,9 @@
     "orderedAt": "2026-09-09",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "x REVOLVE Avani Dress",
@@ -763,7 +855,9 @@
     "orderedAt": "2026-09-09",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Moon Shoe Og Sp Sneaker",
@@ -779,7 +873,9 @@
     "orderedAt": "2026-09-09",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Sott Idol Tank Top",
@@ -795,7 +891,9 @@
     "orderedAt": "2026-09-09",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Scarlett Sandal",
@@ -811,7 +909,9 @@
     "orderedAt": "2026-09-09",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Scooter Heel",
@@ -827,7 +927,9 @@
     "orderedAt": "2026-09-09",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Sloan Slingback Pump",
@@ -843,7 +945,9 @@
     "orderedAt": "2026-09-09",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Lou Pump",
@@ -859,7 +963,9 @@
     "orderedAt": "2026-09-09",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Apron Double-breasted Top",
@@ -875,7 +981,9 @@
     "orderedAt": "2026-09-09",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "for FWRD Cosima Maxi Dress",
@@ -891,7 +999,9 @@
     "orderedAt": "2026-09-08",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Jacksonville Top",
@@ -907,7 +1017,9 @@
     "orderedAt": "2026-09-08",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Ryland Top",
@@ -923,7 +1035,9 @@
     "orderedAt": "2026-09-08",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Knit Long Sleeve Corset Dress",
@@ -939,7 +1053,9 @@
     "orderedAt": "2026-09-08",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Marine Full Length Pant",
@@ -955,7 +1071,9 @@
     "orderedAt": "2026-09-08",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Marine Full Length Pant",
@@ -971,7 +1089,9 @@
     "orderedAt": "2026-09-08",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Brandi Mesh Bodysuit",
@@ -987,7 +1107,9 @@
     "orderedAt": "2026-09-05",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Icon Tee",
@@ -1003,7 +1125,9 @@
     "orderedAt": "2026-09-05",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Cropped Denim Bomber Jacket",
@@ -1019,7 +1143,9 @@
     "orderedAt": "2026-09-05",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Off-The-Shoulder Mini Dress w/ Tags",
@@ -1035,7 +1161,9 @@
     "orderedAt": "2026-09-04",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Halterneck Mini Dress",
@@ -1051,7 +1179,9 @@
     "orderedAt": "2026-09-04",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Leather Vest",
@@ -1067,7 +1197,9 @@
     "orderedAt": "2026-09-04",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Strapless Mini Dress",
@@ -1083,7 +1215,9 @@
     "orderedAt": "2026-09-04",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Pant Set w/ Tags",
@@ -1099,7 +1233,9 @@
     "orderedAt": "2026-09-04",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Leather Shoulder Bag",
@@ -1115,7 +1251,9 @@
     "orderedAt": "2026-09-04",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Birva Skirt",
@@ -1131,7 +1269,9 @@
     "orderedAt": "2026-08-31",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "HEAVY POINTELLE CAMI",
@@ -1147,7 +1287,9 @@
     "orderedAt": "2026-04-29",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "HEAVY POINTELLE MINI SKORT",
@@ -1163,7 +1305,9 @@
     "orderedAt": "2026-04-29",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "NikeSKIMS MATTE 3\" FOLDOVER SHORT",
@@ -1179,7 +1323,9 @@
     "orderedAt": "2026-04-29",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "NikeSKIMS MATTE WRAP LONG SLEEVE CROPPED TOP",
@@ -1195,7 +1341,9 @@
     "orderedAt": "2026-04-29",
     "agency": false,
     "time": "both",
-    "source": "seed"
+    "source": "seed",
+    "status": "have",
+    "eta": ""
   }
 ]
   };

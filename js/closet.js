@@ -4,7 +4,7 @@
   const util = PT.util;
 
   const filters = { category: 'all', color: 'all', retailer: 'all', agency: false,
-                    time: 'all', search: '', shelf: 'active' };
+                    time: 'all', search: '', shelf: 'active', status: 'all' };
   let selectMode = false;
   const selected = {};
 
@@ -15,6 +15,12 @@
   function matches(item) {
     if (filters.shelf === 'active' && item.archived) return false;
     if (filters.shelf === 'archived' && !item.archived) return false;
+    if (filters.status === 'ontheway' && item.status !== 'ontheway') return false;
+    if (filters.status === 'have' && item.status === 'ontheway') return false;
+    if (filters.status === 'risk') {
+      const r = PT.store.arrivalRisk(item);
+      if (r !== 'late' && r !== 'tight' && r !== 'unknown') return false;
+    }
     if (filters.category !== 'all' && item.category !== filters.category) return false;
     if (filters.color !== 'all' && PT.colors.bucket(item.color) !== filters.color) return false;
     if (filters.retailer !== 'all' && (item.retailer || 'Added by hand') !== filters.retailer) return false;
@@ -35,6 +41,18 @@
     const usesText = uses === 0 ? 'In no look yet' : util.pluralize(uses, 'look');
     const onTrip = store.inTrip(item.id);
 
+    const risk = store.arrivalRisk(item);
+    const packing = store.inTrip(item.id) ? store.packingFor(item.id) : null;
+    const arrivalBadge =
+      item.status !== 'ontheway' ? '' :
+      risk === 'late'  ? '<span class="badge badge--alert">Arrives after you leave</span>' :
+      risk === 'tight' ? '<span class="badge badge--warn">Cutting it close</span>' :
+      risk === 'unknown' ? '<span class="badge badge--way">On the way</span>' :
+      '<span class="badge badge--way">On the way</span>';
+    const etaLine = item.status === 'ontheway' && item.eta
+      ? '<div class="card__eta' + (risk === 'late' ? ' card__eta--late' : '') + '">Due ' +
+        util.esc(util.formatDate(item.eta, { weekday: 'short', day: 'numeric', month: 'short' })) + '</div>'
+      : '';
     const isSelected = Boolean(selected[item.id]);
     return '' +
       '<article class="card' + (selectMode ? ' card--selectable' : '') +
@@ -48,6 +66,8 @@
             (item.time === 'day' ? '<span class="badge">Day</span>' : '') +
             (onTrip ? '<span class="badge badge--trip">Packing</span>' : '') +
             (item.archived ? '<span class="badge badge--archived">Archived</span>' : '') +
+            arrivalBadge +
+            (packing && packing.packed ? '<span class="badge badge--packed">Packed</span>' : '') +
           '</div>' +
           (selectMode ? '' :
             '<div class="card__actions">' +
@@ -68,6 +88,7 @@
           (item.retailer
             ? '<div class="card__source">' + util.esc(item.retailer) + '</div>'
             : '') +
+          etaLine +
           '<div class="' + usesClass + '">' + usesText + '</div>' +
         '</div>' +
       '</article>';
@@ -122,6 +143,15 @@
         '<div class="filters__group">' + catChips + '</div>' +
       '</div>' +
       (shopChips ? '<div class="filters"><div class="filters__group">' + shopChips + '</div></div>' : '') +
+      '<div class="filters"><div class="filters__group">' +
+        '<div class="seg">' +
+          '<button data-filter-status="all" aria-pressed="' + (filters.status === 'all') + '" type="button">Everything</button>' +
+          '<button data-filter-status="have" aria-pressed="' + (filters.status === 'have') + '" type="button">In hand</button>' +
+          '<button data-filter-status="ontheway" aria-pressed="' + (filters.status === 'ontheway') + '" type="button">On the way' +
+            (store.onTheWayCount() ? ' (' + store.onTheWayCount() + ')' : '') + '</button>' +
+          '<button data-filter-status="risk" aria-pressed="' + (filters.status === 'risk') + '" type="button">May miss the trip</button>' +
+        '</div>' +
+      '</div></div>' +
       '<div class="filters">' +
         '<div class="filters__group">' + colorChips + '</div>' +
         '<span class="spacer"></span>' +
@@ -219,7 +249,8 @@
     const store = PT.store;
     const existing = itemId ? store.itemById(itemId) : null;
     const draft = Object.assign({
-      name: '', brand: '', size: '', retailer: '', category: 'tops', subtype: '', color: '#141414',
+      name: '', brand: '', size: '', retailer: '', status: 'have', eta: '',
+      category: 'tops', subtype: '', color: '#141414',
       colorName: '', photo: '', photoUrl: '', agency: false, time: 'both'
     }, existing || {});
 
@@ -288,6 +319,19 @@
 
       '<div class="field-row">' +
         '<div class="field">' +
+          '<span class="field-label">Where is it?</span>' +
+          '<div class="seg" data-status>' +
+            '<button type="button" data-status-val="have" aria-pressed="' + (draft.status !== 'ontheway') + '">In hand</button>' +
+            '<button type="button" data-status-val="ontheway" aria-pressed="' + (draft.status === 'ontheway') + '">On the way</button>' +
+          '</div>' +
+        '</div>' +
+        '<div class="field" data-eta-field' + (draft.status === 'ontheway' ? '' : ' hidden') + '>' +
+          '<label for="f-eta">Expected arrival</label>' +
+          '<input id="f-eta" type="date" data-field="eta" value="' + util.esc(draft.eta) + '">' +
+        '</div>' +
+      '</div>' +
+      '<div class="field-row">' +
+        '<div class="field">' +
           '<span class="field-label">Agency-appropriate</span>' +
           '<div class="seg" data-agency>' +
             '<button type="button" data-agency-val="yes" aria-pressed="' + (draft.agency === true) + '">Yes</button>' +
@@ -348,6 +392,16 @@
       colorInput.addEventListener('input', function (e) { setColor(e.target.value); });
       util.on(body, 'click', '[data-swatch]', function (e, btn) { setColor(btn.dataset.swatch); });
 
+      const etaField = body.querySelector('[data-eta-field]');
+      body.querySelector('[data-field="eta"]').addEventListener('input', function (e) { draft.eta = e.target.value; });
+      util.on(body, 'click', '[data-status-val]', function (e, btn) {
+        draft.status = btn.dataset.statusVal;
+        util.qsa('[data-status-val]', body).forEach(function (b) {
+          b.setAttribute('aria-pressed', String(b.dataset.statusVal === draft.status));
+        });
+        etaField.hidden = draft.status !== 'ontheway';
+        if (draft.status !== 'ontheway') draft.eta = '';
+      });
       util.on(body, 'click', '[data-agency-val]', function (e, btn) {
         draft.agency = btn.dataset.agencyVal === 'yes';
         util.qsa('[data-agency-val]', body).forEach(function (b) {
@@ -471,6 +525,10 @@
 
     util.on(root, 'click', '[data-filter-category]', function (e, btn) {
       filters.category = btn.dataset.filterCategory;
+      PT.app.rerender();
+    });
+    util.on(root, 'click', '[data-filter-status]', function (e, btn) {
+      filters.status = btn.dataset.filterStatus;
       PT.app.rerender();
     });
     util.on(root, 'click', '[data-filter-retailer]', function (e, btn) {
