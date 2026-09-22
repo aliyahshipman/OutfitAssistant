@@ -163,8 +163,8 @@ you to import something first. Each piece is remembered by name, size and
 photo after it is applied, so it never arrives twice and a piece you removed
 stays removed — while pieces added to the seed later still turn up on your next
 visit, alongside everything you have already changed. It was generated from every shop order-confirmation email from January 2025
-onwards, across REVOLVE, The RealReal, Zara, SKIMS, FWRD, Alo Yoga, MOTHER and
-Cult Naked.
+onwards, across REVOLVE, The RealReal, Zara, SKIMS, FWRD, Alo Yoga, Jaded London,
+MOTHER and Cult Naked.
 
 Because it comes from *orders*, it lists what was bought, not what was kept.
 The closet has a **Select** mode for exactly this: tap everything you returned
@@ -179,6 +179,10 @@ went through, **Archived → Restore** puts the piece back.
 A handful of Zara confirmations split an order across several deliveries and
 list only a size and a price — no product name. Those arrive as *Zara Piece
 …* with their real photo attached, so they can be renamed from the picture.
+
+Jaded London's receipts carry no product pictures at all. Their photos come
+from the review request that follows each delivery — one email per piece, the
+product shot tagged `alt="Product Image"` — matched back to the order by name.
 
 It is applied once and only once: delete a seeded piece, or erase everything,
 and it stays gone. Regenerate it from an order file, edit it by hand, or delete
