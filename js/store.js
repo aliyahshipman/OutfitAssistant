@@ -21,6 +21,8 @@
     { id: 'shoes', label: 'Shoes', subtypes: ['Flats', 'Heels', 'Boots', 'Trainers'] },
     { id: 'bags', label: 'Bags', subtypes: ['Day bag', 'Evening bag', 'Tote'] },
     { id: 'accessories', label: 'Accessories', subtypes: ['Scarf', 'Jewellery', 'Belt', 'Hat', 'Sunglasses', 'Hosiery'] },
+    { id: 'sleepswim', label: 'Pyjamas & Swim', subtypes: ['Pyjamas', 'Robe', 'Swimsuit', 'Bikini', 'Cover-up'] },
+    { id: 'underwear', label: 'Underwear & Bras', subtypes: ['Bra', 'Bralette', 'Briefs', 'Thong', 'Shapewear'] },
     // A catch-all so an imported piece whose kind we could not work out still
     // shows up in the closet instead of quietly going missing.
     { id: 'other', label: 'Other', subtypes: [] }
