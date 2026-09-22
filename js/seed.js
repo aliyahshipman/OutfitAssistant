@@ -110,6 +110,38 @@
     "source": "seed"
   },
   {
+    "name": "Era top",
+    "brand": "Cult Naked",
+    "size": "XS",
+    "category": "tops",
+    "subtype": "",
+    "color": "#141414",
+    "colorName": "Black",
+    "photoUrl": "https://cdn.shopify.com/s/files/1/0199/8936/4790/files/cultnakedvalentine2521894hh_compact_cropped.jpg?v=1753905904",
+    "link": "",
+    "retailer": "Cult Naked",
+    "orderedAt": "2026-09-21",
+    "agency": false,
+    "time": "both",
+    "source": "seed"
+  },
+  {
+    "name": "Killa pants in Burnt",
+    "brand": "Cult Naked",
+    "size": "XS",
+    "category": "tops",
+    "subtype": "",
+    "color": "#5a4433",
+    "colorName": "Brown",
+    "photoUrl": "https://cdn.shopify.com/s/files/1/0199/8936/4790/files/cultnaked99286_5b276ede-6623-4f14-ad2f-64560a74a35e_compact_cropped.jpg?v=1692289174",
+    "link": "",
+    "retailer": "Cult Naked",
+    "orderedAt": "2026-09-21",
+    "agency": false,
+    "time": "both",
+    "source": "seed"
+  },
+  {
     "name": "Stella Vest",
     "brand": "BY.DYLN",
     "size": "XS",
