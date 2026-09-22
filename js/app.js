@@ -68,7 +68,9 @@
       const photos = store.get().items.filter(function (i) { return i.photo || i.photoUrl; }).length;
       title.textContent = 'The Closet';
       dates.textContent = items ? util.pluralize(items, 'piece') + ' · ' + photos + ' with pictures' : 'Empty so far';
-      countdown.textContent = '';
+      const coming = store.onTheWayCount();
+      countdown.textContent = coming ? coming + ' still on the way' : '';
+      util.qs('#trip-dot').hidden = !countdown.textContent;
       settings.textContent = 'Settings';
       util.qs('#weather-strip').hidden = true;
       return;
@@ -86,6 +88,7 @@
     else if (days > 0) countdown.textContent = days + ' days to go';
     else if (days === 0) countdown.textContent = 'Today';
     else countdown.textContent = util.daysUntil(trip.end) >= 0 ? 'On the trip now' : 'Trip over';
+    util.qs('#trip-dot').hidden = !countdown.textContent;
 
     settings.textContent = 'Trip settings';
     util.qs('#weather-strip').hidden = false;

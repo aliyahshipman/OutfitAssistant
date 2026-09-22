@@ -93,12 +93,17 @@ Trip settings holds the name and dates; the calendar follows them. Note that
 closet is empty and that browser has never been seeded. It is what makes the
 hosted site arrive populated on any device instead of asking you to import
 something first. It was generated from shop order-confirmation emails across
-REVOLVE, FWRD, The RealReal and SKIMS.
+REVOLVE, The RealReal, Zara, SKIMS, FWRD, Alo Yoga, MOTHER and Cult Naked.
 
 Because it comes from *orders*, it lists what was bought, not what was kept.
 The closet has a **Select** mode for exactly this: tap everything you returned
-or no longer own and remove it in one go. Removals are permanent — the starter
-wardrobe never reappears.
+or no longer own. **Archive** keeps a piece on file but out of the way, which is
+the safe choice; **Remove** is permanent and the starter wardrobe never
+reappears.
+
+A handful of Zara confirmations split an order across several deliveries and
+list only a size and a price — no product name. Those arrive as *Zara Piece
+…* with their real photo attached, so they can be renamed from the picture.
 
 It is applied once and only once: delete a seeded piece, or erase everything,
 and it stays gone. Regenerate it from an order file, edit it by hand, or delete

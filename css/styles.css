@@ -308,10 +308,13 @@ img { display: block; max-width: 100%; }
 }
 .card:hover .card__actions, .card:focus-within .card__actions { opacity: 1; }
 
-.card__body { padding: 9px 2px 0; }
+/* Brands write their names without spaces ("perfectwhitetee"), so let any
+   word break rather than push the card past the edge of a phone screen. */
+.card__body { padding: 9px 2px 0; min-width: 0; overflow-wrap: anywhere; }
 .card__name { font-family: var(--serif); font-size: 16px; line-height: 1.25; }
 .card__meta {
   display: flex; align-items: center; gap: 6px; margin-top: 4px;
+  flex-wrap: wrap; min-width: 0;
   font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
 }
 .card__source {

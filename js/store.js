@@ -20,7 +20,10 @@
     { id: 'outerwear', label: 'Outerwear', subtypes: ['Blazer', 'Coat', 'Jacket', 'Trench'] },
     { id: 'shoes', label: 'Shoes', subtypes: ['Flats', 'Heels', 'Boots', 'Trainers'] },
     { id: 'bags', label: 'Bags', subtypes: ['Day bag', 'Evening bag', 'Tote'] },
-    { id: 'accessories', label: 'Accessories', subtypes: ['Scarf', 'Jewellery', 'Belt', 'Hat', 'Sunglasses', 'Hosiery'] }
+    { id: 'accessories', label: 'Accessories', subtypes: ['Scarf', 'Jewellery', 'Belt', 'Hat', 'Sunglasses', 'Hosiery'] },
+    // A catch-all so an imported piece whose kind we could not work out still
+    // shows up in the closet instead of quietly going missing.
+    { id: 'other', label: 'Other', subtypes: [] }
   ];
 
   const BAGS = [
