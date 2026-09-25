@@ -135,6 +135,25 @@
         '<tbody>' + rows + '</tbody></table>';
     }).join('');
 
+    /* The clothes are only half the suitcase, so the page she prints carries
+       the essentials and the to-dos with them. */
+    const essentials = store.ESSENTIAL_GROUPS.map(function (group) {
+      const rows = store.essentialsIn(group.id);
+      if (!rows.length) return '';
+      return '<h3>' + util.esc(group.label) + '</h3><table>' +
+        '<tbody>' + rows.map(function (row) {
+          return '<tr><td>' + (row.packed ? '&#9745;' : '&#9744;') + '</td><td>' +
+            util.esc(row.name) + '</td><td>' +
+            ((Number(row.qty) || 1) > 1 ? '&times;' + (Number(row.qty) || 1) : '') + '</td></tr>';
+        }).join('') + '</tbody></table>';
+    }).join('');
+
+    const todos = store.todos().map(function (row) {
+      return '<tr><td>' + (row.done ? '&#9745;' : '&#9744;') + '</td><td>' + util.esc(row.text) +
+        '</td><td>' + util.esc(row.due ? util.formatDate(row.due, { day: 'numeric', month: 'short' }) : '') +
+        '</td></tr>';
+    }).join('');
+
     const schedule = store.tripDates().map(function (date) {
       const entry = store.day(date);
       const dayOutfit = entry.day ? store.outfitById(entry.day) : null;
@@ -155,12 +174,15 @@
       'table{width:100%;border-collapse:collapse;font-size:14px}' +
       'th{text-align:left;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#8d867c;font-weight:400;padding:4px 8px 4px 0}' +
       'td{border-bottom:1px solid #eee;padding:7px 8px 7px 0}' +
-      'td:first-child{width:20px}@media print{body{margin:0}}' +
+      'td:first-child{width:20px}h3{font-size:12px;letter-spacing:.14em;text-transform:uppercase;' +
+      'color:#8d867c;font-weight:400;margin:18px 0 4px}@media print{body{margin:0}}' +
       '</style></head><body>' +
       '<h1>' + util.esc(trip.name) + '</h1>' +
       '<p class="dates">' + util.esc(util.formatDate(trip.start) + ' – ' + util.formatDate(trip.end, { day: 'numeric', month: 'long', year: 'numeric' })) +
         ' · ' + util.pluralize(items.length, 'piece') + '</p>' +
       sections +
+      (essentials ? '<h2>Essentials</h2>' + essentials : '') +
+      (todos ? '<h2>Before you go</h2><table><tbody>' + todos + '</tbody></table>' : '') +
       (schedule ? '<h2>The plan</h2><table><thead><tr><th>Day</th><th></th><th>Day look</th><th>Night look</th></tr></thead><tbody>' +
         schedule + '</tbody></table>' : '') +
       '</body></html>';

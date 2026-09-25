@@ -720,3 +720,136 @@ input[type="checkbox"].pk-check { width: 18px; height: 18px; accent-color: var(-
 .inspo-muted strong {
   font-size: 10px; letter-spacing: .2em; text-transform: uppercase; font-weight: 400;
 }
+
+/* ---- travel essentials & to do -------------------------------------------
+   Two typed lists, side by side with the derived packing list. Rows are made
+   of live inputs rather than text plus an edit button: on a phone, tapping the
+   word you want to change is the whole interaction. */
+.panel + .panel { margin-top: 56px; padding-top: 44px; border-top: 1px solid var(--line); }
+
+.ess-list, .todo-list { list-style: none; margin: 0; padding: 0; }
+
+.ess-row, .todo-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line);
+}
+.ess-row:last-child, .todo-row:last-child { border-bottom: 0; }
+
+.ess-row__tick { display: flex; align-items: center; flex: 0 0 auto; }
+.ess-row__tick input { width: 17px; height: 17px; accent-color: var(--ink); cursor: pointer; }
+
+/* The name reads as plain text until it is touched, so the list looks like a
+   list and not like a form. */
+.ess-row__name {
+  flex: 1 1 auto;
+  min-width: 0;
+  font: inherit;
+  font-size: 14px;
+  color: var(--ink);
+  background: none;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  padding: 3px 2px;
+}
+.ess-row__name:hover { border-bottom-color: var(--line-firm); }
+.ess-row__name:focus { outline: none; border-bottom-color: var(--ink); }
+
+.ess-row__qty { display: flex; align-items: center; gap: 2px; flex: 0 0 auto; }
+.ess-row__qty input {
+  width: 42px;
+  font: inherit;
+  font-size: 13px;
+  text-align: center;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 4px 2px;
+  -moz-appearance: textfield;
+}
+.ess-row__qty input::-webkit-outer-spin-button,
+.ess-row__qty input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+.icon-btn--tiny { font-size: 15px; line-height: 1; padding: 4px 7px; }
+
+.ess-row.is-packed .ess-row__name,
+.todo-row.is-done .ess-row__name { color: var(--muted); text-decoration: line-through; }
+
+.todo-row__due { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
+.todo-row__due input {
+  font: inherit;
+  font-size: 12px;
+  color: var(--ink-soft);
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 3px 6px;
+}
+.todo-row__when {
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.todo-row.is-overdue .todo-row__when { color: var(--accent); }
+.todo-row.is-overdue .todo-row__due input { border-color: var(--accent); }
+
+.ess-add {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 22px;
+  flex-wrap: wrap;
+}
+.ess-add input[type="text"] {
+  flex: 1 1 200px;
+  min-width: 0;
+  font: inherit;
+  font-size: 14px;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line-firm);
+  border-radius: var(--radius);
+  padding: 9px 11px;
+}
+.ess-add input[type="date"], .ess-add select {
+  font: inherit;
+  font-size: 13px;
+  color: var(--ink-soft);
+  background: var(--paper);
+  border: 1px solid var(--line-firm);
+  border-radius: var(--radius);
+  padding: 9px 8px;
+}
+
+/* On a phone the row wraps: tick and name on the first line, count and the
+   remove button tucked under them, so nothing gets squeezed to nothing. */
+@media (max-width: 560px) {
+  .ess-row, .todo-row { flex-wrap: wrap; row-gap: 6px; }
+  .ess-row__name, .todo-row .ess-row__name { flex: 1 1 calc(100% - 100px); }
+  .ess-row__qty, .todo-row__due { margin-left: 27px; }
+  /* Keep "remove" well away from "one more", which sits next to it once the
+     row wraps — a mis-tap there deletes the line. */
+  .ess-row [data-ess-delete], .todo-row [data-todo-delete] { margin-left: auto; }
+  .todo-row__due { flex: 1 1 100%; }
+  .ess-add input[type="text"] { flex: 1 1 100%; }
+  .ess-add select, .ess-add input[type="date"] { flex: 1 1 auto; }
+}
+
+.todo-row__adddate {
+  font: inherit;
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  padding: 4px 7px;
+  cursor: pointer;
+}
+.todo-row__adddate:hover { color: var(--ink); border-color: var(--line-firm); }

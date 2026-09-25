@@ -19,7 +19,8 @@ Looks like this            ← a photo in, an outfit out of the closet.
     ├── Looks              build outfits from the picked pieces
     ├── Combinations       every top × bottom those pieces make
     ├── 13 days            assign looks to days
-    └── Packing            the list, from looks you actually saved
+    ├── Packing            the list, from looks you actually saved
+    └── Essentials         the cameras, chargers, socks and shampoo — plus a to-do list
 ```
 
 Add a trip with **+** in the top nav. Trips are independent — their own looks,
@@ -154,6 +155,20 @@ checked bag or personal item and tick it off as you pack. Anything picked for
 the trip but never worn in a look is listed as *Staying home*. **Print** gives a
 clean list; **Save as page** downloads a self-contained HTML file to send on.
 
+**Essentials** — the half of the suitcase the closet cannot see. Cameras and
+their spare batteries, portable chargers and the EU adapter, socks and underwear
+by the pair, hair products, makeup, lotion, passport and euros. Each line has a
+count and a tick, grouped under headings, and the whole thing is typed rather
+than derived: **Add the usual** fills in a starter list to edit down, or add
+your own. Tap a name to rename it in place; empty the field to delete the line.
+A second **Add the usual** only fills the gaps, so nothing is ever doubled.
+
+Below it, **To do before you go** — the errands that are not packing. Optional
+due dates (opt in per line with **+ date**), overdue ones flagged in brick, done
+ones struck through and sunk to the bottom. Both lists belong to the trip, not
+to the app: a new trip starts with empty ones. Both ride along on **Save as
+page** and **Print**, so the printed list is the whole suitcase.
+
 ## Trip dates
 
 Trip settings holds the name and dates; the calendar follows them. Note that
@@ -169,7 +184,7 @@ photo after it is applied, so it never arrives twice and a piece you removed
 stays removed — while pieces added to the seed later still turn up on your next
 visit, alongside everything you have already changed. It was generated from every shop order-confirmation email from January 2025
 onwards, across REVOLVE, The RealReal, Zara, SKIMS, FWRD, Alo Yoga, Jaded London,
-Reformation, Ralph Lauren, MOTHER and Cult Naked.
+Reformation, Ralph Lauren, SSENSE, FRAME, Hervé Léger, MOTHER and Cult Naked.
 
 Because it comes from *orders*, it lists what was bought, not what was kept.
 The closet has a **Select** mode for exactly this: tap everything you returned
@@ -189,6 +204,13 @@ Where a shop promises a delivery window in words rather than a date —
 Reformation's "order by 1pm PT to receive in 1 business day" — that is turned
 into a real ETA, skipping the weekend, because whether a piece lands before the
 flight is the whole question.
+
+One purchase can reach the parser twice under two spellings: a shipment email
+drops the " in Colour" suffix its confirmation carried, and a name copied by
+hand can differ in case alone. Two rows are treated as one piece when the photo,
+size, colour *and* order date all match — the date has to match too, so buying
+the same thing again months later still shows up twice, as it should. Two sizes
+of one piece, ordered together to try both, are two rows by design.
 
 Jaded London's receipts carry no product pictures at all. Their photos come
 from the review request that follows each delivery — one email per piece, the

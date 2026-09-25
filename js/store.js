@@ -54,6 +54,64 @@
     { id: 'personal', label: 'Personal item' }
   ];
 
+  /* Everything that goes in the suitcase but is not a piece of clothing: the
+     cameras, the chargers, the socks, the shampoo. Kept per trip, because the
+     counts change — six pairs of socks for twelve days, two for a weekend. */
+  const ESSENTIAL_GROUPS = [
+    { id: 'tech', label: 'Cameras & tech' },
+    { id: 'basics', label: 'Socks & underthings' },
+    { id: 'hair', label: 'Hair' },
+    { id: 'makeup', label: 'Makeup' },
+    { id: 'skin', label: 'Skin & scent' },
+    { id: 'health', label: 'Health & documents' },
+    { id: 'bag', label: 'In the bag' },
+    { id: 'other', label: 'Anything else' }
+  ];
+
+  /* The list she named, filled out to the things that always travel with them.
+     Offered, not imposed: nothing appears until she asks for it, and every row
+     can be renamed, re-counted or deleted. */
+  const ESSENTIAL_STARTER = [
+    ['tech', 'Digital camera', 1], ['tech', 'Camera batteries', 2],
+    ['tech', 'Memory cards', 2], ['tech', 'Portable charger', 2],
+    ['tech', 'Phone charger', 1], ['tech', 'EU plug adapter', 2],
+    ['tech', 'Headphones', 1],
+    ['basics', 'Socks', 6], ['basics', 'Underwear', 14],
+    ['basics', 'Bras', 4], ['basics', 'Tights', 2],
+    ['hair', 'Shampoo', 1], ['hair', 'Conditioner', 1],
+    ['hair', 'Leave-in conditioner', 1], ['hair', 'Hair oil', 1],
+    ['hair', 'Heat protectant', 1], ['hair', 'Brush', 1],
+    ['hair', 'Claw clips', 3], ['hair', 'Silk scarf', 1],
+    ['hair', 'Straightener', 1],
+    ['makeup', 'Foundation', 1], ['makeup', 'Concealer', 1],
+    ['makeup', 'Setting powder', 1], ['makeup', 'Blush', 1],
+    ['makeup', 'Mascara', 1], ['makeup', 'Brow pencil', 1],
+    ['makeup', 'Lip liner', 1], ['makeup', 'Lip gloss', 1],
+    ['makeup', 'Setting spray', 1], ['makeup', 'Makeup brushes', 1],
+    ['makeup', 'Makeup remover', 1],
+    ['skin', 'Cleanser', 1], ['skin', 'Moisturiser', 1],
+    ['skin', 'Body lotion', 1], ['skin', 'SPF', 1],
+    ['skin', 'Lip balm', 1], ['skin', 'Deodorant', 1], ['skin', 'Perfume', 1],
+    ['health', 'Passport', 1], ['health', 'Boarding passes', 1],
+    ['health', 'Euros', 1], ['health', 'Card that works abroad', 1],
+    ['health', 'Travel insurance', 1], ['health', 'Medication', 1],
+    ['health', 'Plasters', 1],
+    ['bag', 'Tote for the day', 1], ['bag', 'Laundry bag', 1],
+    ['bag', 'Jewellery pouch', 1], ['bag', 'Umbrella', 1]
+  ];
+
+  const TODO_STARTER = [
+    'Check the passport is still in date',
+    'Tell the bank about the trip',
+    'Get euros',
+    'Download Paris maps for offline',
+    'Confirm the agency appointments',
+    'Charge the camera batteries',
+    'Book the airport transfer',
+    'Check the airline bag allowance',
+    'Print the packing list'
+  ];
+
   function newTrip(patch) {
     return Object.assign({
       id: util.uid('trip'),
@@ -64,6 +122,8 @@
       outfits: [],
       days: {},
       packing: {},
+      essentials: [],
+      todos: [],
       weather: null,
       createdAt: Date.now()
     }, patch || {});
@@ -88,7 +148,7 @@
   function defaultState() {
     const paris = parisTrip();
     return {
-      version: 3,
+      version: 4,
       items: [],
       trips: [paris],
       activeTripId: paris.id,
@@ -137,7 +197,7 @@
     (Array.isArray(parsed.items) ? parsed.items : []).forEach(function (item) {
       item.category = normalizeCategory(item);
     });
-    parsed.version = 3;
+    parsed.version = 4;
     return parsed;
   }
 
@@ -211,6 +271,7 @@
     CATEGORIES: CATEGORIES,
     GROUPS: GROUPS,
     BAGS: BAGS,
+    ESSENTIAL_GROUPS: ESSENTIAL_GROUPS,
     expand: expand,
 
     get() { return state; },
@@ -640,6 +701,149 @@
         if (!trip) return;
         trip.packing[itemId] = Object.assign({ bag: 'checked', packed: false }, trip.packing[itemId], patch);
       });
+    },
+
+    /* ---- travel essentials, and the list of things to do before you go ----- */
+
+    /* Both lists live on the trip, so the mutators all reach for it the same
+       way the packing state does. */
+    activeTrip(s) {
+      return s.trips.filter(function (t) { return t.id === s.activeTripId; })[0];
+    },
+
+    essentialGroup(id) {
+      return ESSENTIAL_GROUPS.filter(function (g) { return g.id === id; })[0] || null;
+    },
+
+    essentials() {
+      return store.trip().essentials || [];
+    },
+
+    essentialsIn(groupId) {
+      return store.essentials().filter(function (e) { return e.group === groupId; });
+    },
+
+    addEssential(patch) {
+      const row = Object.assign({
+        id: util.uid('ess'),
+        name: '',
+        group: 'other',
+        qty: 1,
+        packed: false,
+        note: '',
+        createdAt: Date.now()
+      }, patch || {});
+      if (!row.name.trim()) return null;
+      row.group = store.essentialGroup(row.group) ? row.group : 'other';
+      update(function (s) {
+        const trip = store.activeTrip(s);
+        if (trip) trip.essentials = (trip.essentials || []).concat([row]);
+      });
+      return row.id;
+    },
+
+    updateEssential(id, patch) {
+      update(function (s) {
+        const trip = store.activeTrip(s);
+        if (!trip) return;
+        trip.essentials = (trip.essentials || []).map(function (row) {
+          return row.id === id ? Object.assign({}, row, patch) : row;
+        });
+      });
+    },
+
+    deleteEssential(id) {
+      update(function (s) {
+        const trip = store.activeTrip(s);
+        if (!trip) return;
+        trip.essentials = (trip.essentials || []).filter(function (row) { return row.id !== id; });
+      });
+    },
+
+    /* Skips anything already on the list, so a second tap adds only the gaps
+       rather than a duplicate of everything. */
+    addStarterEssentials() {
+      let added = 0;
+      update(function (s) {
+        const trip = store.activeTrip(s);
+        if (!trip) return;
+        const have = {};
+        (trip.essentials || []).forEach(function (row) {
+          have[row.name.trim().toLowerCase()] = true;
+        });
+        const rows = ESSENTIAL_STARTER.filter(function (entry) {
+          return !have[entry[1].toLowerCase()];
+        }).map(function (entry, i) {
+          return {
+            id: util.uid('ess'),
+            group: entry[0],
+            name: entry[1],
+            qty: entry[2],
+            packed: false,
+            note: '',
+            createdAt: Date.now() + i
+          };
+        });
+        added = rows.length;
+        trip.essentials = (trip.essentials || []).concat(rows);
+      });
+      return added;
+    },
+
+    todos() {
+      return store.trip().todos || [];
+    },
+
+    addTodo(patch) {
+      const row = Object.assign({
+        id: util.uid('todo'),
+        text: '',
+        due: '',
+        done: false,
+        createdAt: Date.now()
+      }, typeof patch === 'string' ? { text: patch } : (patch || {}));
+      if (!row.text.trim()) return null;
+      update(function (s) {
+        const trip = store.activeTrip(s);
+        if (trip) trip.todos = (trip.todos || []).concat([row]);
+      });
+      return row.id;
+    },
+
+    updateTodo(id, patch) {
+      update(function (s) {
+        const trip = store.activeTrip(s);
+        if (!trip) return;
+        trip.todos = (trip.todos || []).map(function (row) {
+          return row.id === id ? Object.assign({}, row, patch) : row;
+        });
+      });
+    },
+
+    deleteTodo(id) {
+      update(function (s) {
+        const trip = store.activeTrip(s);
+        if (!trip) return;
+        trip.todos = (trip.todos || []).filter(function (row) { return row.id !== id; });
+      });
+    },
+
+    addStarterTodos() {
+      let added = 0;
+      update(function (s) {
+        const trip = store.activeTrip(s);
+        if (!trip) return;
+        const have = {};
+        (trip.todos || []).forEach(function (row) { have[row.text.trim().toLowerCase()] = true; });
+        const rows = TODO_STARTER.filter(function (text) {
+          return !have[text.toLowerCase()];
+        }).map(function (text, i) {
+          return { id: util.uid('todo'), text: text, due: '', done: false, createdAt: Date.now() + i };
+        });
+        added = rows.length;
+        trip.todos = (trip.todos || []).concat(rows);
+      });
+      return added;
     },
 
     /* ---- weather (cached per trip) ----------------------------------------- */

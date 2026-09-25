@@ -16,10 +16,11 @@
     builder:  { module: 'builder',  root: null, scope: 'trip', label: 'Looks' },
     matrix:   { module: 'matrix',   root: null, scope: 'trip', label: 'Combinations' },
     calendar: { module: 'calendar', root: null, scope: 'trip', label: 'Day by day' },
-    packing:  { module: 'packing',  root: null, scope: 'trip', label: 'Packing' }
+    packing:  { module: 'packing',  root: null, scope: 'trip', label: 'Packing' },
+    essentials: { module: 'essentials', root: null, scope: 'trip', label: 'Essentials' }
   };
 
-  const TRIP_ORDER = ['trip', 'builder', 'matrix', 'calendar', 'packing'];
+  const TRIP_ORDER = ['trip', 'builder', 'matrix', 'calendar', 'packing', 'essentials'];
   let current = 'closet';
 
   function inTrip() { return VIEWS[current].scope === 'trip'; }

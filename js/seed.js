@@ -11,7 +11,7 @@
 (function () {
   const PT = (window.PT = window.PT || {});
   PT.SEED = {
-    label: "Alo Yoga, Cult Naked, FWRD, Jaded London, MOTHER, REVOLVE, Ralph Lauren, Reformation, SKIMS, The RealReal and Zara orders",
+    label: "Alo Yoga, Cult Naked, FRAME, FWRD, Herv\u00e9 L\u00e9ger, Jaded London, MOTHER, REVOLVE, Ralph Lauren, Reformation, SKIMS, SSENSE, The RealReal and Zara orders",
     items: [
   {
     "name": "Airlift Headband",
@@ -1154,6 +1154,82 @@
     "eta": ""
   },
   {
+    "name": "The Reboot Corduroy",
+    "brand": "FRAME",
+    "size": "24",
+    "category": "other",
+    "subtype": "",
+    "color": "#9c8f7d",
+    "colorName": "The Reboot Corduroy",
+    "photoUrl": "https://cdn.shopify.com/s/files/1/2259/1799/files/3000820_ESPS_PCK_Front_compact_cropped.jpg",
+    "link": "",
+    "retailer": "FRAME",
+    "orderedAt": "2026-09-23",
+    "agency": false,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "ontheway",
+    "eta": ""
+  },
+  {
+    "name": "The Rodeo",
+    "brand": "FRAME",
+    "size": "24",
+    "category": "other",
+    "subtype": "",
+    "color": "#9c8f7d",
+    "colorName": "The Rodeo",
+    "photoUrl": "https://cdn.shopify.com/s/files/1/2259/1799/files/3014841_SODW_PCK_Front_575f0619-f819-4236-b18c-d86aee410323_compact_cropped.jpg",
+    "link": "",
+    "retailer": "FRAME",
+    "orderedAt": "2026-09-23",
+    "agency": false,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "ontheway",
+    "eta": ""
+  },
+  {
+    "name": "The Vertical",
+    "brand": "FRAME",
+    "size": "26",
+    "category": "other",
+    "subtype": "",
+    "color": "#9c8f7d",
+    "colorName": "The Vertical",
+    "photoUrl": "https://cdn.shopify.com/s/files/1/2259/1799/files/1005210Z_LGIC_PCK_Front_compact_cropped.jpg",
+    "link": "",
+    "retailer": "FRAME",
+    "orderedAt": "2026-09-23",
+    "agency": false,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "ontheway",
+    "eta": ""
+  },
+  {
+    "name": "Hoop Earrings in Gold",
+    "brand": "Jil Sander",
+    "size": "all",
+    "category": "accessories",
+    "subtype": "Jewellery",
+    "color": "#b08d57",
+    "colorName": "Gold",
+    "photoUrl": "https://is4.revolveassets.com/images/p/fw/b/JILS-WL11_V1.jpg",
+    "link": "",
+    "retailer": "FWRD",
+    "orderedAt": "2026-09-23",
+    "agency": false,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "ontheway",
+    "eta": ""
+  },
+  {
     "name": "for FWRD Cosima Maxi Dress in Ivory",
     "brand": "Eterne",
     "size": "XS",
@@ -1170,6 +1246,25 @@
     "source": "seed",
     "archived": false,
     "status": "have",
+    "eta": ""
+  },
+  {
+    "name": "Lounge Sweatpant in Charcoal Heather",
+    "brand": "Fear of God ESSENTIALS",
+    "size": "S",
+    "category": "pants",
+    "subtype": "",
+    "color": "#3d3f42",
+    "colorName": "Charcoal Heather",
+    "photoUrl": "https://is4.revolveassets.com/images/p/fw/b/FALF-WP42_V1.jpg",
+    "link": "",
+    "retailer": "FWRD",
+    "orderedAt": "2026-09-23",
+    "agency": false,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "ontheway",
     "eta": ""
   },
   {
@@ -1344,6 +1439,25 @@
     "eta": ""
   },
   {
+    "name": "Slim Long Sleeve Top in Seal",
+    "brand": "Fear of God ESSENTIALS",
+    "size": "XS",
+    "category": "tops",
+    "subtype": "",
+    "color": "#9c8f7d",
+    "colorName": "Seal",
+    "photoUrl": "https://is4.revolveassets.com/images/p/fw/b/FALF-WS65_V1.jpg",
+    "link": "",
+    "retailer": "FWRD",
+    "orderedAt": "2026-09-23",
+    "agency": true,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "ontheway",
+    "eta": ""
+  },
+  {
     "name": "Slim Racer Tank in Black",
     "brand": "GRLFRND",
     "size": "XS",
@@ -1412,6 +1526,63 @@
     "link": "",
     "retailer": "FWRD",
     "orderedAt": "2026-09-21",
+    "agency": true,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "ontheway",
+    "eta": ""
+  },
+  {
+    "name": "The Gloria Dress",
+    "brand": "Herv\u00e9 L\u00e9ger",
+    "size": "XS",
+    "category": "dresses",
+    "subtype": "Dress",
+    "color": "#141414",
+    "colorName": "Black",
+    "photoUrl": "https://cdn.shopify.com/s/files/1/0449/6139/8952/files/LOOK8_a0224e16-8baa-4777-a8e8-247d275fc438_compact_cropped.jpg?v=1785193094",
+    "link": "",
+    "retailer": "Herv\u00e9 L\u00e9ger",
+    "orderedAt": "2026-09-24",
+    "agency": true,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "ontheway",
+    "eta": ""
+  },
+  {
+    "name": "The Red Carpet Dress",
+    "brand": "Herv\u00e9 L\u00e9ger",
+    "size": "XS",
+    "category": "dresses",
+    "subtype": "Dress",
+    "color": "#9c8f7d",
+    "colorName": "Aster",
+    "photoUrl": "https://cdn.shopify.com/s/files/1/0449/6139/8952/files/HLFT8571180-548_f_compact_cropped.jpg?v=1768515874",
+    "link": "",
+    "retailer": "Herv\u00e9 L\u00e9ger",
+    "orderedAt": "2026-09-24",
+    "agency": true,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "ontheway",
+    "eta": ""
+  },
+  {
+    "name": "The Laura Top",
+    "brand": "Herv\u00e9 L\u00e9ger",
+    "size": "XS",
+    "category": "tops",
+    "subtype": "",
+    "color": "#141414",
+    "colorName": "Black",
+    "photoUrl": "https://cdn.shopify.com/s/files/1/0449/6139/8952/files/46HLT1589795-001_a_compact_cropped.jpg?v=1784667728",
+    "link": "",
+    "retailer": "Herv\u00e9 L\u00e9ger",
+    "orderedAt": "2026-09-24",
     "agency": true,
     "time": "both",
     "source": "seed",
@@ -1644,7 +1815,7 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
+    "status": "have",
     "eta": ""
   },
   {
@@ -1663,7 +1834,7 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
+    "status": "have",
     "eta": ""
   },
   {
@@ -2256,6 +2427,44 @@
     "eta": ""
   },
   {
+    "name": "Logo Mini Waist Belt in Black Croco & Gold",
+    "brand": "Helsa",
+    "size": "S",
+    "category": "accessories",
+    "subtype": "Belt",
+    "color": "#141414",
+    "colorName": "Black Croco & Gold",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/HLSA-WA15_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-24",
+    "agency": false,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
+    "name": "Long Belt in Black",
+    "brand": "Still Here",
+    "size": "XS/S",
+    "category": "accessories",
+    "subtype": "Belt",
+    "color": "#141414",
+    "colorName": "Black",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/SLHR-WA1_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-24",
+    "agency": false,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
     "name": "Majestic Stone Earrings in Turquoise",
     "brand": "Ettika",
     "size": "all",
@@ -2381,6 +2590,25 @@
     "link": "",
     "retailer": "REVOLVE",
     "orderedAt": "2026-03-27",
+    "agency": false,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
+    "name": "Milou Domed Belt in Black Lizard Embossed",
+    "brand": "L'AGENCE",
+    "size": "XS",
+    "category": "accessories",
+    "subtype": "Belt",
+    "color": "#141414",
+    "colorName": "Black Lizard Embossed",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/LAGR-WA13_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-24",
     "agency": false,
     "time": "both",
     "source": "seed",
@@ -2518,8 +2746,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Rhinestone Hoop Earrings in Gold",
@@ -2617,6 +2845,25 @@
     "eta": ""
   },
   {
+    "name": "Rumi Necklace in Black",
+    "brand": "Lovers and Friends",
+    "size": "all",
+    "category": "accessories",
+    "subtype": "Jewellery",
+    "color": "#141414",
+    "colorName": "Black",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/LOVF-WL410_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-22",
+    "agency": false,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
     "name": "Satin Opaque 50 Tights in Admiral",
     "brand": "Wolford",
     "size": "S",
@@ -2651,8 +2898,8 @@
     "time": "night",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Scrunch Ballet Grip Sock in Pink Tulle",
@@ -2666,6 +2913,25 @@
     "link": "",
     "retailer": "REVOLVE",
     "orderedAt": "2026-02-09",
+    "agency": false,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
+    "name": "Silon Sunglasses in Black",
+    "brand": "SHEVOKE",
+    "size": "all",
+    "category": "accessories",
+    "subtype": "Sunglasses",
+    "color": "#141414",
+    "colorName": "Black",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/SVOK-WG17_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-23",
     "agency": false,
     "time": "both",
     "source": "seed",
@@ -2902,6 +3168,25 @@
     "eta": ""
   },
   {
+    "name": "The Cassel Sunglasses in Caramel",
+    "brand": "Banbe",
+    "size": "all",
+    "category": "accessories",
+    "subtype": "Sunglasses",
+    "color": "#9c8f7d",
+    "colorName": "Caramel",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/BNBE-WG72_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-23",
+    "agency": false,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
     "name": "The Dane Anklet in Gold",
     "brand": "Jenny Bird",
     "size": "all",
@@ -3054,6 +3339,25 @@
     "eta": ""
   },
   {
+    "name": "Tie Belt in Black",
+    "brand": "petit moments",
+    "size": "all",
+    "category": "accessories",
+    "subtype": "Belt",
+    "color": "#141414",
+    "colorName": "Black",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/PETM-WA295_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-24",
+    "agency": false,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
     "name": "Tova Belt in Black & Gold",
     "brand": "B-Low the Belt",
     "size": "XS",
@@ -3198,6 +3502,25 @@
     "link": "",
     "retailer": "REVOLVE",
     "orderedAt": "2026-06-18",
+    "agency": false,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
+    "name": "Zulu Sunglasses in Black",
+    "brand": "SHEVOKE",
+    "size": "all",
+    "category": "accessories",
+    "subtype": "Sunglasses",
+    "color": "#141414",
+    "colorName": "Black",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/SVOK-WG1_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-23",
     "agency": false,
     "time": "both",
     "source": "seed",
@@ -3605,6 +3928,25 @@
     "eta": ""
   },
   {
+    "name": "Everyday Bag in Black & Leopard Nylon",
+    "brand": "Kusshi",
+    "size": "all",
+    "category": "bags",
+    "subtype": "Bag",
+    "color": "#b08b57",
+    "colorName": "Black & Leopard Nylon",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/KUSR-WU1_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-22",
+    "agency": true,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
     "name": "Fendi Mama Baguette Shoulder Bag in Blue",
     "brand": "FWRD Renew",
     "size": "all",
@@ -3635,6 +3977,25 @@
     "link": "",
     "retailer": "REVOLVE",
     "orderedAt": "2026-01-10",
+    "agency": true,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
+    "name": "Louis Vuitton Epi Pochette Accessoires 24 Shoulder Bag in Black",
+    "brand": "FWRD Renew",
+    "size": "all",
+    "category": "bags",
+    "subtype": "Bag",
+    "color": "#141414",
+    "colorName": "Black",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/FNEF-WY9102_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-24",
     "agency": true,
     "time": "both",
     "source": "seed",
@@ -3711,6 +4072,25 @@
     "link": "",
     "retailer": "REVOLVE",
     "orderedAt": "2026-05-05",
+    "agency": true,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
+    "name": "7 Days of Flavour Set",
+    "brand": "Marvis",
+    "size": "all",
+    "category": "dresses",
+    "subtype": "",
+    "color": "#9c8f7d",
+    "colorName": "7 Days Of Flavour Set",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/MVIS-WU2_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-22",
     "agency": true,
     "time": "both",
     "source": "seed",
@@ -4114,8 +4494,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Halo Dress in Black & White",
@@ -4129,6 +4509,25 @@
     "link": "",
     "retailer": "REVOLVE",
     "orderedAt": "2026-07-07",
+    "agency": true,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
+    "name": "Insider Packing Cubes, Set Of 4 in Matcha Milk Green",
+    "brand": "Away",
+    "size": "all",
+    "category": "dresses",
+    "subtype": "",
+    "color": "#2f4a3c",
+    "colorName": "Matcha Milk Green",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/ARAY-WA8_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-22",
     "agency": true,
     "time": "both",
     "source": "seed",
@@ -4570,8 +4969,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Webster Romper in Falling Rain Wash",
@@ -5049,25 +5448,6 @@
     "eta": ""
   },
   {
-    "name": "Maria Mid Rise Bootcut",
-    "brand": "EB Denim",
-    "size": "24",
-    "category": "jeans",
-    "subtype": "Jeans",
-    "color": "#141414",
-    "colorName": "Black",
-    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/EBDR-WP25_V1.jpg",
-    "link": "",
-    "retailer": "REVOLVE",
-    "orderedAt": "2026-09-17",
-    "agency": false,
-    "time": "both",
-    "source": "seed",
-    "archived": false,
-    "status": "have",
-    "eta": ""
-  },
-  {
     "name": "Maria Mid Rise Bootcut Jean in Tribeca",
     "brand": "EB Denim",
     "size": "24",
@@ -5102,8 +5482,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Maria Mid Rise Bootcut Jeans in Havana Night",
@@ -5387,8 +5767,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Top Model Cuffed Jeans in Dark Denim",
@@ -5505,6 +5885,25 @@
     "eta": ""
   },
   {
+    "name": "Body Gua Sha",
+    "brand": "Skin Gym",
+    "size": "all",
+    "category": "other",
+    "subtype": "",
+    "color": "#9c8f7d",
+    "colorName": "Body Gua Sha",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/SKGM-WU85_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-23",
+    "agency": false,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
     "name": "Elba Flare in Tar Aged Black",
     "brand": "Dr. Denim",
     "size": "27",
@@ -5543,6 +5942,25 @@
     "eta": ""
   },
   {
+    "name": "Hand-painted Sheep Compact Mirror",
+    "brand": "Solar Eclipse",
+    "size": "all",
+    "category": "other",
+    "subtype": "",
+    "color": "#9c8f7d",
+    "colorName": "Hand-Painted Sheep Compact Mirror",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/SPSR-WU102_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-22",
+    "agency": false,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
     "name": "Japan in Bright Royal",
     "brand": "adidas Originals",
     "size": "9",
@@ -5562,6 +5980,44 @@
     "eta": ""
   },
   {
+    "name": "Layla French Terry Sweatshorts in Teal Blue",
+    "brand": "perfectwhitetee",
+    "size": "S",
+    "category": "other",
+    "subtype": "",
+    "color": "#4a6c94",
+    "colorName": "Teal Blue",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/PFEC-WF25_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-24",
+    "agency": false,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
+    "name": "Low Rise Flare in Dark Wash",
+    "brand": "Miaou",
+    "size": "XS",
+    "category": "other",
+    "subtype": "",
+    "color": "#9c8f7d",
+    "colorName": "Dark Wash",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/MAOU-WJ3_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-23",
+    "agency": false,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
     "name": "Low Rise Slim in Detox",
     "brand": "AGOLDE",
     "size": "27",
@@ -5573,6 +6029,25 @@
     "link": "",
     "retailer": "REVOLVE",
     "orderedAt": "2026-01-13",
+    "agency": false,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
+    "name": "Mini Cosmetic Case in Milky",
+    "brand": "CEE CLEAR",
+    "size": "all",
+    "category": "other",
+    "subtype": "Mini",
+    "color": "#9c8f7d",
+    "colorName": "Milky",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/CEER-WU6_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-22",
     "agency": false,
     "time": "both",
     "source": "seed",
@@ -5611,6 +6086,101 @@
     "link": "",
     "retailer": "REVOLVE",
     "orderedAt": "2026-04-05",
+    "agency": false,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
+    "name": "Small Neoprene Train Case in French Pink & Sherbert",
+    "brand": "Kusshi",
+    "size": "all",
+    "category": "other",
+    "subtype": "",
+    "color": "#d97a97",
+    "colorName": "French Pink & Sherbert",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/KUSR-WU27_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-22",
+    "agency": false,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
+    "name": "Snap-in Double Organizer in Black",
+    "brand": "Kusshi",
+    "size": "all",
+    "category": "other",
+    "subtype": "",
+    "color": "#141414",
+    "colorName": "Black",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/KUSR-WU13_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-22",
+    "agency": false,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
+    "name": "Tone'd Body Firming Roller Creme",
+    "brand": "VOESH",
+    "size": "all",
+    "category": "other",
+    "subtype": "",
+    "color": "#9c8f7d",
+    "colorName": "Tone'D Body Firming Roller Creme",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/VOER-WU9_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-23",
+    "agency": false,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
+    "name": "Travel Body Routine",
+    "brand": "Oak Essentials",
+    "size": "all",
+    "category": "other",
+    "subtype": "",
+    "color": "#9c8f7d",
+    "colorName": "Travel Body Routine",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/OALF-WU24_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-22",
+    "agency": false,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
+    "name": "Travel Xtra Large Bombshell Volumizer",
+    "brand": "Color WOW",
+    "size": "all",
+    "category": "other",
+    "subtype": "",
+    "color": "#9c8f7d",
+    "colorName": "Travel Xtra Large Bombshell Volumizer",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/CWOW-WU34_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-22",
     "agency": false,
     "time": "both",
     "source": "seed",
@@ -5706,25 +6276,6 @@
     "link": "",
     "retailer": "REVOLVE",
     "orderedAt": "2026-05-12",
-    "agency": true,
-    "time": "both",
-    "source": "seed",
-    "archived": false,
-    "status": "have",
-    "eta": ""
-  },
-  {
-    "name": "Cropped Denim Bomber Jacket",
-    "brand": "Courtney Zheng",
-    "size": "S",
-    "category": "outerwear",
-    "subtype": "Bomber",
-    "color": "#3f4d63",
-    "colorName": "Dark Vintage",
-    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/CZHE-WO5_V1.jpg",
-    "link": "",
-    "retailer": "REVOLVE",
-    "orderedAt": "2026-09-05",
     "agency": true,
     "time": "both",
     "source": "seed",
@@ -5938,8 +6489,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Relaxed Cardigan in Matcha Green",
@@ -6014,8 +6565,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "The Jordan Vest in Black",
@@ -6238,6 +6789,25 @@
     "link": "",
     "retailer": "REVOLVE",
     "orderedAt": "2026-01-11",
+    "agency": false,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
+    "name": "Cotton Jersey Foldover Pant in Navy",
+    "brand": "SKIMS",
+    "size": "XS",
+    "category": "pants",
+    "subtype": "Trousers",
+    "color": "#222f4d",
+    "colorName": "Navy",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/SIMX-WP44_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-24",
     "agency": false,
     "time": "both",
     "source": "seed",
@@ -6645,6 +7215,25 @@
     "eta": ""
   },
   {
+    "name": "Signature Straight Sweatpant in Woodland Camo",
+    "brand": "Darlin",
+    "size": "S",
+    "category": "pants",
+    "subtype": "",
+    "color": "#9c8f7d",
+    "colorName": "Woodland Camo",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/DLIN-WP5_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-24",
+    "agency": false,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
     "name": "The Essentials Pant in Galaxy",
     "brand": "437",
     "size": "S",
@@ -6854,6 +7443,25 @@
     "eta": ""
   },
   {
+    "name": "X Jennie Camille Bottom in Black",
+    "brand": "Frankies Bikinis",
+    "size": "XS",
+    "category": "pants",
+    "subtype": "",
+    "color": "#141414",
+    "colorName": "Black",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/FRBI-WX1483_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-23",
+    "agency": false,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
     "name": "x REVOLVE Capri Pants in Black",
     "brand": "SNDYS",
     "size": "XS",
@@ -6865,6 +7473,25 @@
     "link": "",
     "retailer": "REVOLVE",
     "orderedAt": "2026-07-26",
+    "agency": false,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
+    "name": "x REVOLVE Regency Pant in Cocoa",
+    "brand": "Amanda Uprichard",
+    "size": "XS",
+    "category": "pants",
+    "subtype": "Trousers",
+    "color": "#9c8f7d",
+    "colorName": "Cocoa",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/AMAN-WP202_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-22",
     "agency": false,
     "time": "both",
     "source": "seed",
@@ -6922,6 +7549,25 @@
     "link": "",
     "retailer": "REVOLVE",
     "orderedAt": "2026-02-08",
+    "agency": true,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
+    "name": "Audokia Sandal in Black",
+    "brand": "Lucasheva",
+    "size": "40",
+    "category": "shoes",
+    "subtype": "Sandals",
+    "color": "#141414",
+    "colorName": "Black",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/LASH-WZ18_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-24",
     "agency": true,
     "time": "both",
     "source": "seed",
@@ -7192,8 +7838,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Drift Trail Sneaker in Mutli",
@@ -8469,6 +9115,25 @@
     "eta": ""
   },
   {
+    "name": "Roby Short in Gray",
+    "brand": "Lovers and Friends",
+    "size": "XS",
+    "category": "shorts",
+    "subtype": "Shorts",
+    "color": "#9a9a96",
+    "colorName": "Gray",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/LOVF-WF705_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-24",
+    "agency": false,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
     "name": "Roxie Hot Short in White",
     "brand": "Lovers and Friends",
     "size": "XS",
@@ -8518,6 +9183,25 @@
     "link": "",
     "retailer": "REVOLVE",
     "orderedAt": "2026-04-29",
+    "agency": false,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
+    "name": "Silas Short in Neutral Plaid",
+    "brand": "superdown",
+    "size": "XS",
+    "category": "shorts",
+    "subtype": "Shorts",
+    "color": "#9c8f7d",
+    "colorName": "Neutral Plaid",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/SPDW-WF332_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-24",
     "agency": false,
     "time": "both",
     "source": "seed",
@@ -8864,8 +9548,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Dylan Asymmetrical Wrap Skirt in Blue Stripe",
@@ -8921,8 +9605,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Finn Mini Skirt in Olive",
@@ -9073,8 +9757,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Mirror Ellora Mini Skirt in Silver",
@@ -9111,8 +9795,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Penny Micro Skirt in Black",
@@ -9130,8 +9814,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Petra Mini Skirt in White",
@@ -9168,8 +9852,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Presley Skirt in Gardenia",
@@ -9206,8 +9890,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Shaina Midi Skirt in Black",
@@ -10312,25 +10996,6 @@
     "eta": ""
   },
   {
-    "name": "Brandi Mesh Bodysuit",
-    "brand": "SEROYA",
-    "size": "XS",
-    "category": "tops",
-    "subtype": "Bodysuit",
-    "color": "#141414",
-    "colorName": "Black",
-    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/SERR-WS154_V1.jpg",
-    "link": "",
-    "retailer": "REVOLVE",
-    "orderedAt": "2026-09-05",
-    "agency": true,
-    "time": "both",
-    "source": "seed",
-    "archived": false,
-    "status": "have",
-    "eta": ""
-  },
-  {
     "name": "Brandi Mesh Bodysuit in Black",
     "brand": "SEROYA",
     "size": "XS",
@@ -10730,25 +11395,6 @@
     "eta": ""
   },
   {
-    "name": "Cropped 60s Slim Tee",
-    "brand": "RE/DONE",
-    "size": "XS",
-    "category": "tops",
-    "subtype": "Tee",
-    "color": "#141414",
-    "colorName": "Black",
-    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/REDR-WS315_V1.jpg",
-    "link": "",
-    "retailer": "REVOLVE",
-    "orderedAt": "2026-09-18",
-    "agency": true,
-    "time": "both",
-    "source": "seed",
-    "archived": false,
-    "status": "ontheway",
-    "eta": ""
-  },
-  {
     "name": "Cropped 60s Slim Tee in Black",
     "brand": "RE/DONE",
     "size": "XS",
@@ -10783,8 +11429,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Cross Bamboo Bodysuit in Black",
@@ -11053,6 +11699,25 @@
     "eta": ""
   },
   {
+    "name": "Emotional Support Staff Boyfriend V2 Top in Green",
+    "brand": "Boys Lie",
+    "size": "all",
+    "category": "tops",
+    "subtype": "",
+    "color": "#2f4a3c",
+    "colorName": "Green",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/BOYR-WK226_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-24",
+    "agency": true,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
     "name": "Essential Bandeau Top in White",
     "brand": "Enza Costa",
     "size": "S",
@@ -11186,6 +11851,25 @@
     "eta": ""
   },
   {
+    "name": "Francis Top in Black",
+    "brand": "With Jean",
+    "size": "XS",
+    "category": "tops",
+    "subtype": "",
+    "color": "#141414",
+    "colorName": "Black",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/WITR-WS33_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-24",
+    "agency": true,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
     "name": "Gather Long Sleeve in Black",
     "brand": "alo",
     "size": "S",
@@ -11273,25 +11957,6 @@
     "link": "",
     "retailer": "REVOLVE",
     "orderedAt": "2026-04-08",
-    "agency": true,
-    "time": "both",
-    "source": "seed",
-    "archived": false,
-    "status": "have",
-    "eta": ""
-  },
-  {
-    "name": "Icon Tee",
-    "brand": "LIONESS",
-    "size": "XS",
-    "category": "tops",
-    "subtype": "Tee",
-    "color": "#141414",
-    "colorName": "Noir",
-    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/LIOR-WS436_V1.jpg",
-    "link": "",
-    "retailer": "REVOLVE",
-    "orderedAt": "2026-09-05",
     "agency": true,
     "time": "both",
     "source": "seed",
@@ -11410,8 +12075,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Jersey Tank in White, Sencha & Billiard Gre",
@@ -11482,6 +12147,25 @@
     "link": "",
     "retailer": "REVOLVE",
     "orderedAt": "2026-07-02",
+    "agency": true,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
+    "name": "Kravitz Baseball Tee in Crimson",
+    "brand": "LIONESS",
+    "size": "XS",
+    "category": "tops",
+    "subtype": "Tee",
+    "color": "#9c8f7d",
+    "colorName": "Crimson",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/LIOR-WS336_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-24",
     "agency": true,
     "time": "both",
     "source": "seed",
@@ -11581,8 +12265,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Lewis Blouse in White",
@@ -12227,8 +12911,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Quincy Top in Yellow & Black Dot",
@@ -12497,6 +13181,44 @@
     "eta": ""
   },
   {
+    "name": "Sheer Cashmere Long Sleeve Tee in Light Heather Grey",
+    "brand": "SKIMS",
+    "size": "XS",
+    "category": "tops",
+    "subtype": "Tee",
+    "color": "#9a9a96",
+    "colorName": "Light Heather Grey",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/SIMX-WS45_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-24",
+    "agency": true,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
+    "name": "Sheer Modal T-shirt in Onyx",
+    "brand": "SKIMS",
+    "size": "S",
+    "category": "tops",
+    "subtype": "Shirt",
+    "color": "#16161a",
+    "colorName": "Onyx",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/SIMX-WS57_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-24",
+    "agency": true,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
     "name": "Sheer Twist Tank in Optic White",
     "brand": "Helmut Lang",
     "size": "S",
@@ -12570,25 +13292,6 @@
     "source": "seed",
     "archived": false,
     "status": "have",
-    "eta": ""
-  },
-  {
-    "name": "Sisi Silk Hooded Blouse",
-    "brand": "HERSKIND",
-    "size": "32",
-    "category": "tops",
-    "subtype": "Shirt",
-    "color": "#f2ece1",
-    "colorName": "Off White",
-    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/HSKI-WS16_V1.jpg",
-    "link": "",
-    "retailer": "REVOLVE",
-    "orderedAt": "2026-09-18",
-    "agency": true,
-    "time": "both",
-    "source": "seed",
-    "archived": false,
-    "status": "ontheway",
     "eta": ""
   },
   {
@@ -12915,25 +13618,6 @@
     "eta": ""
   },
   {
-    "name": "Teodora Western Shirt",
-    "brand": "LEVI'S",
-    "size": "XS",
-    "category": "tops",
-    "subtype": "Shirt",
-    "color": "#9c8f7d",
-    "colorName": "High Vibration Western",
-    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/LEIV-WS106_V1.jpg",
-    "link": "",
-    "retailer": "REVOLVE",
-    "orderedAt": "2026-09-17",
-    "agency": true,
-    "time": "both",
-    "source": "seed",
-    "archived": false,
-    "status": "have",
-    "eta": ""
-  },
-  {
     "name": "Teodora Western Shirt in High Vibration Western",
     "brand": "LEVI'S",
     "size": "XS",
@@ -13045,25 +13729,6 @@
     "source": "seed",
     "archived": false,
     "status": "have",
-    "eta": ""
-  },
-  {
-    "name": "The Cropped Not So Basic Tank",
-    "brand": "Sold Out NYC",
-    "size": "XS",
-    "category": "tops",
-    "subtype": "Sleeveless",
-    "color": "#141414",
-    "colorName": "Black",
-    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/SNYR-WS18_V1.jpg",
-    "link": "",
-    "retailer": "REVOLVE",
-    "orderedAt": "2026-09-18",
-    "agency": true,
-    "time": "both",
-    "source": "seed",
-    "archived": false,
-    "status": "ontheway",
     "eta": ""
   },
   {
@@ -13371,25 +14036,6 @@
     "eta": ""
   },
   {
-    "name": "V-neck Racerback Tank",
-    "brand": "Eterne",
-    "size": "XS",
-    "category": "tops",
-    "subtype": "Sleeveless",
-    "color": "#141414",
-    "colorName": "Black",
-    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/ERNE-WS88_V1.jpg",
-    "link": "",
-    "retailer": "REVOLVE",
-    "orderedAt": "2026-09-18",
-    "agency": true,
-    "time": "both",
-    "source": "seed",
-    "archived": false,
-    "status": "ontheway",
-    "eta": ""
-  },
-  {
     "name": "V-neck Racerback Tank in Black",
     "brand": "Eterne",
     "size": "XS",
@@ -13534,6 +14180,25 @@
     "link": "",
     "retailer": "REVOLVE",
     "orderedAt": "2026-07-30",
+    "agency": true,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "have",
+    "eta": ""
+  },
+  {
+    "name": "X Jennie Encore Top in Black",
+    "brand": "Frankies Bikinis",
+    "size": "XS",
+    "category": "tops",
+    "subtype": "",
+    "color": "#141414",
+    "colorName": "Black",
+    "photoUrl": "https://is4.revolveassets.com/images/p4/ip2/pl2/FRBI-WX1482_V1.jpg",
+    "link": "",
+    "retailer": "REVOLVE",
+    "orderedAt": "2026-09-23",
     "agency": true,
     "time": "both",
     "source": "seed",
@@ -14279,8 +14944,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Cable-Knit Polo Shirt",
@@ -14355,8 +15020,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Olivia Premium Tights",
@@ -14374,8 +15039,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Svea Sheer Tights",
@@ -14393,8 +15058,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Cary High Rise Slouchy Wide Leg Long Jeans",
@@ -14412,8 +15077,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Gisele Low Rise Long Pant",
@@ -14431,8 +15096,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Vida Low Rise Long Pant",
@@ -14450,8 +15115,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Francine Ruched Loafer",
@@ -14469,8 +15134,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Rosa Stretch Knee Boot",
@@ -14488,8 +15153,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Calie Tank",
@@ -14507,8 +15172,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Calie Tank",
@@ -14526,8 +15191,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Leven Knit Top",
@@ -14545,8 +15210,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Lian Cashmere Crew Sweater",
@@ -14564,8 +15229,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Nova Knit Top",
@@ -14583,8 +15248,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Santino Knit Top",
@@ -14602,11 +15267,11 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
-    "name": "COTTON RIB TANK DRESS",
+    "name": "Cotton Rib Tank Dress",
     "brand": "SKIMS",
     "size": "XS",
     "category": "dresses",
@@ -14621,11 +15286,11 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
+    "status": "have",
     "eta": ""
   },
   {
-    "name": "ESSENTIAL KNIT ROUNDED CROPPED CARDIGAN",
+    "name": "Essential Knit Rounded Cropped Cardigan",
     "brand": "SKIMS",
     "size": "XS",
     "category": "outerwear",
@@ -14640,11 +15305,11 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
+    "status": "have",
     "eta": ""
   },
   {
-    "name": "COTTON JERSEY WIDE LEG PANT",
+    "name": "Cotton Jersey Wide Leg Pant",
     "brand": "SKIMS",
     "size": "L",
     "category": "pants",
@@ -14682,26 +15347,7 @@
     "eta": ""
   },
   {
-    "name": "NikeSKIMS MATTE 3\" FOLDOVER SHORT",
-    "brand": "SKIMS",
-    "size": "S",
-    "category": "shorts",
-    "subtype": "Shorts",
-    "color": "#2b2d33",
-    "colorName": "Obsidian",
-    "photoUrl": "https://cdn.shopify.com/s/files/1/0259/5448/4284/files/SKIMS-ACTIVE-BO-SHO-9490W-OBD-FLT?v=1769319592_compact_cropped.jpg",
-    "link": "",
-    "retailer": "SKIMS",
-    "orderedAt": "2026-04-29",
-    "agency": false,
-    "time": "both",
-    "source": "seed",
-    "archived": false,
-    "status": "have",
-    "eta": ""
-  },
-  {
-    "name": "HEAVY POINTELLE MINI SKORT",
+    "name": "Heavy Pointelle Mini Skort",
     "brand": "SKIMS",
     "size": "S",
     "category": "skirts",
@@ -14720,26 +15366,7 @@
     "eta": ""
   },
   {
-    "name": "HEAVY POINTELLE MINI SKORT",
-    "brand": "SKIMS",
-    "size": "S",
-    "category": "skirts",
-    "subtype": "Skirt",
-    "color": "#9c8f7d",
-    "colorName": "Morganite",
-    "photoUrl": "https://cdn.shopify.com/s/files/1/0259/5448/4284/files/SKIMS-LOUNGEWEAR-BT-SKT-11717W-MGI-FLT?v=1775252740_compact_cropped.jpg",
-    "link": "",
-    "retailer": "SKIMS",
-    "orderedAt": "2026-04-29",
-    "agency": false,
-    "time": "both",
-    "source": "seed",
-    "archived": false,
-    "status": "have",
-    "eta": ""
-  },
-  {
-    "name": "SLEEP LONG SLEEVE BUTTON UP SET",
+    "name": "Sleep Long Sleeve Button Up Set",
     "brand": "SKIMS",
     "size": "XS",
     "category": "sleep",
@@ -14754,11 +15381,11 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
+    "status": "have",
     "eta": ""
   },
   {
-    "name": "SOFT LOUNGE SLEEP SET",
+    "name": "Soft Lounge Sleep Set",
     "brand": "SKIMS",
     "size": "S",
     "category": "sleep",
@@ -14773,11 +15400,11 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
+    "status": "have",
     "eta": ""
   },
   {
-    "name": "COTTON JERSEY LONG SLEEVE BOATNECK TOP",
+    "name": "Cotton Jersey Long Sleeve Boatneck Top",
     "brand": "SKIMS",
     "size": "XS",
     "category": "tops",
@@ -14792,11 +15419,11 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
+    "status": "have",
     "eta": ""
   },
   {
-    "name": "COTTON JERSEY SCOOP NECK T-SHIRT",
+    "name": "Cotton Jersey Scoop Neck T-shirt",
     "brand": "SKIMS",
     "size": "M",
     "category": "tops",
@@ -14815,7 +15442,7 @@
     "eta": ""
   },
   {
-    "name": "COTTON JERSEY SCOOP NECK T-SHIRT",
+    "name": "Cotton Jersey Scoop Neck T-shirt",
     "brand": "SKIMS",
     "size": "M",
     "category": "tops",
@@ -14823,25 +15450,6 @@
     "color": "#3a3a3c",
     "colorName": "Soot",
     "photoUrl": "https://cdn.shopify.com/s/files/1/0259/5448/4284/files/SKIMS-LOUNGEWEAR-SS-STT-8025W-SOT-FLT_compact_cropped.jpg?v=1740612416",
-    "link": "",
-    "retailer": "SKIMS",
-    "orderedAt": "2025-04-24",
-    "agency": true,
-    "time": "both",
-    "source": "seed",
-    "archived": false,
-    "status": "have",
-    "eta": ""
-  },
-  {
-    "name": "FITS EVERYBODY T-SHIRT",
-    "brand": "SKIMS",
-    "size": "M",
-    "category": "tops",
-    "subtype": "Shirt",
-    "color": "#16161a",
-    "colorName": "Onyx",
-    "photoUrl": "https://cdn.shopify.com/s/files/1/0259/5448/4284/products/SKIMS-LOUNGEWEAR-AP-TSH-0649-ONX-FL_compact_cropped.jpg?v=1615492274",
     "link": "",
     "retailer": "SKIMS",
     "orderedAt": "2025-04-24",
@@ -14872,17 +15480,17 @@
     "eta": ""
   },
   {
-    "name": "HEAVY POINTELLE CAMI",
+    "name": "Fits Everybody T-shirt",
     "brand": "SKIMS",
-    "size": "XS",
+    "size": "M",
     "category": "tops",
-    "subtype": "Sleeveless",
-    "color": "#9c8f7d",
-    "colorName": "Morganite",
-    "photoUrl": "https://cdn.shopify.com/s/files/1/0259/5448/4284/files/SKIMS-LOUNGEWEAR-TP-TNK-11715W-MGI-FLT_compact_cropped.jpg?v=1775252739",
+    "subtype": "Shirt",
+    "color": "#16161a",
+    "colorName": "Onyx",
+    "photoUrl": "https://cdn.shopify.com/s/files/1/0259/5448/4284/products/SKIMS-LOUNGEWEAR-AP-TSH-0649-ONX-FL_compact_cropped.jpg?v=1615492274",
     "link": "",
     "retailer": "SKIMS",
-    "orderedAt": "2026-04-29",
+    "orderedAt": "2025-04-24",
     "agency": true,
     "time": "both",
     "source": "seed",
@@ -14891,14 +15499,14 @@
     "eta": ""
   },
   {
-    "name": "HEAVY POINTELLE CAMI",
+    "name": "Heavy Pointelle Cami",
     "brand": "SKIMS",
     "size": "XS",
     "category": "tops",
     "subtype": "Sleeveless",
     "color": "#9c8f7d",
     "colorName": "Morganite",
-    "photoUrl": "https://cdn.shopify.com/s/files/1/0259/5448/4284/files/SKIMS-LOUNGEWEAR-TP-TNK-11715W-MGI-FLT?v=1775252739_compact_cropped.jpg",
+    "photoUrl": "https://cdn.shopify.com/s/files/1/0259/5448/4284/files/SKIMS-LOUNGEWEAR-TP-TNK-11715W-MGI-FLT_compact_cropped.jpg?v=1775252739",
     "link": "",
     "retailer": "SKIMS",
     "orderedAt": "2026-04-29",
@@ -14929,25 +15537,6 @@
     "eta": ""
   },
   {
-    "name": "NikeSKIMS MATTE WRAP LONG SLEEVE CROPPED TOP",
-    "brand": "SKIMS",
-    "size": "XS",
-    "category": "tops",
-    "subtype": "",
-    "color": "#2b2d33",
-    "colorName": "Obsidian",
-    "photoUrl": "https://cdn.shopify.com/s/files/1/0259/5448/4284/files/SKIMS-ACTIVE-LS-LSL-9692W-OBD-FLT?v=1769321030_compact_cropped.jpg",
-    "link": "",
-    "retailer": "SKIMS",
-    "orderedAt": "2026-04-29",
-    "agency": true,
-    "time": "both",
-    "source": "seed",
-    "archived": false,
-    "status": "have",
-    "eta": ""
-  },
-  {
     "name": "NikeSKIMS PERFORMANCE COTTON BLEND SHORT SLEEVE V-NECK CROP TOP",
     "brand": "SKIMS",
     "size": "XS",
@@ -14963,7 +15552,7 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
+    "status": "have",
     "eta": ""
   },
   {
@@ -14982,11 +15571,11 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
+    "status": "have",
     "eta": ""
   },
   {
-    "name": "SEAMLESS SCULPT THONG BODYSUIT",
+    "name": "Seamless Sculpt Thong Bodysuit",
     "brand": "SKIMS",
     "size": "XS",
     "category": "tops",
@@ -15001,11 +15590,11 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
+    "status": "have",
     "eta": ""
   },
   {
-    "name": "SEAMLESS SCULPT THONG BODYSUIT",
+    "name": "Seamless Sculpt Thong Bodysuit",
     "brand": "SKIMS",
     "size": "M",
     "category": "tops",
@@ -15024,7 +15613,7 @@
     "eta": ""
   },
   {
-    "name": "EVERYDAY COTTON UNLINED DEMI BRA",
+    "name": "Everyday Cotton Unlined Demi Bra",
     "brand": "SKIMS",
     "size": "34",
     "category": "underwear",
@@ -15039,7 +15628,7 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
+    "status": "have",
     "eta": ""
   },
   {
@@ -15096,7 +15685,7 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
+    "status": "have",
     "eta": ""
   },
   {
@@ -15115,8 +15704,84 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
+    "status": "have",
     "eta": ""
+  },
+  {
+    "name": "White Ballerina Sneakers",
+    "brand": "Sandy Liang",
+    "size": "IT 39.5",
+    "category": "shoes",
+    "subtype": "Sneakers",
+    "color": "#fdfdfb",
+    "colorName": "White Ballerina Sneakers",
+    "photoUrl": "https://res.cloudinary.com/ssenseweb/image/upload/b_white,c_lpad,g_south,h_706,q_75,w_470/c_scale,h_480/v4/261677F128000_1.jpg",
+    "link": "",
+    "retailer": "SSENSE",
+    "orderedAt": "2026-09-23",
+    "agency": true,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "ontheway",
+    "eta": "2026-09-26"
+  },
+  {
+    "name": "Gray Holiday Embossed 90s Raglan Hoodie",
+    "brand": "Fear Of God Essentials",
+    "size": "XS",
+    "category": "tops",
+    "subtype": "Knit",
+    "color": "#9a9a96",
+    "colorName": "Gray Holiday Embossed 90S Raglan Hoodie",
+    "photoUrl": "https://res.cloudinary.com/ssenseweb/image/upload/b_white,c_lpad,g_south,h_706,q_75,w_470/c_scale,h_480/v4/261161F097015_1.jpg",
+    "link": "",
+    "retailer": "SSENSE",
+    "orderedAt": "2026-09-23",
+    "agency": true,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "ontheway",
+    "eta": "2026-09-26"
+  },
+  {
+    "name": "Gray Slim Longsleeve T-shirt",
+    "brand": "Fear Of God Essentials",
+    "size": "XS",
+    "category": "tops",
+    "subtype": "Shirt",
+    "color": "#9a9a96",
+    "colorName": "Gray Slim Longsleeve T-Shirt",
+    "photoUrl": "https://res.cloudinary.com/ssenseweb/image/upload/b_white,c_lpad,g_south,h_706,q_75,w_470/c_scale,h_480/v4/262161F110010_1.jpg",
+    "link": "",
+    "retailer": "SSENSE",
+    "orderedAt": "2026-09-23",
+    "agency": true,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "ontheway",
+    "eta": "2026-09-26"
+  },
+  {
+    "name": "Taupe Clean Backless Halter Top",
+    "brand": "WARDROBE.NYC",
+    "size": "XS",
+    "category": "tops",
+    "subtype": "Sleeveless",
+    "color": "#9c8f7d",
+    "colorName": "Taupe Clean Backless Halter Top",
+    "photoUrl": "https://res.cloudinary.com/ssenseweb/image/upload/b_white,c_lpad,g_south,h_706,q_75,w_470/c_scale,h_480/v4/261277F111000_1.jpg",
+    "link": "",
+    "retailer": "SSENSE",
+    "orderedAt": "2026-09-23",
+    "agency": true,
+    "time": "both",
+    "source": "seed",
+    "archived": false,
+    "status": "ontheway",
+    "eta": "2026-09-26"
   },
   {
     "name": "14K Alphabet 'A' Block Pop Necklace",
@@ -15343,7 +16008,7 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
+    "status": "have",
     "eta": ""
   },
   {
@@ -15381,7 +16046,7 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
+    "status": "have",
     "eta": ""
   },
   {
@@ -15419,8 +16084,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Tote",
@@ -15533,8 +16198,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-24"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Leather Biker Jacket",
@@ -15571,7 +16236,7 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
+    "status": "have",
     "eta": ""
   },
   {
@@ -15647,8 +16312,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-24"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Vintage Leather Biker Jacket",
@@ -15685,8 +16350,8 @@
     "time": "both",
     "source": "seed",
     "archived": false,
-    "status": "ontheway",
-    "eta": "2026-09-23"
+    "status": "have",
+    "eta": ""
   },
   {
     "name": "Snakeskin Animal Print D'Orsay Pumps",
